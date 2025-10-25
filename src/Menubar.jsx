@@ -1,4 +1,5 @@
 import Container from 'react-bootstrap/Container';
+import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
@@ -7,11 +8,18 @@ import "./Menubar.css";
 import heroImage from './assets/homeimg.webp';
 
 function Menubar() {
+  const navigate = useNavigate(); //  Hook to navigate between pages
+
   return (
     <div>
       <Navbar expand="lg" className="wedding-navbar">
         <Container fluid className="px-3 px-lg-4">
-          <Navbar.Brand href="#home" className="d-flex align-items-center brand-logo">
+          {/* Brand logo navigates home */}
+          <Navbar.Brand 
+            onClick={() => navigate('/')} 
+            className="d-flex align-items-center brand-logo ms-3" 
+            style={{ cursor: "pointer" }}
+          >
             <img 
               src="https://images.wedmegood.com/images/WMG-logo.svg" 
               alt="WedMeGood Logo" 
@@ -19,15 +27,19 @@ function Menubar() {
             />
           </Navbar.Brand>
 
-          {/* Search and Login - Mobile (shows before toggle) */}
+          {/* Search & Login (Mobile View) */}
           <div className="d-flex d-lg-none align-items-center order-lg-3">
-            <Button className="search-button-mobile" variant="link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
-                <circle cx="10" cy="10" r="8"/>
-                <path d="m21 21-4.35-4.35"/>
+            <Button className="search-button-mobile " variant="link">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
               </svg>
             </Button>
-            <Button className="login-button-mobile" variant="link">
+            <Button 
+              className="login-button-mobile" 
+              variant='link' 
+              onClick={() => navigate('/login')}
+            >
               Log In
             </Button>
           </div>
@@ -45,16 +57,21 @@ function Menubar() {
               <Nav.Link href="#genie" className='ms-2'>Genie</Nav.Link>
             </Nav>
 
-            {/* Search Icon and Login Button - Desktop */}
+            {/*  Search & Login (Desktop View) */}
             <Nav className="ms-auto d-none d-lg-flex align-items-center">
               <Button className="search-button" variant="link">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="lightgray" strokeWidth="2.5" strokeLinecap="round">
-                  <circle cx="10" cy="10" r="8"/>
-                  <path d="m21 21-4.35-4.35"/>
+                  <circle cx="10" cy="10" r="8" />
+                  <path d="m21 21-4.35-4.35" />
                 </svg>
               </Button>
 
-              <Button className="login-button" variant="link">
+              {/*  Added navigate on click */}
+              <Button 
+                className="login-button" 
+                variant="link" 
+                onClick={() => navigate('/login')}
+              >
                 Log In
               </Button>
             </Nav>
@@ -62,7 +79,7 @@ function Menubar() {
         </Container>
       </Navbar>
 
-      {/* Home image */}
+      {/*  Hero Section */}
       <div className="hero-section">
         <img 
           src={heroImage} 
