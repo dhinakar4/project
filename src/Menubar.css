@@ -1,14 +1,15 @@
-/* Navbar Base */
+    /* WEDDING NAVBAR STYLES  */
+
+/* BASE NAVBAR */
 .wedding-navbar {
-  background-color: #dd1e71 !important;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  background-color: #eb2a7d !important;
+  padding: 5px 0;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-/* Brand */
+/* BRAND */
 .wedding-navbar .navbar-brand {
   color: white !important;
   font-size: 1rem;
@@ -16,19 +17,23 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-right: auto !important;
+  cursor: pointer;
 }
 
 .wedding-navbar .navbar-brand img {
-  height: 32px;
+  height: 32px !important;
+  width: auto !important;
+  object-fit: contain;
+  transition: none !important;
 }
 
-.wedding-navbar .brand-text {
-  /* font-weight: 500; */
-  letter-spacing: 0.5px;
+.brand-text {
   color: white;
+  letter-spacing: 0.5px;
 }
 
-/* Nav Links */
+/* NAV LINKS */
 .wedding-navbar .nav-link {
   color: white !important;
   font-weight: 400;
@@ -36,85 +41,148 @@
 }
 
 .wedding-navbar .nav-link:hover {
-  color: #fce4ec !important;
+  color: #fbfafb !important;
 }
 
-/* Navbar Toggle (Hamburger) */
+/* TOGGLER */
 .wedding-navbar .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5);
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 2px 6px !important;
 }
 
 .wedding-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-/* Search Button */
+/* SEARCH BUTTON */
 .search-button {
   background-color: rgba(0, 0, 0, 0.25) !important;
   border: none !important;
   border-radius: 50% !important;
-  padding: 4px !important;
+  padding: 5px !important;
+  width: 30px !important;
+  height: 30px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: background-color 0.3s ease !important;
-  width: 30px !important;
-  height: 30px !important;
 }
 
 .search-button:focus {
   box-shadow: none !important;
-  outline: none !important;
 }
 
-/* Login Button */
+/* LOGIN BUTTON */
 .login-button {
   background-color: rgba(0, 0, 0, 0.25) !important;
   border: none !important;
   border-radius: 20px !important;
-  padding: 5px 45px !important;
+  padding: 4px 42px !important;
   color: white !important;
-  font-size: 0.8rem !important;
+  font-size: 0.9rem !important;
   font-weight: 400 !important;
-  transition: background-color 0.3s ease !important;
   margin-left: 40px !important;
-  white-space: nowrap;
   text-decoration: none !important;
+  transition: all 0.2s ease !important;
 }
 
 .login-button:focus {
   box-shadow: none !important;
+}
+
+   /* 🏙️ TOPBAR (ALL CITIES) */
+
+.topbar {
+  background-color: #b82462;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 4px 14px;
+  flex-wrap: wrap;
+}
+
+.topbar-text {
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.city-toggle-btn {
+  position: relative;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 200px;
+  max-width: 200px;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.city-toggle-btn::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #333;
+  transition: transform 0.25s ease;
+}
+
+.city-toggle-btn.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.city-toggle-btn:hover,
+.city-toggle-btn:active,
+.city-toggle-btn:focus {
+  background-color: #fff !important;
+  color: #333 !important;
+  box-shadow: none !important;
   outline: none !important;
 }
 
-/* Hero Section */
-.hero-section {
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  position: relative;
+   /* 💻 Small Laptops (992–1100px) */
+
+@media (max-width: 1100px) and (min-width: 992px) {
+  .wedding-navbar .nav-link {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .login-button {
+    padding: 5px 25px !important;
+    font-size: 0.85rem !important;
+    margin-left: 16px !important;
+  }
+
+  .search-button {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .wedding-navbar .container-fluid {
+    padding: 0 16px !important;
+  }
+
+  .brand-text {
+    font-size: 1rem !important;
+  }
 }
 
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Gradient overlay */
-.hero-section::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 280px;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.85));
-  pointer-events: none;
-}
-
-/* ========== Responsive Styles ========== */
+   /* 📱 Tablets (≤991px) */
 
 @media (max-width: 991px) {
   .wedding-navbar .navbar-collapse {
@@ -128,125 +196,36 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .hero-section {
-    height: 400px;
-  }
-
-  .hero-section::after {
-    height: 150px;
-  }
-
   .login-button {
     padding: 6px 23px !important;
-  }
-}
-
-/* Small phones */
-@media (max-width: 576px) {
-  .wedding-navbar .navbar-brand img {
-    height: 25px !important;
-  }
-
-  .brand-text {
-    font-size: 1rem;
-  }
-
-  .hero-section {
-    height: 300px;
-  }
-
-  .login-button {
-    padding: 5px 18px !important;
     font-size: 0.85rem !important;
+    margin-left: 0 !important;
   }
 }
 
-/* Fix layout for mid-sized laptops (around 1024px) */
-@media (max-width: 1100px) and (min-width: 992px) {
-  .wedding-navbar .nav-link {
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.9rem !important;
-  }
+   /* 📱 Mobile Large (≤430px) */
 
-  .login-button {
-    padding: 6px 25px !important;
-    font-size: 0.85rem !important;
-    margin-left: 20px !important;
-  }
-
-  .search-button {
-    width: 30px !important;
-    height: 30px !important;
-  }
-
-  .brand-text {
-    font-size: 1rem !important;
-  }
-
-  .wedding-navbar .navbar-brand img {
-    height: 28px !important;
-  }
-}
-
-/* Shared fixes for both Mobile S and M */
 @media (max-width: 430px) {
-  /* Keep logo fully left & aligned properly */
   .wedding-navbar .container,
   .wedding-navbar .container-fluid {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-
-  /* Brand logo positioning */
-  .wedding-navbar .navbar-brand {
-    margin-right: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
+    padding: 0 8px !important;
   }
 
   .wedding-navbar .navbar-brand img {
-    height: 22px !important;
-    width: auto !important;
+    height: 26px !important;
   }
 
   .brand-text {
     font-size: 0.85rem !important;
-    white-space: nowrap !important;
   }
 
-  /* Toggler icon (hamburger) */
-  .navbar-toggler {
-    padding: 2px 6px !important;
-    margin-left: auto !important;
-  }
-
-  /* Buttons */
-  .login-button {
-    padding: 4px 14px !important;
-    font-size: 0.75rem !important;
-    margin-left: 6px !important;
-  }
-
-  .search-button {
-    width: 28px !important;
-    height: 28px !important;
-    padding: 4px !important;
-  }
-
-  /* Dropdown menu (collapsed nav) */
   .navbar-collapse {
-    background-color: #dd1e71 !important;
     border-radius: 8px !important;
-    margin-top: 6px !important;
     padding: 10px 0 !important;
-  }
-
-  .navbar-nav {
-    text-align: left !important;
+    margin-top: 6px !important;
   }
 
   .navbar-nav .nav-link {
@@ -255,20 +234,23 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Hero section sizing */
-  .hero-section {
-    height: 230px !important;
+  .search-button {
+    width: 28px !important;
+    height: 28px !important;
   }
 
-  .hero-section::after {
-    height: 70px !important;
+  .login-button {
+    padding: 4px 16px !important;
+    font-size: 0.8rem !important;
+    margin-left: 6px !important;
   }
 }
 
-/* Mobile Small (≤360px) — tighter scaling */
+   /*  Mobile Small (≤360px) */
+
 @media (max-width: 360px) {
   .wedding-navbar .navbar-brand img {
-    height: 20px !important;
+    height: 22px !important;
   }
 
   .brand-text {
@@ -284,12 +266,48 @@
     width: 26px !important;
     height: 26px !important;
   }
+}
 
-  .hero-section {
-    height: 210px !important;
+   /* TOPBAR RESPONSIVE */
+
+@media (min-width: 640px) {
+  .topbar {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  .topbar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 10px 12px;
   }
 
-  .hero-section::after {
-    height: 65px !important;
+  .topbar-text {
+    font-size: 0.85rem;
+  }
+
+  .city-toggle-btn {
+    width: 200px;
+    max-width: 200px;
+    font-size: 13px;
+    align-self: center;
+  }
+}
+
+@media (max-width: 426px) {
+  .topbar {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .city-toggle-btn {
+    margin: 0 auto !important;
   }
 }

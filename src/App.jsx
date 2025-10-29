@@ -1,14 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Menubar from './Menubar';
-import Login from './Login';  // ← create this page
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Home";      // ✅ import the new Home component
+import Login from "./Login";
 
 function App() {
   return (
     <Router>
-      <Menubar />
       <Routes>
-        <Route path="/" />
-        <Route path="/login" element={<Login />} />  {/* ✅ Login route */}
+        <Route path="/" element={<Home />} />      {/* ✅ Home page */}
+        <Route path="/login" element={<Login />} /> {/* ✅ Login page */}
       </Routes>
     </Router>
   );
