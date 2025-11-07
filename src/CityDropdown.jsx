@@ -33,25 +33,22 @@ function CityDropdown({ show, close, onCitySelect }) {
           <div className="column">
             <h6>Top Cities</h6>
             <ul>
-              <li><button onClick={() => handleCityClick("All Cities")}>All Cities</button></li>
-              <li><button onClick={() => handleCityClick("Delhi NCR")}>Delhi NCR</button></li>
-              <li><button onClick={() => handleCityClick("Mumbai")}>Mumbai</button></li>
+              <li><button onClick={() => handleCityClick("All cities")}>All cities</button></li>
+              <li><button onClick={() => handleCityClick("Coimbatore")}>Coimbatore</button></li>
             </ul>
           </div>
 
           <div className="column">
             <h6>Popular Cities</h6>
             <ul>
-              <li><button onClick={() => handleCityClick("Goa")}>Goa</button></li>
-              <li><button onClick={() => handleCityClick("Udaipur")}>Udaipur</button></li>
+              <li><button onClick={() => handleCityClick("Erode")}>Erode</button></li>
             </ul>
           </div>
 
           <div className="column">
             <h6>Other Cities</h6>
             <ul>
-              <li><button onClick={() => handleCityClick("Nagpur")}>Nagpur</button></li>
-              <li><button onClick={() => handleCityClick("Surat")}>Surat</button></li>
+              <li><button onClick={() => handleCityClick("Chennai")}>Chennai</button></li>
             </ul>
           </div>
 
@@ -59,13 +56,10 @@ function CityDropdown({ show, close, onCitySelect }) {
             <h6>States</h6>
             <ul>
               <li><button onClick={() => handleCityClick("Kerala")}>Kerala</button></li>
-              <li><button onClick={() => handleCityClick("Rajasthan")}>Rajasthan</button></li>
             </ul>
-
             <h6 className="mt-3">International Cities</h6>
             <ul>
               <li><button onClick={() => handleCityClick("Dubai")}>Dubai</button></li>
-              <li><button onClick={() => handleCityClick("Bali")}>Bali</button></li>
             </ul>
           </div>
         </div>

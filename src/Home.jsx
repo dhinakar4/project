@@ -5,7 +5,7 @@ import heroImage from './assets/homeimg.webp';
 import "./Home.css";
 
 function Home() {
-  const [selectedCity, setSelectedCity] = useState("Select City");
+  const [selectedCity, setSelectedCity] = useState("All cities");
 
   return (
     <div>
