@@ -1,0 +1,284 @@
+.heading {
+  margin: 0 auto !important;
+  text-align: center !important;
+  color: rgb(81, 80, 80);
+}
+
+.dream-wedding {
+  font-weight: 400 !important;
+  font-size: 22px;
+}
+
+.subheading {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+/* Search bar container */
+.searchbar-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  width: 65%;
+  overflow: visible !important;
+  background-color: #fff;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Dropdown button */
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-color: #ec407a;
+  color: white;
+  border: none;
+  padding: 10px 25px 10px 20px;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+/* .dropdown-btn:hover {
+  background-color: #d7376a;
+} */
+
+/* Heart icon inside dropdown */
+.dropdown-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Dropdown arrow icon */
+.dropdown-arrow {
+  width: 19px;
+  height: 20px;
+  margin-left: 4px;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ec407a;
+  width: 100%;
+  height: auto;
+  z-index: 9999;
+  border-radius: 0;
+}
+
+/* Dropdown item */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.dropdown-item:hover {
+  background-color: #bd305d;
+  color: white;
+}
+
+/* Input field */
+.custom-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* Placeholder styling */
+.custom-search-input::placeholder {
+  color: #999;
+  opacity: 1;
+  font-size: 18px;
+}
+
+/* Icons inside dropdown */
+.dropdown-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  width: 20%;
+  z-index: 9999;
+}
+
+/* Popular Searches Section */
+.popular-searches {
+  width: 65%;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.popular-searches h5 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #4e4e4e;
+  margin-bottom: 15px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  font-style: inherit;
+}
+
+.tag {
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 8px 18px ;
+  font-size: 16px;
+  color: #474646;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.tag:hover {
+  border-color: #ec407a;
+  color: #ec407a;
+}
+
+.bottom{
+  padding-top: 250px;
+  margin: 0 auto;
+}
+
+.pink{
+  color: rgb(225, 38, 100);
+  margin-bottom: 5px !important;
+}
+
+.color{
+  color: rgb(143, 143, 143);
+  font-weight: 400;
+  font: 12px;
+  padding-top: 5px !important;
+}
+
+.home-button{
+  margin-right:95%;
+  color: rgb(143, 143, 143);
+  margin-top: 40px !important;
+}
+
+/*  Responsive Styles */
+
+@media (max-width:1440px) {
+  .home-button{
+    margin-right: 80%;
+  }
+}
+
+/* Large tablets and below (≤1024px) */
+@media (max-width: 1024px) {
+  .searchbar-container {
+    width: 80%;
+  }
+
+  .dropdown-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  .custom-search-input {
+    font-size: 18px;
+  }
+
+  .popular-searches {
+    width: 80%;
+  }
+
+  .dream-wedding {
+    font-size: 20px;
+  }
+  
+}
+
+/* Tablets and small laptops (≤768px) */
+@media (max-width: 768px) {
+  .dropdown-wrapper {
+    width: 26%;
+    position: relative;
+  }
+
+  .custom-search-input {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+   .dropdown-btn {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+} 
+
+/* 📱 Mobile devices (≤480px) */
+@media (max-width: 480px) {
+  .searchbar-container {
+    flex-direction: column; /* Stack vertically */
+    width: 90%;
+    align-items: stretch;
+  }
+
+  .dropdown-wrapper {
+    width: 100%; /* full width for dropdown */
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    left: 0;
+  }
+
+  .dropdown-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  .custom-search-input {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .popular-searches {
+    width: 90%;
+  }
+
+  .tag {
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+
+  .bottom {
+    padding-top: 80px;
+  }
+
+  .home-button {
+    margin-right: 80%;
+    margin-bottom: 10px;
+  }
+}

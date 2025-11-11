@@ -33,7 +33,6 @@ const handleDropdownClick = (menu) => {
 };
 
 
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const onDocClick = () => setShowDropdown(false);

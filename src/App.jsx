@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";      // ✅ import the new Home component
+import Home from "./Home";      //  import the new Home component
 import Login from "./Login";
 import Search from "./Search";
 

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Menubar from "./Menubar";
 import heroImage from './assets/homeimg.webp';
 import "./Home.css";
+import Selectvendor from "./Selectvendor";
 
 function Home() {
   const [selectedCity, setSelectedCity] = useState("All cities");
@@ -11,18 +12,23 @@ function Home() {
     <div>
       <Menubar selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
 
+
       {/* Hero Section */}
       <div className="hero-section">
-        <img 
-          src={heroImage} 
-          alt="Wedding Couple" 
+        <img
+          src={heroImage}
+          alt="Wedding Couple"
           className="hero-image"
         />
+        <div className="hero-overlay">
+          <Selectvendor />
+        </div>
 
         {/* Display Selected City */}
-        <h2 className="selected-city-text">
+        {/* <h2 className="selected-city-text">
           {selectedCity !== "Select City" ? `You selected: ${selectedCity}` : ""}
-        </h2>
+        </h2> */}
+
       </div>
     </div>
   );
