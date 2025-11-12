@@ -14,19 +14,19 @@ function Selectvendor() {
   const cityRef = useRef(null);
 
   const vendors = [
+    "All Categories",
     "Photographer",
-    "Caterer",
     "Venue",
     "Decorator",
     "Makeup Artist"
   ];
 
   const cities = [
-    "Delhi",
-    "Mumbai",
+    "All Cities",
     "Chennai",
-    "Bangalore",
-    "Hyderabad"
+    "Erode",
+    "Coimbatore",
+    "Salem"
   ];
 
   //  Filter based on search only (not selected value)
