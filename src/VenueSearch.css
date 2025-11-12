@@ -1,0 +1,160 @@
+.venue-heading {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: rgb(83, 83, 83);
+}
+
+
+.venue-carousel-wrapper {
+  position: relative;
+  padding-top: 5px;
+}
+
+.venue-carousel-row {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  align-items: center;
+}
+
+.venue-carousel-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card - image and text in one row */
+.venue-card {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 6px;
+  background: #fff;
+  max-width: 390px;
+}
+
+.venue-image {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  
+}
+
+.venue-image:hover {
+  cursor: pointer;
+}
+
+.venue-text {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.venue-title {
+   margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 195px; /* 👈 Adjust width for how early you want "..." to appear */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.venue-cities {
+  font-size: 14px;
+  color: rgb(234, 42, 135);
+  font-weight: 500;
+  transition:  transform 0.1s ease;
+
+}
+
+.venue-more {
+  text-decoration: underline;
+  color: rgb(234, 42, 135);
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.1s ease;
+
+}
+
+.venue-cities:hover{
+  transform: scale(1.02);
+  font-weight: 500;
+}
+.venue-more:hover{
+  transform: scale(1.02);
+  font-weight: 500;
+}
+
+/* Arrows */
+.venue-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.venue-arrow:hover {
+  color: rgb(234, 42, 135);
+}
+
+.venue-arrow-left {
+  left: 0;
+}
+
+.venue-arrow-right {
+  right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .venue-card {
+    min-width: 300px;
+    gap: 10px;
+  }
+
+  .venue-image {
+    width: 130px;
+    height: 90px;
+  }
+
+  .venue-title {
+    font-size: 15px;
+  }
+
+  .venue-cities {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 992px) {
+  .venue-heading {
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .venue-heading {
+    font-size: 18px;
+    margin-bottom: 1rem;
+    text-align: center !important;
+  }
+}

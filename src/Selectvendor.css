@@ -110,10 +110,6 @@
   white-space: nowrap;
 }
 
-.sv-btn:hover {
-  background-color: #e73870;
-}
-
 /*  Popular Searches */
 .sv-popular {
   display: flex;

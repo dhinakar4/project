@@ -4,6 +4,8 @@ import Menubar from "./Menubar";
 import heroImage from './assets/homeimg.webp';
 import "./Home.css";
 import Selectvendor from "./Selectvendor";
+import VenueSearch from "./VenueSearch";
+import PopularSearch from "./PopularSearch";
 
 function Home() {
   const [selectedCity, setSelectedCity] = useState("All cities");
@@ -11,7 +13,6 @@ function Home() {
   return (
     <div>
       <Menubar selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
-
 
       {/* Hero Section */}
       <div className="hero-section">
@@ -23,13 +24,10 @@ function Home() {
         <div className="hero-overlay">
           <Selectvendor />
         </div>
-
-        {/* Display Selected City */}
-        {/* <h2 className="selected-city-text">
-          {selectedCity !== "Select City" ? `You selected: ${selectedCity}` : ""}
-        </h2> */}
-
       </div>
+
+      <VenueSearch />
+      <PopularSearch />
     </div>
   );
 }

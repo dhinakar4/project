@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";      //  import the new Home component
+import Home from "./Home";      
 import Login from "./Login";
 import Search from "./Search";
+import PopularSearch from "./PopularSearch";
+import VenueSearch from "./VenueSearch";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/search" element={< Search />} /> {/* search page*/}
       </Routes>
     </Router>
+    // <PopularSearch />
+    // <VenueSearch />
   );
 }
 

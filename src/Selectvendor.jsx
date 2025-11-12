@@ -58,7 +58,7 @@ function Selectvendor() {
         <p>Find the best wedding vendors with thousands of trusted reviews</p>
       </div>
 
-      {/* 🔹 Dropdown Search Bar */}
+      {/*  Dropdown Search Bar */}
       <div className="sv-dropdown-bar">
         {/* Vendor Dropdown */}
         <div className="sv-dropdown-wrapper" ref={vendorRef}>
