@@ -9,14 +9,13 @@ import Img5 from "./assets/popularsearch/Img5.avif";
 import Img6 from "./assets/popularsearch/Img6.avif";
 
 function PopularSearch() {
-  // 👇 now each slide has an image and a name
   const slides = [
-    { img: Img1, title: "Bridal Wear" },
-    { img: Img2, title: "Bridal Makeup Artists" },
-    { img: Img3, title: "Photographers" },
-    { img: Img4, title: "Invitations" },
-    { img: Img5, title: "Catering Services" },
-    { img: Img6, title: "Decorators" },
+    { img: Img1, title: "Bridal Wear in Mumbai" },
+    { img: Img2, title: "Bridal Makeup Artists in Mumbai" },
+    { img: Img3, title: "Photographers in Mumbai" },
+    { img: Img4, title: "Invitations in Mumbai" },
+    { img: Img5, title: "Catering Services in Mumbai" },
+    { img: Img6, title: "Decorators in Mumbai" },
   ];
 
   const carouselRef = useRef(null);
@@ -26,7 +25,6 @@ function PopularSearch() {
   const handleScroll = () => {
     const el = carouselRef.current;
     if (!el) return;
-
     setShowLeft(el.scrollLeft > 10);
     setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 10);
   };
@@ -66,13 +64,15 @@ function PopularSearch() {
 
         <div className="carousel-row" ref={carouselRef}>
           {slides.map((slide, index) => (
-            <div key={index} className="carousel-slide ">
-              <img
-                src={slide.img}
-                alt={slide.title}
-                className="carousel-image"
-              />
-              <p className="carousel-title ">{slide.title}</p>
+            <div key={index} className="carousel-card">
+              <div className="carousel-image-wrapper">
+                <img
+                  src={slide.img}
+                  alt={slide.title}
+                  className="carousel-image"
+                />
+              </div>
+              <p className="carousel-title">{slide.title}</p>
             </div>
           ))}
         </div>

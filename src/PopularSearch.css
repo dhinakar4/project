@@ -1,8 +1,9 @@
-.popular-heading{
+.popular-heading {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 1rem;
-  color:  rgb(83, 83, 83);}
+  color: rgb(83, 83, 83);
+}
 
 .carousel-wrapper {
   position: relative;
@@ -23,29 +24,54 @@
   display: none;
 }
 
-.carousel-slide {
+/* Card container */
+.carousel-card {
   flex: 0 0 auto;
-  width: 250px;
+  width: 240px;
+  border-radius: 12px;
+  background: #fff;
   overflow: hidden;
-  border-radius: 6px;
+  transition: transform 0.3s ease;
 }
 
-.carousel-image {
+/* Image wrapper to lock height */
+.carousel-image-wrapper {
   width: 100%;
   height: 270px;
-  border-radius: 6px;
-  object-fit: cover;
-  transition: transform 0.2s ease-in-out;
-  display: block;
-  transform-origin: center center;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
 
+/* Image styling */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+  display: block;
 }
 
 .carousel-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.3);
   cursor: pointer;
-  
-  
+}
+.carousel-card:hover .carousel-title{
+    color: rgb(234, 42, 135);
+
+}
+
+/* Title below image */
+.carousel-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  padding: 12px 0;
+  background-color: #fff;
+  transition: color 0.2s ease;
+}
+
+.carousel-title:hover {
+  color: rgb(234, 42, 135);
 }
 
 /* Arrows */
@@ -64,7 +90,7 @@
   cursor: pointer;
   font-size: 24px;
   z-index: 10;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .custom-arrow.left {
@@ -75,53 +101,25 @@
   right: 0;
 }
 
-.custom-arrow.left:hover {
-    color: rgb(234, 42, 135);
+.custom-arrow:hover {
+  color: rgb(234, 42, 135);
 }
 
-.custom-arrow.right:hover {
-    color: rgb(234, 42, 135);
-}
-
-.carousel-title{
-    font-size: 16px;
-    padding-top: 5px;
-    font-weight: 400;
-}
-
-.carousel-title:hover {
-    color: rgb(234, 42, 135);
-}
-
-/*  RESPONSIVE STYLING */
-
-/* Medium screens (tablets) */
+/* Responsive */
 @media (max-width: 992px) {
-  .carousel-row {
-    gap: 15px;
-    padding: 15px 0;
-  }
-
-  .carousel-slide {
+  .carousel-card {
     width: 200px;
   }
 
-  .carousel-image {
-    height: 220px;
+  .carousel-image-wrapper {
+    height: 200px;
   }
 
   .carousel-title {
     font-size: 15px;
   }
-
-  .custom-arrow {
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-  }
 }
 
-/* Small screens (mobile) */
 @media (max-width: 576px) {
   .pv-search {
     padding: 20px 10px;
@@ -132,17 +130,12 @@
     text-align: center;
   }
 
-  .carousel-row {
-    gap: 10px;
-    padding: 10px 0;
-  }
-
-  .carousel-slide {
+  .carousel-card {
     width: 160px;
   }
 
-  .carousel-image {
-    height: 190px;
+  .carousel-image-wrapper {
+    height: 160px;
   }
 
   .carousel-title {
