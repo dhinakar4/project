@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";      
+import Home from "./Home";
 import Login from "./Login";
 import Search from "./Search";
-import PopularSearch from "./PopularSearch";
-import VenueSearch from "./VenueSearch";
+import BusinesSignup from "./BusinesSignup";
+import VendorSignup from "./VendorSignup";
+import WMGservice from "./WMGservice";
 
 function App() {
   return (
@@ -11,11 +12,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />      {/*  Home page */}
         <Route path="/login" element={<Login />} /> {/*  Login page */}
+        <Route path="/business-signin" element={<BusinesSignup />} /> {/* Business Login */}
         <Route path="/search" element={< Search />} /> {/* search page*/}
       </Routes>
     </Router>
-    // <PopularSearch />
-    // <VenueSearch />
+
+    // <VendorSignup />
   );
 }
 

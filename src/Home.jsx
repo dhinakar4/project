@@ -6,6 +6,7 @@ import "./Home.css";
 import Selectvendor from "./Selectvendor";
 import VenueSearch from "./VenueSearch";
 import PopularSearch from "./PopularSearch";
+import WMGservice from "./WMGservice";
 
 function Home() {
   const [selectedCity, setSelectedCity] = useState("All cities");
@@ -28,6 +29,7 @@ function Home() {
 
       <VenueSearch />
       <PopularSearch />
+      <WMGservice />
     </div>
   );
 }
