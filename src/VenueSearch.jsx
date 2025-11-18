@@ -32,7 +32,7 @@ function VenueSearch() {
   const scroll = (direction) => {
     const el = carouselRef.current;
     if (!el) return;
-    const scrollAmount = 320;
+    const scrollAmount = 410;
     el.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",

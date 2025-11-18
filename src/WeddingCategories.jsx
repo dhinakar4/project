@@ -1,0 +1,75 @@
+import { useState } from "react";
+import { Container } from "react-bootstrap";
+import { FiChevronDown } from "react-icons/fi";
+import "./WeddingCategories.css";
+
+import Img1 from "./assets/weddingcategories/img1.avif";
+import Img2 from "./assets/weddingcategories/img2.avif";
+import Img3 from "./assets/weddingcategories/img3.avif";
+import Img4 from "./assets/weddingcategories/img4.avif";
+import Img5 from "./assets/weddingcategories/img5.avif";
+import Img6 from "./assets/weddingcategories/img6.avif";
+
+function WeddingCategories() {
+  const [open, setOpen] = useState(null);
+
+  const toggle = (id) => {
+    setOpen(open === id ? null : id);
+  };
+
+  const items = [
+    { id: 1, title: "Venues", desc: "Banquet Halls", img: Img1, bg: "lavender" },
+    { id: 2, title: "Photographers", desc: "Photographers", img: Img2, bg: "rgb(244, 211, 199)" },
+    { id: 3, title: "Makeup", desc: "Bridal Makeup Artists", img: Img3, bg: "rgb(239, 191, 191)" },
+    { id: 4, title: "Planning & Decor", desc: "Decorators", img: Img4, bg: "rgb(251, 187, 161)" },
+    { id: 5, title: "Virtual Planning", desc: "Virtual Planning", img: Img5, bg: "rgb(250, 215, 202)" },
+    { id: 6, title: "Mehndi", desc: "Mehndi Artists", img: Img6, bg: "rgb(240, 216, 185)" },
+  ];
+
+  return (
+    <Container className="wedding-categories p-5">
+      <h4 className="text-xl font-semibold">Wedding Categories</h4>
+
+      <div className="mt-[30px]">
+        {items.map((item, i) => (
+          <div
+            key={item.id}
+            className="inline-block align-top w-[50%] p-2"
+          >
+            {/* Card */}
+            <div
+              onClick={() => toggle(item.id)}
+              className="relative cursor-pointer h-[120px]  p-0 transition-all duration-300"
+              style={{ backgroundColor: item.bg }}
+            >
+              <img
+                src={item.img}
+                className="float-end rounded-l-[70px] w-[250px] h-[120px] object-cover"
+              />
+
+              <div className="flex items-center gap-2 pt-3 ps-4 pe-4">
+                <h5 className="text-[18px] font-medium">{item.title}</h5>
+                <FiChevronDown
+                  className={`me-auto mb-1 text-[20px] transition-transform duration-300 ${
+                    open === item.id ? "rotate-180" : ""
+                  }`}
+                />
+              </div>
+
+              <p className="text-sm ps-4 pt-1">{item.desc}</p>
+            </div>
+
+            {/* Dropdown (same width as card, below it) */}
+            {open === item.id && (
+              <div className="p-3 text-sm  bg-white shadow animate-fadeIn w-[100%]">
+                <p className="text-gray-700 categories-all-text">{item.desc}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </Container>
+  );
+}
+
+export default WeddingCategories;

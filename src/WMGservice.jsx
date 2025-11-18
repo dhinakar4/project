@@ -25,10 +25,10 @@ function WMGservice() {
   ];
 
   return (
-    <Container className="WMG-service p-5">
+    <Container className="WMG-service p-5 p-md-1 p-sm-0">
       <h5 className="WMG-heading">WMG Inhouse Services</h5>
 
-      <div className="service-grid">
+      <div className="service-grid mt-[30px]">
         {services.map((service, index) => (
           <div className="service-card" key={index}>
             <div className="service-image-wrapper">
@@ -41,8 +41,7 @@ function WMGservice() {
 
             <h5 className="service-title mt-3">{service.title}</h5>
             <p className="service-desc">{service.desc}</p>
-
-            <button className="service-btn">Know More</button>
+            <button className="service-btn ">Know More</button>
           </div>
         ))}
       </div>

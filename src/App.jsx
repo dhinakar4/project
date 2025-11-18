@@ -5,19 +5,23 @@ import Search from "./Search";
 import BusinesSignup from "./BusinesSignup";
 import VendorSignup from "./VendorSignup";
 import WMGservice from "./WMGservice";
+import WeddingCategories from "./WeddingCategories";
+import DownloadApp from "./DownloadApp";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />      {/*  Home page */}
-        <Route path="/login" element={<Login />} /> {/*  Login page */}
-        <Route path="/business-signin" element={<BusinesSignup />} /> {/* Business Login */}
-        <Route path="/search" element={< Search />} /> {/* search page*/}
-      </Routes>
-    </Router>
-
-    // <VendorSignup />
+    <div> 
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />      
+          <Route path="/login" element={<Login />} /> 
+          <Route path="/business-signin" element={<BusinesSignup />} /> 
+          <Route path="/search" element={<Search />} /> 
+        </Routes>
+      </Router>
+     {/* <DownloadApp /> */}
+      {/* <VendorSignup /> */}
+    </div>
   );
 }
 

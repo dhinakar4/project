@@ -332,6 +332,7 @@
 
   .topbar-text{
     margin:  0 auto !important;
+    padding-top: 10px !important;
   }
 
   .city-toggle-btn {
@@ -340,18 +341,18 @@
   
   .topbar-links {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    align-items: center !important;
     flex-wrap: nowrap;
   }
 
   .topbar-links a {
     font-size: 13px;
     display: flex;
-    align-items: center;
+    align-items: center !important;
+    text-align: center !important;
     gap: 6px;
     white-space: nowrap;
-    margin: 0 auto !important;
+    margin-right: 5px !important;
   }
 
   .right-icon{
@@ -364,12 +365,18 @@
   .right-icon{
     margin-right: 15px !important;
   }
+   .topbar-links a{
+    margin-right: 30px !important;
+   }
 }
 
 @media(max-width:321px) {
   .right-icon{
     margin-left: 8px !important;
   }
+   .topbar-links a{
+    margin-right: 10px !important;
+   }
 }
 
 
@@ -380,7 +387,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    padding: 4px 10px;
+    padding: 10px 10px;
   }
 
   /* Increase All Cities width for laptops */
@@ -429,19 +436,12 @@
     margin-left: auto !important;
     margin-bottom: 3px !important;
   }
-   .topbar-links {
-    display: flex;
-    align-items: center;
-    /* gap: 1px; */
-    justify-content: flex-end;
-    flex-wrap: nowrap;
-  }
 
   .topbar-links a {
     font-size: 12px;
     display: flex;
     align-items: center;
-    /* gap: 6px; */
+    gap: 6px;
     white-space: nowrap;
   }
 }

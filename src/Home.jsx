@@ -1,4 +1,3 @@
-// src/Home.js
 import React, { useState } from "react";
 import Menubar from "./Menubar";
 import heroImage from './assets/homeimg.webp';
@@ -7,6 +6,7 @@ import Selectvendor from "./Selectvendor";
 import VenueSearch from "./VenueSearch";
 import PopularSearch from "./PopularSearch";
 import WMGservice from "./WMGservice";
+import WeddingCategories from "./WeddingCategories";
 
 function Home() {
   const [selectedCity, setSelectedCity] = useState("All cities");
@@ -29,6 +29,7 @@ function Home() {
 
       <VenueSearch />
       <PopularSearch />
+      <WeddingCategories />
       <WMGservice />
     </div>
   );
