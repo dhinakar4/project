@@ -13,8 +13,7 @@
 
 .venue-carousel-row {
   display: flex;
-  gap: 30px;
-  overflow-x: auto;
+  overflow: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none;
   align-items: center;
@@ -24,23 +23,30 @@
   display: none;
 }
 
-/* Each card - image and text in one row */
 .venue-card {
-  flex: 0 0 auto;
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 20px;
-  border-radius: 6px;
   background: #fff;
-  max-width: 390px;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .venue-image {
   width: 180px;
   height: 120px;
   object-fit: cover;
-  border-radius: 6px;
-  
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.venue-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 10px;
 }
 
 .venue-image:hover {
@@ -52,27 +58,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 15px;
+  width: 50%;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }
 
 .venue-title {
-   margin-bottom: 8px;
   font-size: 16px;
+  white-space: normal;
+  max-width: 100%;
   font-weight: 600;
-  color: #333;
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 195px; /* 👈 Adjust width for how early you want "..." to appear */
-  display: inline-block;
-  vertical-align: middle;
 }
 
 .venue-cities {
   font-size: 14px;
   color: rgb(234, 42, 135);
   font-weight: 500;
-  transition:  transform 0.1s ease;
+  transition: transform 0.1s ease;
 
 }
 
@@ -86,11 +92,12 @@
 
 }
 
-.venue-cities:hover{
+.venue-cities:hover {
   transform: scale(1.02);
   font-weight: 500;
 }
-.venue-more:hover{
+
+.venue-more:hover {
   transform: scale(1.02);
   font-weight: 500;
 }
@@ -124,37 +131,124 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .venue-card {
-    min-width: 300px;
-    gap: 10px;
+@media (min-width: 576px) and (max-width: 1024px) {
+
+  /* Container width locked */
+  .venue-carousel-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    gap: 0 !important;
+    padding: 0 !important;
   }
 
+  .venue-arrow {
+    top: 35% !important;
+    transform: translateY(-40%) !important;
+  }
+
+  /* TWO CARDS ONLY in viewport */
+  .venue-card {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    min-width: 50% !important;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  /* Bigger image - full card width */
   .venue-image {
-    width: 130px;
-    height: 90px;
+    width: 95% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+  }
+
+  /* Text centered */
+  .venue-text {
+    text-align: center;
+    padding: 10px 5px;
+    width: 100%;
   }
 
   .venue-title {
-    font-size: 15px;
+    font-size: 16px !important;
+    white-space: normal !important;
+    max-width: 100% !important;
   }
 
-  .venue-cities {
-    font-size: 13px;
+  .venue-cities,
+  .venue-more {
+    font-size: 14px !important;
   }
 }
 
-@media (max-width: 992px) {
-  .venue-heading {
-    font-size: 20px;
-    margin-bottom: 1.5rem;
-  }
-}
 
 @media (max-width: 576px) {
+
+  .venue-search {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .venue-arrow {
+    top: 35% !important;
+    transform: translateY(-40%) !important;
+  }
+
+  .venue-carousel-row {
+    gap: 0 !important;
+    padding: 0 !important;
+    scroll-snap-type: x mandatory;
+  }
+
+  .venue-card {
+    flex: 0 0 100vw !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    scroll-snap-align: center;
+    flex-direction: column !important;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .venue-image {
+    width: 90vw !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    display: block;
+    border-radius: 10px !important;
+  }
+
+  .venue-text {
+    text-align: center !important;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .venue-title {
+    max-width: 100% !important;
+    white-space: normal !important;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .venue-cities,
+  .venue-more {
+    font-size: 14px;
+  }
+
   .venue-heading {
     font-size: 18px;
     margin-bottom: 1rem;
-    text-align: center !important;
+    text-align: center;
   }
 }

@@ -7,20 +7,22 @@ import VendorSignup from "./VendorSignup";
 import WMGservice from "./WMGservice";
 import WeddingCategories from "./WeddingCategories";
 import DownloadApp from "./DownloadApp";
-
+import VenueSearch from "./VenueSearch";
 function App() {
   return (
     <div> 
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path="/" element={<Home />} />      
           <Route path="/login" element={<Login />} /> 
           <Route path="/business-signin" element={<BusinesSignup />} /> 
           <Route path="/search" element={<Search />} /> 
         </Routes>
-      </Router>
+      </Router> */}
      {/* <DownloadApp /> */}
       {/* <VendorSignup /> */}
+      <VenueSearch />
+
     </div>
   );
 }
