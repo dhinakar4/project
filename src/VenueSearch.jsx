@@ -84,7 +84,7 @@ function VenueSearch() {
   };
 
   return (
-    <Container className="venue-search p-5">
+    <Container className="venue-search p-4">
       <h5 className="venue-heading">Popular Venue Searches</h5>
 
       <div className="venue-carousel-wrapper">

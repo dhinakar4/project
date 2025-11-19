@@ -13,6 +13,7 @@
 
 .venue-carousel-row {
   display: flex;
+  /* gap: 5px; */
   overflow: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -25,6 +26,7 @@
 
 .venue-card {
   flex: 0 0 33.333%;
+  /* 3 cards in a row */
   max-width: 33.333%;
   display: flex;
   flex-direction: row;
@@ -55,10 +57,12 @@
 
 .venue-text {
   text-align: left;
+  /* text on right */
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
+  /* right side */
   margin-left: 10px;
   margin-bottom: 5px;
 }
