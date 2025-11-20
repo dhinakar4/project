@@ -1,0 +1,171 @@
+.wedding-title {
+    color: rgb(84, 84, 84);
+}
+
+.real-wedding-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.real-wedding-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 25px;
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+}
+
+.real-wedding-row::-webkit-scrollbar {
+    display: none;
+}
+
+.real-wedding-card {
+    flex: 0 0 auto;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+}
+
+.wedding-image-wrapper {
+    width: 410px;
+    height: 270px;
+    overflow: hidden;
+}
+
+.real-wedding-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    display: block;
+}
+
+.real-wedding-image:hover {
+    transform: scale(1.2);
+    /* zoom in slightly */
+    cursor: pointer;
+}
+
+.stories-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    text-align: left;
+}
+
+.real-wedding-desc {
+    color:rgb(34, 34, 34);
+    font-size: 14px !important;
+    font-weight: 400;
+}
+.real-wedding-date{
+    color: gray;
+}
+
+.custom-arrow {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+.custom-arrow.left {
+    left: 0;
+}
+
+.custom-arrow.right {
+    right: 0;
+}
+
+.custom-arrow:hover {
+    color: rgb(234, 42, 135);
+}
+
+@media (max-width: 767px) {
+    .real-wedding-row {
+        gap: 10px;
+        padding: 0;
+    }
+
+    .wedding-title {
+        text-align: center;
+    }
+
+    .real-wedding-card {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        border-radius: 8px;
+    }
+
+    .wedding-image-wrapper {
+        aspect-ratio: 16/9;
+    }
+
+    .real-wedding-image {
+        object-fit: cover;
+    }
+
+    .stories-title {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+
+    .custom-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
+
+/* Tablet view - 2 images per view */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .real-wedding-card {
+        width: calc(50% - 10px);
+        min-width: calc(50% - 10px);
+    }
+
+     .real-wedding-image {
+        object-fit: cover;
+    }
+
+    .wedding-image-wrapper {
+        aspect-ratio: 4/3;
+    }
+}
+
+/* Laptop/Desktop view - 4 images per view */
+@media (min-width: 1024px) {
+    .real-wedding-card {
+        width: calc(33% - 15px);
+        min-width: calc(33% - 15px);
+    }
+
+     .real-wedding-image {
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .wedding-image-wrapper {
+        aspect-ratio: 2/3;
+    }
+}

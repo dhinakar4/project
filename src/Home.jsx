@@ -5,8 +5,10 @@ import "./Home.css";
 import Selectvendor from "./Selectvendor";
 import VenueSearch from "./VenueSearch";
 import PopularSearch from "./PopularSearch";
-import WMGservice from "./WMGservice";
 import WeddingCategories from "./WeddingCategories";
+import WMGservice from "./WMGservice";
+import RealWedding from "./RealWedding";
+
 
 function Home() {
   const [selectedCity, setSelectedCity] = useState("All cities");
@@ -31,6 +33,7 @@ function Home() {
       <PopularSearch />
       <WeddingCategories />
       <WMGservice />
+      <RealWedding />
     </div>
   );
 }

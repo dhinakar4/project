@@ -25,7 +25,6 @@ function PopularSearch() {
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
 
-  // Clone slides for seamless infinite scroll
   const slides = [...baseSlides, ...baseSlides, ...baseSlides];
 
   useEffect(() => {
