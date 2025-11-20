@@ -34,7 +34,7 @@ function Search() {
         "Bridal Hairstyles",
         "Bridal entry songs",
         "Bridal Makeup in Delhi",
-        "Bridal Makeup in Mumbai",
+        // "Bridal Makeup in Mumbai",
     ];
 
     return (
@@ -109,8 +109,8 @@ function Search() {
                 </div>
 
                 <div className="bottom">
-                    <GiButterfly className="pink" size={25} /> <br />
-                    <span className="color">India's favorite wedding planning platform.</span>
+                    <GiButterfly className="pink " size={25} /> <br />
+                    <p className="color">India's favorite wedding planning platform.</p>
                 </div>
 
             </div>

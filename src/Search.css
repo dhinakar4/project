@@ -44,10 +44,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* .dropdown-btn:hover {
-  background-color: #d7376a;
-} */
-
 /* Heart icon inside dropdown */
 .dropdown-icon {
   width: 20px;
@@ -144,7 +140,7 @@
 .tag {
   border: 1px solid #ccc;
   border-radius: 25px;
-  padding: 8px 18px ;
+  padding: 8px 18px;
   font-size: 16px;
   color: #474646;
   cursor: pointer;
@@ -157,25 +153,25 @@
   color: #ec407a;
 }
 
-.bottom{
-  padding-top: 250px;
+.bottom {
+  padding-top: 200px;
   margin: 0 auto;
 }
 
-.pink{
+.pink {
   color: rgb(225, 38, 100);
-  margin-bottom: 5px !important;
+  margin: 0 auto;
 }
 
-.color{
+.color {
   color: rgb(143, 143, 143);
   font-weight: 400;
   font: 12px;
-  padding-top: 5px !important;
+  padding-top: 1px !important;
 }
 
-.home-button{
-  margin-right:95%;
+.home-button {
+  margin-left: 10%;
   color: rgb(143, 143, 143);
   margin-top: 40px !important;
 }
@@ -183,7 +179,7 @@
 /*  Responsive Styles */
 
 @media (max-width:1440px) {
-  .home-button{
+  .home-button {
     margin-right: 80%;
   }
 }
@@ -210,7 +206,7 @@
   .dream-wedding {
     font-size: 20px;
   }
-  
+
 }
 
 /* Tablets and small laptops (≤768px) */
@@ -227,23 +223,25 @@
     padding: 10px;
   }
 
-   .dropdown-btn {
+  .dropdown-btn {
     justify-content: space-between;
     width: 100%;
   }
 
-} 
+}
 
 /* 📱 Mobile devices (≤480px) */
 @media (max-width: 480px) {
   .searchbar-container {
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column;
+    /* Stack vertically */
     width: 90%;
     align-items: stretch;
   }
 
   .dropdown-wrapper {
-    width: 100%; /* full width for dropdown */
+    width: 100%;
+    /* full width for dropdown */
   }
 
   .dropdown-menu {
@@ -274,7 +272,7 @@
   }
 
   .bottom {
-    padding-top: 80px;
+    padding-top: 50px;
   }
 
   .home-button {
