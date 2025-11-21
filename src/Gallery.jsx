@@ -1,21 +1,23 @@
 import React, { useRef, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import "./PopularSearch.css";
-import Img1 from "./assets/popularsearch/Img1.avif";
-import Img2 from "./assets/popularsearch/Img2.avif";
-import Img3 from "./assets/popularsearch/Img3.avif";
-import Img4 from "./assets/popularsearch/Img4.avif";
-import Img5 from "./assets/popularsearch/Img5.avif";
-import Img6 from "./assets/popularsearch/Img6.avif";
+import "./Gallery.css";
+import img1 from "./assets/gallery/img1.avif";
+import img2 from "./assets/gallery/img2.avif";
+import img3 from "./assets/gallery/img3.avif";
+import img4 from "./assets/gallery/img4.avif";
+import img5 from "./assets/gallery/img5.avif";
+import img6 from "./assets/gallery/img6.avif";
+import img7 from "./assets/gallery/img7.avif";
 
-function PopularSearch() {
+function Gallery() {
   const baseSlides = [
-    { img: Img1, title: "Bridal Wear in Mumbai" },
-    { img: Img2, title: "Bridal Makeup Artists in Mumbai" },
-    { img: Img3, title: "Photographers in Mumbai" },
-    { img: Img4, title: "Invitations in Mumbai" },
-    { img: Img5, title: "Catering Services in Mumbai" },
-    { img: Img6, title: "Decorators in Mumbai" },
+    { img: img1, title: "Bridal Lahenga" },
+    { img: img2, title: "Outfits" },
+    { img: img3, title: "Blouse Designs" },
+    { img: img4, title: "Wedding Sarees" },
+    { img: img5, title: "Mehndi Designs" },
+    { img: img6, title: "Wedding Jwellary" },
+    { img: img7, title: "Wedding Makeup"}
   ];
 
   const carouselRef = useRef(null);
@@ -85,9 +87,9 @@ function PopularSearch() {
   };
 
   return (
-    <Container className="pv-search p-3">
-      <h5 className="popular-heading">Popular Searches</h5>
-      <div className="carousel-wrapper">
+    <Container className="gallery p-0 mt-5">
+      <h5 className="gallery-heading">Gallery to Look for</h5>
+      <div className="gallery-carousel-wrapper">
         {showLeft && (
           <button
             className="custom-arrow left"
@@ -97,17 +99,17 @@ function PopularSearch() {
           </button>
         )}
 
-        <div className="carousel-row" ref={carouselRef}>
+        <div className="gallery-row" ref={carouselRef}>
           {slides.map((slide, index) => (
-            <div key={index} className="carousel-card">
-              <div className="carousel-image-wrapper">
+            <div key={index} className="gallery-card">
+              <div className="gallery-image-wrapper">
                 <img
                   src={slide.img}
                   alt={slide.title}
-                  className="carousel-image"
+                  className="gallery-image"
                 />
               </div>
-              <p className="carousel-title">{slide.title}</p>
+              <p className="gallery-title">{slide.title}</p>
             </div>
           ))}
         </div>
@@ -125,4 +127,4 @@ function PopularSearch() {
   );
 }
 
-export default PopularSearch;
+export default Gallery;

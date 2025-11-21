@@ -1,42 +1,110 @@
 import { HiLightBulb } from "react-icons/hi";
 import { IoHeartSharp } from "react-icons/io5";
 import { BsFillBagCheckFill } from "react-icons/bs";
-import './DownloadApp.css'
-
+import { RiAppleFill } from "react-icons/ri";
+import { DiAndroid } from "react-icons/di";
+import "./DownloadApp.css";
+import { useState } from "react";
+import downloadimg from "./assets/appimage.avif";
 
 function DownloadApp() {
+  const [phone, setPhone] = useState("+91");
 
-    
+  const handleChange = (e) => {
+    let value = e.target.value;
 
-    return (
-        <div>
-            <div className="app-download h-[400px] w-[100%]">
-                <h5 className="ml-[80px] pt-5" style={{ fontSize: '22px' }}>
-                    Download The WedMeGood Mobile App Today!
-                </h5>
-                <div>
-                    <div className="d-flex ml-[80px] icon-colors mt-3" >
-                        <i><HiLightBulb size={24} /> </i>
-                        <p className="ms-1">Save Wedding Ideas</p>
-                        <i><IoHeartSharp className="ms-4 mt-1" size={22} /></i>
-                        <p className="ms-1">Shortlist Vendors</p>
-                        <i><BsFillBagCheckFill className="ms-4 rotate-350 mt-1 text-pink" size={18} /></i>
-                        <p className="ms-1">Getting Free Wedding Checklist</p>
-                    </div>
-                    <p className="ml-[80px] mt-4 font-semibold">You will receive an SMS with a link to download the App</p>
-                    <div className="flex items-center gap-2 px-3 py-2 rounded-md w-[280px]">
-                        <span className="text-gray-600">+91</span>
-                        <input
-                            type="tel"
-                            maxLength={10}
-                            onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}
-                            className="border-b border-gray-500 w-[250px] py-2 focus:outline-none focus:border-pink-500"
-                        />
+    if (!value.startsWith("+91")) {
+      value = "+91" + value.replace(/\D/g, "");
+    } else {
+      value =
+        "+91" +
+        value
+          .replace("+91", "")
+          .replace(/\D/g, "");
+    }
+    setPhone(value);
+  };
 
-                    </div>
+  return (
+    <div className="py-5">
+      <div className="app-download container p-4 p-md-5">
 
-                </div>
+        <div className="row align-items-center">
+
+          {/* LEFT CONTENT */}
+          <div className="col-12 col-md-7">
+
+            <h5 className="fw-bold mb-3" style={{ fontSize: "22px" }}>
+              Download The WedMeGood Mobile App Today!
+            </h5>
+
+            {/* Icons Row */}
+            <div className="d-flex align-items-center icon-colors flex-wrap gap-2">
+
+              <span className="d-flex align-items-center">
+                <HiLightBulb size={24} className="me-1" />
+                Save Wedding Ideas
+              </span>
+
+              <span className="d-flex align-items-center ms-md-3">
+                <IoHeartSharp size={22} className="me-1" />
+                Shortlist Vendors
+              </span>
+
+              <span className="d-flex align-items-center ms-md-3">
+                <BsFillBagCheckFill size={18} className="me-1" />
+                Free Wedding Checklist
+              </span>
+
             </div>
+
+            <p className="fw-semibold mt-4">
+              You will receive an SMS with a link to download the App
+            </p>
+
+            {/* Phone Input */}
+            <div className="d-flex align-items-center border-bottom pb-1 w-100 w-md-75">
+              <img
+                src="https://flagcdn.com/w20/in.png"
+                alt="India"
+                className="me-2"
+              />
+
+              <input
+                type="tel"
+                maxLength={14}
+                value={phone}
+                onChange={handleChange}
+                className="phone-input flex-grow-1"
+              />
+            </div>
+
+            {/* Button */}
+            <button className="download-btn text-white fw-semibold px-4 py-2 mt-4">
+              <span className="button-text">Download the App</span>
+            </button>
+
+            {/* App Icons */}
+            <div className="d-flex align-items-center mt-3">
+              <RiAppleFill size={28} />
+              <DiAndroid size={28} className="ms-2" />
+            </div>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <div className="col-12 col-md-5 text-center mt-4 mt-md-0">
+            <img
+              src={downloadimg}
+              alt="download app"
+              className="img-fluid app-img"
+            />
+          </div>
+
         </div>
-    )
-}; export default DownloadApp;
+
+      </div>
+    </div>
+  );
+}
+
+export default DownloadApp;

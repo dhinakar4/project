@@ -10,6 +10,7 @@ import DownloadApp from "./DownloadApp";
 import VenueSearch from "./VenueSearch";
 import PopularSearch from "./PopularSearch";
 import RealWedding from "./RealWedding";
+import Gallery from "./Gallery";
 
 function App() {
   return (
@@ -24,8 +25,7 @@ function App() {
       </Router>
      {/* <DownloadApp /> */}
       {/* <VendorSignup /> */}
-      {/* <RealWedding /> */}
-
+      {/* <Gallery /> */}
     </div>
   );
 }

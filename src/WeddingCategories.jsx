@@ -27,41 +27,44 @@ function WeddingCategories() {
   ];
 
   return (
-    <Container className="wedding-categories p-4">
+    <Container className="wedding-categories p-3">
       <h4 className="text-xl font-semibold">Wedding Categories</h4>
 
-      <div className="mt-[30px]">
-        {items.map((item, i) => (
-          <div
-            key={item.id}
-            className="inline-block align-top w-[50%] p-2"
-          >
+      <div className="row mt-4">
+        {items.map((item) => (
+          <div key={item.id} className="col-12 col-md-6 mb-3">
             {/* Card */}
             <div
               onClick={() => toggle(item.id)}
-              className="relative cursor-pointer h-[120px]  p-0 transition-all duration-300"
+              className="category-texts relative cursor-pointer p-0 rounded shadow-sm w-100 
+             h-[120px] md:h-[90px] lg:h-[120px] max-[480px]:h-[90px]"
               style={{ backgroundColor: item.bg }}
             >
               <img
                 src={item.img}
-                className="float-end rounded-l-[70px] w-[250px] h-[120px] object-cover"
+                className="category-img"
+                alt={item.title}
               />
 
-              <div className="flex items-center gap-2 pt-3 ps-4 pe-4">
-                <h5 className="text-[18px] font-medium">{item.title}</h5>
+              <div className="d-flex align-items-center gap-2 pt-3 ps-4 pe-4">
+                <h5 className="text-[18px] md:text-[17px] sm:text-[16px] font-medium 
+               whitespace-nowrap overflow-hidden text-ellipsis">
+                  {item.title}
+                </h5>
+
+
                 <FiChevronDown
-                  className={`me-auto mb-1 text-[20px] transition-transform duration-300 ${
-                    open === item.id ? "rotate-180" : ""
-                  }`}
+                  className={`me-auto mb-1 text-[20px] transition-transform duration-300 ${open === item.id ? "rotate-180" : ""
+                    }`}
                 />
               </div>
 
               <p className="text-sm ps-4 pt-1">{item.desc}</p>
             </div>
 
-            {/* Dropdown (same width as card, below it) */}
+            {/* Dropdown */}
             {open === item.id && (
-              <div className="p-3 text-sm  bg-white shadow animate-fadeIn w-[100%]">
+              <div className="p-3 text-sm bg-white shadow animate-fadeIn ">
                 <p className="text-gray-700 categories-all-text">{item.desc}</p>
               </div>
             )}
@@ -69,6 +72,7 @@ function WeddingCategories() {
         ))}
       </div>
     </Container>
+
   );
 }
 

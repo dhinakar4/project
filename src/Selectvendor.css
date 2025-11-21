@@ -162,6 +162,10 @@
     padding: 14px 24px;
     font-size: 14px;
   }
+
+  .sv-container{
+    margin-bottom: 50px;
+  }
 }
 
 /* Mobile Landscape (max-width: 768px) */

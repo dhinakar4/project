@@ -2,7 +2,7 @@
 .wedding-navbar {
   background-color: #eb2a7d !important;
   padding: 5px 0;
-  position: sticky;
+  position: sticky !important;
   top: 0;
   left: 0;
   z-index: 1050;

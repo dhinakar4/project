@@ -1,27 +1,46 @@
 .wedding-categories {
-    color: rgb(88, 88, 88);
-    height: 600px !important;
+  color: rgb(88, 88, 88);
 }
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.category-img {
+  float: right;
+  width: 50%;
+  height: 120px;
+  object-fit: cover;
+  border-top-left-radius: 70px;
+  border-bottom-left-radius: 70px;
 }
+
+@media (max-width: 768px) {
+  .category-img {
+    width: 45%;
+    height: 90px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fadeIn {
-    animation: fadeIn .25s ease-out;
+  animation: fadeIn 0.25s ease-out;
 }
+
 .categories-all-text {
-    transition: color 0.1s ease;
-    cursor: pointer;
+  transition: color 0.1s ease;
+  cursor: pointer;
 }
+
 .categories-all-text:hover {
-    transform: scale(1.01);
-    color: #000;
-    font-weight: 500 !important;
+  transform: scale(1.01);
+  color: #000;
+  font-weight: 500 !important;
 }
+

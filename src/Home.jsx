@@ -8,6 +8,8 @@ import PopularSearch from "./PopularSearch";
 import WeddingCategories from "./WeddingCategories";
 import WMGservice from "./WMGservice";
 import RealWedding from "./RealWedding";
+import DownloadApp from "./DownloadApp";
+import Gallery from "./Gallery";
 
 
 function Home() {
@@ -33,7 +35,9 @@ function Home() {
       <PopularSearch />
       <WeddingCategories />
       <WMGservice />
+      <DownloadApp />
       <RealWedding />
+      <Gallery />
     </div>
   );
 }

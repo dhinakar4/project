@@ -1,171 +1,120 @@
+/* --- variables --- */
+:root {
+  --gap: 16px; /* gap between cards */
+}
+
+/* title */
 .wedding-title {
-    color: rgb(84, 84, 84);
+  color: rgb(84, 84, 84);
 }
 
+/* wrapper hides side overflow so no peeking */
 .real-wedding-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* important: prevents half-cut peeking */
+  display: flex;
+  align-items: center;
 }
 
+/* row: horizontal scroll container */
 .real-wedding-row {
-    display: flex;
-    overflow-x: auto;
-    gap: 25px;
-    scroll-behavior: smooth;
-    width: 100%;
-    scrollbar-width: none;
-    padding: 10px 0;
-    scroll-snap-type: x mandatory;
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 0;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  align-items: stretch;
 }
 
-.real-wedding-row::-webkit-scrollbar {
-    display: none;
-}
+.real-wedding-row::-webkit-scrollbar { display: none; }
 
 .real-wedding-card {
-    flex: 0 0 auto;
-    background: #fff;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
-    scroll-snap-align: start;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-
+  flex: 0 0 calc(90% - 0px); /* 1 card -> full width */
+  max-width: calc(90% - 0px);
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
+@media (min-width: 576px) {
+  .real-wedding-card {
+    flex: 0 0 calc(100% - 0px);
+    max-width: calc(100% - 0px);
+  }
+}
+@media (min-width: 768px) {
+  .real-wedding-card {
+    flex: 0 0 calc((100% - var(--gap)) / 2);
+    max-width: calc((100% - var(--gap)) / 2);
+  }
+}
+@media (min-width: 1024px) {
+  .real-wedding-card {
+    flex: 0 0 calc((100% - (var(--gap) * 2)) / 3);
+    max-width: calc((100% - (var(--gap) * 2)) / 3);
+  }
+}
+
+/* image wrapper keeps aspect ratio */
 .wedding-image-wrapper {
-    width: 410px;
-    height: 270px;
-    overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
 }
 
 .real-wedding-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
 }
 
 .real-wedding-image:hover {
-    transform: scale(1.2);
-    /* zoom in slightly */
-    cursor: pointer;
+  transform: scale(1.05);
 }
 
-.stories-title {
-    font-size: 16px;
-    font-weight: 500;
-    color: black;
-    text-align: left;
-}
+/* text */
+.card-body { padding-bottom: 12px; }
+.stories-title { font-size: 16px; font-weight: 600; margin: 0; color: #111;}
+.real-wedding-desc { margin: 6px 0; color: #333; line-height: 1.4; font-size: 0.95rem; }
+.real-wedding-date { color: gray; font-size: 0.85rem; }
 
-.real-wedding-desc {
-    color:rgb(34, 34, 34);
-    font-size: 14px !important;
-    font-weight: 400;
-}
-.real-wedding-date{
-    color: gray;
-}
-
+/* arrows */
 .custom-arrow {
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    background-color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 10;
-    transition: color 0.2s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
-.custom-arrow.left {
-    left: 0;
+.custom-arrow.left { left: 8px; }
+.custom-arrow.right { right: 8px; }
+
+@media (max-width: 575px) {
+  .custom-arrow { width: 34px; height: 34px; font-size: 18px; }
 }
 
-.custom-arrow.right {
-    right: 0;
-}
-
-.custom-arrow:hover {
-    color: rgb(234, 42, 135);
-}
+.real-wedding-row { padding-inline: 0.5rem; }
 
 @media (max-width: 767px) {
-    .real-wedding-row {
-        gap: 10px;
-        padding: 0;
-    }
-
-    .wedding-title {
-        text-align: center;
-    }
-
-    .real-wedding-card {
-        width: 100%;
-        box-sizing: border-box;
-        margin: 0;
-        border-radius: 8px;
-    }
-
-    .wedding-image-wrapper {
-        aspect-ratio: 16/9;
-    }
-
-    .real-wedding-image {
-        object-fit: cover;
-    }
-
-    .stories-title {
-        font-size: 14px;
-        padding: 6px 0;
-    }
-
-    .custom-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 18px;
-    }
-}
-
-/* Tablet view - 2 images per view */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .real-wedding-card {
-        width: calc(50% - 10px);
-        min-width: calc(50% - 10px);
-    }
-
-     .real-wedding-image {
-        object-fit: cover;
-    }
-
-    .wedding-image-wrapper {
-        aspect-ratio: 4/3;
-    }
-}
-
-/* Laptop/Desktop view - 4 images per view */
-@media (min-width: 1024px) {
-    .real-wedding-card {
-        width: calc(33% - 15px);
-        min-width: calc(33% - 15px);
-    }
-
-     .real-wedding-image {
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .wedding-image-wrapper {
-        aspect-ratio: 2/3;
-    }
+  .real-wedding-row { scroll-snap-type: x mandatory; }
+  .real-wedding-card { scroll-snap-align: center; }
 }
