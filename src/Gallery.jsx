@@ -17,8 +17,10 @@ function Gallery() {
     { img: img4, title: "Wedding Sarees" },
     { img: img5, title: "Mehndi Designs" },
     { img: img6, title: "Wedding Jwellary" },
-    { img: img7, title: "Wedding Makeup"}
+    { img: img7, title: "Wedding Makeup" }
   ];
+
+  const slides = [...baseSlides, ...baseSlides, ...baseSlides];
 
   const carouselRef = useRef(null);
   const cardWidthRef = useRef(0);
@@ -27,18 +29,17 @@ function Gallery() {
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
 
-  const slides = [...baseSlides, ...baseSlides, ...baseSlides];
-
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
 
-    const firstCard = el.querySelector(".carousel-card");
+    const firstCard = el.querySelector(".real-wedding-card");
     if (!firstCard) return;
 
-    cardWidthRef.current = firstCard.offsetWidth;
+    // compute width after layout (card width already set by CSS)
+    cardWidthRef.current = firstCard.getBoundingClientRect().width;
 
-    // Start in the middle for seamless loop
+    // center to middle copy (so infinite loop looks natural)
     el.style.scrollBehavior = "auto";
     el.scrollLeft = baseSlides.length * cardWidthRef.current;
     el.style.scrollBehavior = "smooth";
@@ -57,37 +58,46 @@ function Gallery() {
         el.style.scrollBehavior = "smooth";
       }
 
-      // Show left arrow only if user clicked right
-      if (hasScrolledRight.current) {
-        setShowLeft(true);
-      }
+      // show left arrow only after user scrolled right manually
+      if (hasScrolledRight.current) setShowLeft(true);
       setShowRight(true);
     };
 
     el.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
+    window.addEventListener("resize", () => {
+      // recompute card width on resize to keep infinite math accurate
+      const updatedFirst = el.querySelector(".real-wedding-card");
+      if (updatedFirst) {
+        cardWidthRef.current = updatedFirst.getBoundingClientRect().width;
+      }
+      handleScroll();
+    });
 
     return () => {
       el.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, [baseSlides.length]);
+  }, []);
 
   const scroll = (dir) => {
     const el = carouselRef.current;
-    const cardWidth = cardWidthRef.current;
-    if (!el || !cardWidth) return;
+    const width = cardWidthRef.current;
+    if (!el || !width) return;
+
+    if (dir === "right") {
+      hasScrolledRight.current = true;
+      setShowLeft(true);
+    }
 
     el.scrollBy({
-      left: dir === "left" ? -cardWidth : cardWidth,
-      behavior: "smooth",
+      left: dir === "left" ? -width : width,
+      behavior: "smooth"
     });
-
-    if (dir === "right") hasScrolledRight.current = true;
   };
 
+
   return (
-    <Container className="gallery p-0 mt-5">
+    <Container className="gallery mt-5">
       <h5 className="gallery-heading">Gallery to Look for</h5>
       <div className="gallery-carousel-wrapper">
         {showLeft && (

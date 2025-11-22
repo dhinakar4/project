@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Menubar.css";
 import { useState, useEffect } from 'react';
-import CityDropdown from './CityDropDown';
+import CityDropdown from './CityDropdown';
 import goaImage from './assets/goa.webp';
 import jaipurImage from './assets/jaipur.webp';
 import udaipurImage from './assets/udaipur.webp';
