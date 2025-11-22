@@ -32,9 +32,9 @@ function DownloadApp() {
         <div className="row align-items-center">
 
           {/* LEFT CONTENT */}
-          <div className="col-12 col-md-7">
+          <div className="col-12 col-md-7 ps-5">
 
-            <h5 className="fw-bold mb-3" style={{ fontSize: "22px" }}>
+            <h5 className="fw-semibold mb-3" style={{ fontSize: "22px" }}>
               Download The WedMeGood Mobile App Today!
             </h5>
 
@@ -63,11 +63,11 @@ function DownloadApp() {
             </p>
 
             {/* Phone Input */}
-            <div className="d-flex align-items-center border-bottom pb-1 w-100 w-md-75">
+            <div className="d-flex align-items-center  pb-1 w-50 w-md-75">
               <img
                 src="https://flagcdn.com/w20/in.png"
                 alt="India"
-                className="me-2"
+                className="me-2 border-bottom border-dark pb-1 pr-2 pt-[6px]"
               />
 
               <input
@@ -75,28 +75,28 @@ function DownloadApp() {
                 maxLength={14}
                 value={phone}
                 onChange={handleChange}
-                className="phone-input flex-grow-1"
+                className="phone-input flex-grow-1 border-bottom border-dark"
               />
             </div>
 
             {/* Button */}
-            <button className="download-btn text-white fw-semibold px-4 py-2 mt-4">
-              <span className="button-text">Download the App</span>
+            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-3 w-[200px]">
+              <span className="button-text ">Download the App</span>
             </button>
 
             {/* App Icons */}
-            <div className="d-flex align-items-center mt-3">
+            <div className="d-flex align-items-center mt-3 ml-[60px]">
               <RiAppleFill size={28} />
               <DiAndroid size={28} className="ms-2" />
             </div>
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="col-12 col-md-5 text-center mt-4 mt-md-0">
+          <div className="col-12 col-md-5 text-center mt-4 mt-md-0 ">
             <img
               src={downloadimg}
               alt="download app"
-              className="img-fluid app-img"
+              className="img-fluid app-img mx-auto"
             />
           </div>
 

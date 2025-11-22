@@ -93,7 +93,7 @@ function RealWedding() {
   };
 
   return (
-    <Container fluid className="mt-5 p-5">
+    <Container className=" p-md-2">
       <h4 className="wedding-title mb-3 text-center text-md-start">Real Wedding Stories</h4>
 
       <div className="real-wedding-wrapper">
@@ -112,7 +112,7 @@ function RealWedding() {
 
               <div className="card-body px-3 pt-2">
                 <h6 className="stories-title mb-1">{slide.title}</h6>
-                <p className="real-wedding-desc mb-1">{slide.desc}</p>
+                <p className="real-wedding-desc mb-3">{slide.desc}</p>
                 <p className="real-wedding-date small fw-semibold mb-0">{slide.date}</p>
               </div>
             </article>

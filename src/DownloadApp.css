@@ -18,8 +18,8 @@
 .download-btn {
   background: linear-gradient(
     to bottom right,
-    #ed158c 85%,
-    #9e0849 15%
+    #fb3379 85%,
+    #c00757 15%
   );
   border-radius: 50px;
   position: relative;
@@ -62,4 +62,5 @@
 .app-img {
   max-height: 350px;
   object-fit: contain;
+  
 }
