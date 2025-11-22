@@ -37,7 +37,7 @@ function Home() {
       <WMGservice />
       <DownloadApp />
       <RealWedding />
-      {/* <Gallery /> */}
+      <Gallery />
     </div>
   );
 }
