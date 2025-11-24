@@ -10,6 +10,8 @@ import WMGservice from "./WMGservice";
 import RealWedding from "./RealWedding";
 import DownloadApp from "./DownloadApp";
 import Gallery from "./Gallery";
+import FeatureVendor from "./FeatureVendor";
+import LatestBlogs from "./LatestBlogs";
 
 
 function Home() {
@@ -38,6 +40,8 @@ function Home() {
       <DownloadApp />
       <RealWedding />
       <Gallery />
+      <FeatureVendor />
+      <LatestBlogs />
     </div>
   );
 }

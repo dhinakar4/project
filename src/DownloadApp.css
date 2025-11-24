@@ -17,7 +17,7 @@
 /* Button */
 .download-btn {
   background: linear-gradient(
-    to bottom right,
+    to right bottom,
     #fb3379 85%,
     #c00757 15%
   );
@@ -25,7 +25,7 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.4s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .download-btn::after {
@@ -34,7 +34,7 @@
   inset: 0;
   background: #9e0849;
   opacity: 0;
-  transition: 0.4s ease-in-out;
+  transition: 0.5s ease-in-out;
   clip-path: polygon(
     100% 100%,
     100% 70%,

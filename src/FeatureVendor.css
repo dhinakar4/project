@@ -1,0 +1,20 @@
+.feature-vendor-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.feature-vendor-price {
+    color: rgb(239, 21, 152);
+    font-weight: 500;
+}
+.feature-vendor-quantity{
+    color: rgb(239, 21, 152) !important;
+    font-weight: 400;
+    font-size: 14px;
+}
+.feature-vendor-heading{
+  color: rgb(83, 83, 83);
+}
+.feature-vendor-desc{
+  color: rgb(151, 151, 151);
+}

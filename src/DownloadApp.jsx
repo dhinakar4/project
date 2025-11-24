@@ -26,7 +26,7 @@ function DownloadApp() {
   };
 
   return (
-    <div className="py-5">
+    <div className="mt-5">
       <div className="app-download container p-4 p-md-5">
 
         <div className="row align-items-center">
@@ -80,8 +80,8 @@ function DownloadApp() {
             </div>
 
             {/* Button */}
-            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-3 w-[200px]">
-              <span className="button-text ">Download the App</span>
+            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-[15px] w-[250px]">
+              <span className="button-text">Download the App</span>
             </button>
 
             {/* App Icons */}

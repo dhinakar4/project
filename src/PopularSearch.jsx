@@ -85,7 +85,7 @@ function PopularSearch() {
   };
 
   return (
-    <Container className="pv-search p-3">
+    <Container className="pv-search mt-5">
       <h5 className="popular-heading">Popular Searches</h5>
       <div className="carousel-wrapper">
         {showLeft && (

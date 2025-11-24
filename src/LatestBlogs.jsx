@@ -1,16 +1,16 @@
 import './RealWedding.css';
 import Container from "react-bootstrap/Container";
 import React, { useRef, useEffect, useState } from "react";
-import img1 from './assets/realwedding/img1.avif';
-import img2 from './assets/realwedding/img2.avif';
-import img3 from './assets/realwedding/img3.avif';
-import img4 from './assets/realwedding/img4.avif';
-import img5 from './assets/realwedding/img5.avif';
+import img1 from './assets/latestblogs/img1.avif';
+import img2 from './assets/latestblogs/img2.avif';
+import img3 from './assets/latestblogs/img3.avif';
+import img4 from './assets/latestblogs/img4.avif';
+import img5 from './assets/latestblogs/img5.avif';
 
-function RealWedding() {
+function LatestBlogs() {
   const baseSlides = [
-    { img: img1, title: 'Rupanshi and Yash', desc: 'A Deeply Personalished Mumbai Wedding That Was A Guest-First Celebration!', date: '18 January 2025' },
-    { img: img2, title: 'Natasia and Jeet', desc: 'A Breezy, Nature-Filled Wedding In Mumbai That Redefines Romantic Minimalism!', date: '21 February 2025' },
+    { img: img1, title: 'A Divine Udaipur Wedding That Just Hit Different', desc: 'A Deeply Personalished Mumbai Wedding That Was A Guest-First Celebration!', date: '20 Nov, 2025' },
+    { img: img2, title: 'Natasia and Jeet', desc: 'A Breezy, Nature-Filled Wedding In Mumbai That Redefines Romantic Minimalism!', date: '20 February 2025' },
     { img: img3, title: 'Palak and Aarjav', desc: 'A Mumbai Wedding With Vintage Couture & A Rom-Com-Style NYC Elopement', date: '03 June 2025' },
     { img: img4, title: 'Shradha and Nitesh', desc: "This Celebrity MUA's Ethereal Roka Came With 3 Dreamy Celebrations You Can't Miss!", date: '16 July 2025' },
     { img: img5, title: 'Sanam and Mohit', desc: 'Seaside Terrace Wedding At Home With A Bride Who Rocked A Neon Lehenga!', date: '22 December 2025' }
@@ -93,8 +93,8 @@ function RealWedding() {
   };
 
   return (
-    <Container className=" p-md-2 mt-5">
-      <h4 className="wedding-title mb-3 text-center text-md-start">Real Wedding Stories</h4>
+    <Container className="p-md-2 mt-5">
+      <h4 className="wedding-title mb-3 text-center text-md-start">Latest Blogs</h4>
 
       <div className="real-wedding-wrapper">
         {showLeft && (
@@ -129,4 +129,4 @@ function RealWedding() {
   );
 }
 
-export default RealWedding;
+export default LatestBlogs;

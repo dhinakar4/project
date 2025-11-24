@@ -11,6 +11,8 @@ import VenueSearch from "./VenueSearch";
 import PopularSearch from "./PopularSearch";
 import RealWedding from "./RealWedding";
 import Gallery from "./Gallery";
+import FeatureVendor from "./FeatureVendor";
+import LatestBlogs from "./LatestBlogs";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
      {/* <DownloadApp /> */}
       {/* <VendorSignup /> */}
       {/* <Gallery /> */}
+      {/* <FeatureVendor /> */}
+      {/* <LatestBlogs /> */}
     </div>
   );
 }

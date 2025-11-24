@@ -27,7 +27,7 @@ function WeddingCategories() {
   ];
 
   return (
-    <Container className="wedding-categories p-3">
+    <Container className="wedding-categories mt-5">
       <h4 className="text-xl font-semibold">Wedding Categories</h4>
 
       <div className="row mt-4">
