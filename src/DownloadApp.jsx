@@ -9,22 +9,37 @@ import downloadimg from "./assets/appimage.avif";
 
 function DownloadApp() {
   const [phone, setPhone] = useState("+91");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    let value = e.target.value;
+    let value = e.target.value.replace(/\D/g, "");
 
-    if (!value.startsWith("+91")) {
-      value = "+91" + value.replace(/\D/g, "");
-    } else {
-      value =
-        "+91" +
-        value
-          .replace("+91", "")
-          .replace(/\D/g, "");
+    if (!value.startsWith("91")) {
+      value = "91" + value;
     }
-    setPhone(value);
-  };
 
+    value = "+91" + value.slice(2, 12);
+
+    setPhone(value);
+
+    if (value.length !== 13) {
+      setError("Please enter a valid phone number!");
+    } else {
+      setError("");
+    }
+  };
+  const handleDownload = () => {
+    if (!phone.length !== 13) {
+      setError("Please enter a valid phone number!");
+    } else {
+      setSuccess("");
+      return;
+    }
+
+    setError("");
+    setSuccess("Meassage sent!")
+  };
   return (
     <div className="mt-5">
       <div className="app-download container p-4 p-md-5">
@@ -63,7 +78,7 @@ function DownloadApp() {
             </p>
 
             {/* Phone Input */}
-            <div className="d-flex align-items-center  pb-1 w-50 w-md-75">
+            <div className="d-flex align-items-center pb-1 w-50 w-md-75">
               <img
                 src="https://flagcdn.com/w20/in.png"
                 alt="India"
@@ -72,15 +87,23 @@ function DownloadApp() {
 
               <input
                 type="tel"
-                maxLength={14}
+                maxLength={13}
                 value={phone}
                 onChange={handleChange}
                 className="phone-input flex-grow-1 border-bottom border-dark"
               />
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <p style={{ color: "red", fontSize: "14px", marginTop: "5px" }}>
+                {error}
+              </p>
+            )}
+
             {/* Button */}
-            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-[15px] w-[250px]">
+            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-[15px] w-[250px]"
+              onClick={handleDownload}>
               <span className="button-text">Download the App</span>
             </button>
 
@@ -89,6 +112,7 @@ function DownloadApp() {
               <RiAppleFill size={28} />
               <DiAndroid size={28} className="ms-2" />
             </div>
+
           </div>
 
           {/* RIGHT IMAGE */}
@@ -101,6 +125,12 @@ function DownloadApp() {
           </div>
 
         </div>
+         {/* Success Message */}
+            {success && (
+              <p style={{ color: "green", fontSize: "14px",fontWeight:"500" }}>
+                {success}
+              </p>
+            )}
 
       </div>
     </div>

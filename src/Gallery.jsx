@@ -33,7 +33,7 @@ function Gallery() {
     const el = carouselRef.current;
     if (!el) return;
 
-    const firstCard = el.querySelector(".real-wedding-card");
+    const firstCard = el.querySelector(".gallery-card");
     if (!firstCard) return;
 
     // compute width after layout (card width already set by CSS)
@@ -66,7 +66,7 @@ function Gallery() {
     el.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", () => {
       // recompute card width on resize to keep infinite math accurate
-      const updatedFirst = el.querySelector(".real-wedding-card");
+      const updatedFirst = el.querySelector(".gallery-card");
       if (updatedFirst) {
         cardWidthRef.current = updatedFirst.getBoundingClientRect().width;
       }

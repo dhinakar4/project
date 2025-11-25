@@ -27,7 +27,7 @@
 }
 
 .gallery-card {
-    height: 300px;
+    /* height: 300px; */
     padding: 10px;
     flex: 0 0 auto;
     background: #fff;
@@ -40,7 +40,7 @@
 
 .gallery-image-wrapper {
     height: 240px;
-    width: 295px;
+    width: 100%;
     overflow: hidden !important;
     object-fit: cover;
 
@@ -48,11 +48,12 @@
 
 .gallery-image {
     height: 100%;
-    width: 295px;
+    width: 100%;
     object-fit: cover;
     transition: transform 0.7s ease;
     display: block;
     border-radius: 6px !important;
+    overflow: hidden !important;
 }
 
 .gallery-image:hover {

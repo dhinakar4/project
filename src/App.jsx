@@ -13,6 +13,7 @@ import RealWedding from "./RealWedding";
 import Gallery from "./Gallery";
 import FeatureVendor from "./FeatureVendor";
 import LatestBlogs from "./LatestBlogs";
+import ContactPage from "./ContactPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       {/* <Gallery /> */}
       {/* <FeatureVendor /> */}
       {/* <LatestBlogs /> */}
+      {/* <ContactPage /> */}
     </div>
   );
 }
