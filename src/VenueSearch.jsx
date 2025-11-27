@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import "./VenueSearch.css";
 
@@ -10,13 +11,15 @@ import Img5 from "./assets/venuesearch/img5.avif";
 import Img6 from "./assets/venuesearch/img6.avif";
 
 function VenueSearch() {
+  const navigate = useNavigate();
+
   const baseSlides = [
-    { img: Img1, title: "4 Star & Above Wedding Hotel" },
-    { img: Img2, title: "Banquet Halls" },
-    { img: Img3, title: "Marriage Garden / Lawns" },
-    { img: Img4, title: "3 Star Hotels with Banquets" },
-    { img: Img5, title: "Country / Golf Club" },
-    { img: Img6, title: "Wedding Resorts" },
+    { img: Img1, title: "4 Star & Above Wedding Hotel", type: "4star" },
+    { img: Img2, title: "Banquet Halls", type: "banquet" },
+    { img: Img3, title: "Marriage Garden / Lawns", type: "garden" },
+    { img: Img4, title: "3 Star Hotels with Banquets", type: "3star" },
+    { img: Img5, title: "Country / Golf Club", type: "club" },
+    { img: Img6, title: "Wedding Resorts", type: "resort" },
   ];
 
   const slides = [...baseSlides, ...baseSlides, ...baseSlides];
@@ -24,7 +27,6 @@ function VenueSearch() {
   const carouselRef = useRef(null);
   const cardWidthRef = useRef(0);
 
-  // NEW STATE FOR ARROWS
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
 
@@ -55,7 +57,6 @@ function VenueSearch() {
     const total = baseSlides.length * cardWidth;
     const middle = total;
 
-    // SHOW LEFT ARROW ONLY AFTER MOVING FROM CENTER
     setShowLeft(el.scrollLeft > middle + 5);
     setShowRight(true);
 
@@ -89,7 +90,6 @@ function VenueSearch() {
 
       <div className="venue-carousel-wrapper">
 
-        {/* LEFT ARROW - SHOW ONLY WHEN showLeft = true */}
         {showLeft && (
           <button
             className="venue-arrow venue-arrow-left"
@@ -105,20 +105,22 @@ function VenueSearch() {
           onScroll={handleScroll}
         >
           {slides.map((slide, index) => (
-            <div key={index} className="venue-card">
+            <div
+              key={index}
+              className="venue-card"
+              onClick={() => navigate(`/venues?type=${slide.type}`)}
+              style={{ cursor: "pointer" }}
+            >
               <img src={slide.img} alt={slide.title} className="venue-image" />
               <div className="venue-text">
                 <p className="venue-title">{slide.title}</p>
-                <span className="venue-cities">
-                  Mumbai | Bangalore | Pune |
-                </span>
+                <span className="venue-cities">Mumbai | Bangalore | Pune |</span>
                 <span className="venue-more">More</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* RIGHT ARROW (ALWAYS SHOW) */}
         {showRight && (
           <button
             className="venue-arrow venue-arrow-right"

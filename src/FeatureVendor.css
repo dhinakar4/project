@@ -1,20 +1,45 @@
-.feature-vendor-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-.feature-vendor-price {
-    color: rgb(239, 21, 152);
-    font-weight: 500;
-}
-.feature-vendor-quantity{
-    color: rgb(239, 21, 152) !important;
-    font-weight: 400;
-    font-size: 14px;
-}
 .feature-vendor-heading{
-  color: rgb(83, 83, 83);
+    color: rgb(83, 83, 83);
 }
-.feature-vendor-desc{
-  color: rgb(151, 151, 151);
+
+.feature-vendor-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+  scroll-snap-type: x mandatory; 
+}
+
+.feature-vendor-row::-webkit-scrollbar {
+  display: none;
+}
+
+.feature-vendor-card {
+  flex: 0 0 auto;
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.3s, border 0.3s, background 0.3s;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.feature-vendor-image{
+  border-radius: 8px;
+}
+
+
+@media (max-width: 575px) {
+  .feature-vendor-card { width: calc(100% - 16px); }
+}
+
+@media (min-width: 576px) and (max-width: 1023px) {
+  .feature-vendor-card { width: calc((100% - 16px) / 2); }
+}
+
+@media (min-width: 1024px) {
+  .feature-vendor-card { width: calc((100% - 32px) / 3); }
 }

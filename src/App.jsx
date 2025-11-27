@@ -15,24 +15,31 @@ import FeatureVendor from "./FeatureVendor";
 import LatestBlogs from "./LatestBlogs";
 import ContactPage from "./ContactPage";
 
+// NEW FILES YOU MUST CREATE
+import Layout from "./components/Layout";
+import VenueList from "./pages/VenueList";
+import VenueDetails from "./pages/VenueDetails";
+
 function App() {
   return (
-    <div> 
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />      
-          <Route path="/login" element={<Login />} /> 
-          <Route path="/business-signin" element={<BusinesSignup />} /> 
-          <Route path="/search" element={<Search />} /> 
-        </Routes>
-      </Router>
-     {/* <DownloadApp /> */}
-      {/* <VendorSignup /> */}
-      {/* <Gallery /> */}
-      {/* <FeatureVendor /> */}
-      {/* <LatestBlogs /> */}
-      {/* <ContactPage /> */}
-    </div>
+    <Router>
+      <Routes>
+
+        {/* Pages without Layout (simple screens) */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/business-signin" element={<BusinesSignup />} />
+        <Route path="/vendor-signup" element={<VendorSignup />} />
+        <Route path="/search" element={<Search />} />
+
+
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/venues/:city" element={<VenueList />} />     {/* Popular search category pages */}
+          <Route path="/venue/:id" element={<VenueDetails />} />     {/* Single venue details */}
+        </Route>
+
+      </Routes>
+    </Router>
   );
 }
 
