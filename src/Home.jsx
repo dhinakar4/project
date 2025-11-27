@@ -43,7 +43,7 @@ function Home() {
       <Gallery />
       <FeatureVendor />
       <LatestBlogs />
-      <ContactPage />
+      {/* <ContactPage /> */}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { DiAndroid } from "react-icons/di";
 import "./DownloadApp.css";
 import { useState } from "react";
 import downloadimg from "./assets/appimage.avif";
+import { Container } from "react-bootstrap";
 
 function DownloadApp() {
   const [phone, setPhone] = useState("+91");
@@ -41,7 +42,7 @@ function DownloadApp() {
     setSuccess("Meassage sent!")
   };
   return (
-    <div className="mt-5">
+    <Container className="mt-5">
       <div className="app-download container p-4 p-md-5">
 
         <div className="row align-items-center">
@@ -133,7 +134,7 @@ function DownloadApp() {
             )}
 
       </div>
-    </div>
+    </Container>
   );
 }
 
