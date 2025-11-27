@@ -22,7 +22,7 @@ function ContactPage() {
 
             <div className="row pt-4 text-sm">
 
-                <div className="col-md-4">
+                <div className="col-12 col-md-6 col-lg-5">
                     <div className="fw-semibold mb-2 text-lg">Contact us to get best deals</div>
                     <div className="d-flex align-items-start mt-3">
                         <div className="me-4">
@@ -48,9 +48,9 @@ function ContactPage() {
                     </div>
                 </div>
 
-                <div className="col-md-4 mt-4 mt-md-0">
-                    <div className="fw-semibold mb-2 text-lg">Follow us on:</div>
-                    <ul className="list-unstyled mt-3">
+                <div className="col-md-6 col-lg-3 mt-4 mt-md-0 ">
+                    <div className="fw-semibold mb-2 text-lg ms-md-3">Follow us on:</div>
+                    <ul className="list-unstyled mt-3 ms-md-3">
                         <li className="d-flex align-items-center mb-2">
                             <FaFacebookF className="me-2 text-blue-900" /> Facebook
                         </li>
@@ -69,7 +69,7 @@ function ContactPage() {
                     </ul>
                 </div>
 
-                <div className="col-md-4 mt-4 mt-md-0">
+                <div className="col-md-12 col-lg-3 mt-4 mt-md-0">
                     <div className="fw-semibold mb-2 text-lg">Get The WedMeGood App</div>
                     <div className="d-flex flex-column mt-3">
                         <img src={img1} alt="App Store" className="img-fluid mb-3" style={{ maxWidth: 160 }} />
@@ -101,7 +101,7 @@ function ContactPage() {
 
             <hr className="mt-5" />
 
-            <div className="row text-left justify-between">
+            <div className="row text-left justify-content-lg-between text-md-start">
 
                 <div className="col-lg-2 col-md-4 col-6 p-2">
                     <h6>Start Planning</h6>
