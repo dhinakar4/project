@@ -324,7 +324,7 @@
 
    /* TOPBAR RESPONSIVE */
 
-@media (max-width: 426px) {
+@media (max-width: 475px) {
   .topbar {
     align-items: center !important;
     text-align: center !important;
@@ -343,6 +343,7 @@
     display: flex;
     align-items: center !important;
     flex-wrap: nowrap;
+    margin: 0 auto !important;
   }
 
   .topbar-links a {

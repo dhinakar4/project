@@ -93,7 +93,7 @@ function LatestBlogs() {
   };
 
   return (
-    <Container className="p-md-2 mt-5">
+    <Container className="p-md-2 mt-5 mb-5">
       <h4 className="wedding-title mb-3 text-center text-md-start">Latest Blogs</h4>
 
       <div className="real-wedding-wrapper">
