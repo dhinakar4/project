@@ -42,7 +42,7 @@ function DownloadApp() {
     setSuccess("Meassage sent!")
   };
   return (
-    <Container className="mt-5">
+    <Container className="mt-4 p-5">
       <div className="app-download container p-4 p-md-5">
 
         <div className="row align-items-center">

@@ -1,16 +1,15 @@
 import { Outlet } from "react-router-dom";
+import Menubar from "../Menubar";
 
 function Layout() {
   return (
     <>
-      {/* <Navbar /> */}
+    <Menubar />
 
       <div style={{ minHeight: "80vh" }}>
         <Outlet />  {/* Page content loads here */}
       </div>
 
-      {/* Footer (if you have one) */}
-      {/* <Footer /> */}
     </>
   );
 }

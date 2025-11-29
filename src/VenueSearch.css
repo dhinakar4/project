@@ -8,12 +8,12 @@
 
 .venue-carousel-wrapper {
   position: relative;
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
 
 .venue-carousel-row {
   display: flex;
-  /* gap: 5px; */
+  gap: 1px;
   overflow: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -31,7 +31,7 @@
   flex-direction: row;
   align-items: center;
   background: #fff;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
   box-sizing: border-box;
 }
@@ -126,11 +126,11 @@
 }
 
 .venue-arrow-left {
-  left: 0;
+  left: -10px;
 }
 
 .venue-arrow-right {
-  right: 0;
+  right: -10px;
 }
 
 /* Responsive */

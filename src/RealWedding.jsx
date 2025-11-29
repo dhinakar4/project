@@ -93,7 +93,7 @@ function RealWedding() {
   };
 
   return (
-    <Container className=" p-md-2 mt-5">
+    <Container className=" p-md-2 mt-4 real-wedding-container">
       <h4 className="wedding-title mb-3 text-center text-md-start">Real Wedding Stories</h4>
 
       <div className="real-wedding-wrapper">

@@ -56,7 +56,7 @@ function Menubar() {
   return (
     <div>
       {/* Top bar */}
-      <div className="topbar ">
+      <div className="topbar p-2">
         <span className="topbar-text ms-4 text-white ">
           India’s Favourite Wedding Planning Platform
         </span>

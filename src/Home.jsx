@@ -20,7 +20,7 @@ function Home() {
 
   return (
     <div>
-      <Menubar selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
+      {/* <Menubar selectedCity={selectedCity} setSelectedCity={setSelectedCity} /> */}
 
       {/* Hero Section */}
       <div className="hero-section">

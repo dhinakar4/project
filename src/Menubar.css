@@ -344,6 +344,8 @@
     align-items: center !important;
     flex-wrap: nowrap;
     margin: 0 auto !important;
+    padding: 5px;
+    padding-left: 10px !important;
   }
 
   .topbar-links a {
@@ -432,7 +434,7 @@
   }
 
     .city-toggle-btn {
-    width: 120px !important;
+    width: 200px !important;
     font-size: 13px;
     margin-left: auto !important;
     margin-bottom: 3px !important;

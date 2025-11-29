@@ -179,7 +179,7 @@
   }
 
    .sv-container {
-    padding-bottom: 110px !important;  /* ensures room for popular section */
+    padding-bottom: 150px !important;  /* ensures room for popular section */
   }
 
   .sv-dropdown-wrapper {
@@ -221,7 +221,7 @@
     font-size: 22px;
   }
   .sv-container {
-    padding-bottom: 130px !important;  /* ensures room for popular section */
+    padding-bottom: 170px !important;  /* ensures room for popular section */
   }
 
   .sv-center-text p {

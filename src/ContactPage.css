@@ -9,9 +9,8 @@
 
   background: linear-gradient(
     to bottom right,
-    transparent 15%,
-    transparent 85%,
-    #1f5ceb 100%   
+    white 85%,
+    #628fef 15%
   );
 
   color: var(--text);

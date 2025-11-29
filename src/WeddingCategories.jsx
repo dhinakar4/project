@@ -27,7 +27,7 @@ function WeddingCategories() {
   ];
 
   return (
-    <Container className="wedding-categories mt-5">
+    <Container className="wedding-categories mt-4 p-5">
       <h4 className="text-xl font-semibold">Wedding Categories</h4>
 
       <div className="row mt-4">
@@ -36,7 +36,7 @@ function WeddingCategories() {
             {/* Card */}
             <div
               onClick={() => toggle(item.id)}
-              className="category-texts relative cursor-pointer p-0 rounded shadow-sm w-100 
+              className="category-texts relative cursor-pointer p-0 shadow-sm w-100 
              h-[120px] md:h-[90px] lg:h-[120px] max-[480px]:h-[90px]"
               style={{ backgroundColor: item.bg }}
             >
