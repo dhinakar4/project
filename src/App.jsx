@@ -34,7 +34,7 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/venues/:city" element={<VenueList />} />     {/* Popular search category pages */}
+          <Route path="/venues" element={<VenueList />} />     {/* Popular search category pages */}
           <Route path="/venue/:id" element={<VenueDetails />} />     {/* Single venue details */}
         </Route>
 

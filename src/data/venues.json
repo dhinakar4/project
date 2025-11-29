@@ -1,142 +1,146 @@
 [
-    {
-        "id":"1",
-        "name":"Leela Palace",
-        "city":"Adyar, Chennai",
-        "rating":4.9,
-        "price-per-plate":"2000",
-        "capacity":"500-1500",
-        "venue-type":"Hotel",
-        "image":"./images/img1.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"2",
-        "name":"ITC Grand Chola",
-        "city":"Guindy, Chennai",
-        "rating":5.0,
-        "price-per-plate":"3000",
-        "capacity":"300-2000",
-        "venue-type":"Hotel",
-        "image":"./images/img2.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"3",
-        "name":"Ramada by Wyndham",
-        "city":"Madurai",
-        "rating":4.7,
-        "price-per-plate":"1500",
-        "capacity":"100-1000",
-        "venue-type":"Hotel",
-        "image":"./images/img3.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"4",
-        "name":"Goldfinch Hotel",
-        "city":"Bangalore",
-        "rating":4.8,
-        "price-per-plate":"2700",
-        "capacity":"200-2500",
-        "venue-type":"Hotel",
-        "image":"./images/img4.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"5",
-        "name":"Banyan Tree Resorts",
-        "city":"Coimbatore",
-        "rating":5.0,
-        "price-per-plate":"2000",
-        "capacity":"100-3000",
-        "venue-type":"Hotel",
-        "image":"./images/img5.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"6",
-        "name":"Royal Palace",
-        "city":"Bangalore",
-        "rating":5.0,
-        "price-per-plate":"2600",
-        "capacity":"500-3500",
-        "venue-type":"Hotel",
-        "image":"./images/img6.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"7",
-        "name":"Kumarakom Lake Resort",
-        "city":"Coimbatore",
-        "rating":4.8,
-        "price-per-plate":"3000",
-        "capacity":"200-1800",
-        "venue-type":"Hotel",
-        "image":"./images/img7.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"8",
-        "name":"Hidden Resort",
-        "city":"Ooty",
-        "rating":4.7,
-        "price-per-plate":"2400",
-        "capacity":"150-1400",
-        "venue-type":"Hotel",
-        "image":"./images/img8.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"9",
-        "name":"Moonlight Resort",
-        "city":"Erode",
-        "rating":4.9,
-        "price-per-plate":"1500",
-        "capacity":"100-2000",
-        "venue-type":"Hotel",
-        "image":"./images/img9.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"10",
-        "name":"Pleasant Tree Hotels",
-        "city":"Ooty",
-        "rating":4.7,
-        "price-per-plate":"1800",
-        "capacity":"200-1700",
-        "venue-type":"Hotel",
-        "image":"./images/img10.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"11",
-        "name":"Sunday Hotel Vadodara",
-        "city":"Coimbatore",
-        "rating":4.6,
-        "price-per-plate":"1600",
-        "capacity":"250-2000",
-        "venue-type":"Hotel",
-        "image":"./images/img11.avif",
-        "description":"4 Star & Above Wedding Hotels."
-    },
-
-    {
-        "id":"12",
-        "name":"Taj Bangalore",
-        "city":"Bangalore",
-        "rating":4.9,
-        "price-per-plate":"2800",
-        "capacity":"150-"
-    }
+  {
+    "id": 1,
+    "name": "Radisson Blu Plaza",
+    "city": "New Delhi",
+    "venue-type": "4star",
+    "rating": 4.8,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img1.avif"
+  },
+  {
+    "id": 2,
+    "name": "ITC Maurya",
+    "city": "New Delhi",
+    "venue-type": "4star",
+    "rating": 4.9,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img2.avif"
+  },
+  {
+    "id": 3,
+    "name": "The Leela Palace",
+    "city": "New Delhi",
+    "venue-type": "4star",
+    "rating": 4.7,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img3.avif"
+  },
+  {
+    "id": 4,
+    "name": "Emerald Banquet Hall",
+    "city": "Mumbai",
+    "venue-type": "banquet",
+    "rating": 4.5,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img4.avif"
+  },
+  {
+    "id": 5,
+    "name": "Golden Crown Banquet",
+    "city": "Mumbai",
+    "venue-type": "banquet",
+    "rating": 4.4,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img5.avif"
+  },
+  {
+    "id": 6,
+    "name": "Royal Garden Venue",
+    "city": "Jaipur",
+    "venue-type": "garden",
+    "rating": 4.6,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img6.avif"
+  },
+  {
+    "id": 7,
+    "name": "Green Meadows Lawn",
+    "city": "Jaipur",
+    "venue-type": "garden",
+    "rating": 4.3,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img7.avif"
+  },
+  {
+    "id": 8,
+    "name": "Comfort Inn",
+    "city": "Chennai",
+    "venue-type": "3star",
+    "rating": 4.1,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img8.avif"
+  },
+  {
+    "id": 9,
+    "name": "Classic Comfort Hotel",
+    "city": "Chennai",
+    "venue-type": "3star",
+    "rating": 4.0,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img9.avif"
+  },
+  {
+    "id": 10,
+    "name": "Heritage Country Club",
+    "city": "Bangalore",
+    "venue-type": "club",
+    "rating": 4.4,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img10.avif"
+  },
+  {
+    "id": 11,
+    "name": "Royal Golf Club",
+    "city": "Bangalore",
+    "venue-type": "club",
+    "rating": 4.5,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img11.avif"
+  },
+  {
+    "id": 12,
+    "name": "Sunset Wedding Resort",
+    "city": "Goa",
+    "venue-type": "resort",
+    "rating": 4.9,
+    "veg_price": 4500,
+    "nonveg_price": 5250,
+    "pax_range": "150-700 pax",
+    "rooms": 390,
+    "image": "/images/img12.avif"
+  }
 ]

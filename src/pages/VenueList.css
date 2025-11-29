@@ -1,0 +1,33 @@
+.json-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.json-img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.json-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.json-city {
+  font-size: 14px;
+}
+
+.json-rating {
+  color: #d9534f;
+  font-weight: 600;
+}
+
+.json-price {
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.json-extra {
+  font-size: 13px;
+  color: #6c757d;
+}
