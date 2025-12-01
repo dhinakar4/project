@@ -1,97 +1,192 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { TiStarFullOutline } from "react-icons/ti";
+import { FaLocationDot } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import { PiBankFill } from "react-icons/pi";
+import { LiaCrownSolid } from "react-icons/lia";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 import venuesData from "../data/venues.json";
+import Filters from "./Filters";
 import "./VenueList.css";
 
 function VenueList() {
-  const [filteredData, setFilteredData] = useState([]);
-
-  const location = useLocation();
+  const [filteredData, setFilteredData] = useState(venuesData);
   const navigate = useNavigate();
 
-  // Get ?type= and ?city= from URL
-  const query = new URLSearchParams(location.search);
-  const type = query.get("type");
-  const city = query.get("city");
+  const toNumber = (price) => Number(price.replace(/\D/g, ""));
 
-  useEffect(() => {
-    let data = venuesData;
+  const parsePax = (range) => {
+    const nums = range.match(/\d+/g);
+    return nums ? { min: Number(nums[0]), max: Number(nums[1]) } : { min: 0, max: 0 };
+  };
 
-    if (type) {
-      data = data.filter(
-        (item) =>
-          item.venue-type &&
-          item.venue-type.toLowerCase() === type.toLowerCase()
+  const handleFilterChange = (type, valueObj) => {
+    if (type === "reset") {
+      setFilteredData(venuesData);
+      return;
+    }
+
+    let updatedList = venuesData;
+    const value = valueObj.value; // { min, max } or string/type or number
+
+    // Guests Filter (min/max)
+    if (type === "guests") {
+      updatedList = updatedList.filter((v) => {
+        const { min, max } = parsePax(v.pax_range);
+        return min >= value.min && max <= value.max;
+      });
+    }
+
+    // Rooms Filter (min/max)
+    if (type === "rooms") {
+      updatedList = updatedList.filter(
+        (v) => v.rooms >= value.min && v.rooms <= value.max
       );
     }
 
-    if (city) {
-      data = data.filter(
-        (item) => item.city.toLowerCase() === city.toLowerCase()
+    // Price Filter (min/max)
+    if (type === "price") {
+      updatedList = updatedList.filter((v) => {
+        const p = toNumber(v.veg_price);
+        return p >= value.min && p <= value.max;
+      });
+    }
+
+
+    if (type === "rental" && value) {
+      updatedList = updatedList.filter((v) => {
+        const rental = Number(v.rental_cost.replace(/\D/g, ""));
+        return rental >= value.min && rental <= value.max;
+      });
+    }
+
+    // Venue Type (string)
+    if (type === "type") {
+      updatedList = updatedList.filter((v) =>
+        v["venue-type"].toLowerCase().includes(value.toLowerCase())
       );
     }
 
-    setFilteredData(data);
-  }, [type, city]);
+
+    if (type === "space" && value) {
+      updatedList = updatedList.filter((v) =>
+        v.space.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+
+
+    if (type === "features" && value) {
+      updatedList = updatedList.filter((v) =>
+        v.features.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+
+    // Rating (number)
+    if (type === "rating") {
+      updatedList = updatedList.filter((v) => v.rating >= value);
+    }
+
+    setFilteredData(updatedList);
+  };
+
 
   return (
-    <div className="container mt-4">
+    <div>
+      <Filters onFilterChange={handleFilterChange} />
 
-      {/* Header */}
-      <h3 className="mb-4">
-        <strong>{filteredData.length}</strong> Venues found
-      </h3>
+      <div className="container p-5">
+        <div className="row mt-4">
+          {filteredData.length > 0 ? (
+            filteredData.map((venue) => (
+              <div
+                className="col-md-4 mb-2"
+                key={venue.id}
+                onClick={() => navigate(`/venue/${venue.id}`)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="card json-card border border-0 p-[10px] pb-4 hover:shadow-lg transition-all relative">
 
-      <div className="row">
-        {filteredData.map((venue) => (
-          <div
-            className="col-md-4 mb-4"
-            key={venue.id}
-            onClick={() => navigate(`/venue/${venue.id}`)}
-            style={{ cursor: "pointer" }}
-          >
-            <div className="card json-card shadow-sm">
+                  {/* Handpicked Badge */}
+                  <div className="absolute top-[10px] left-[10px] flex items-center bg-pink-600 text-white px-2 py-[4px] font-semibold text-sm rounded-sm shadow-md group cursor-pointer">
+                    <LiaCrownSolid size={18} className="mr-1" />
+                    Handpicked
 
-              {/* Image */}
-              <img
-                src={venue.image}
-                alt={venue.name}
-                className="card-img-top json-img"
-              />
+                    <div className="hidden group-hover:flex absolute left-0 mt-2 bg-pink-600 text-white text-xs px-3 py-2 rounded shadow-xl w-[260px] z-50">
+                      Handpicked showcases sponsored, top-rated vendors across budgets.
+                    </div>
+                  </div>
 
-              {/* Details */}
-              <div className="card-body">
+                  {/* Info Icon */}
+                  <div className="absolute top-[10px] right-[10px] text-gray-700 bg-white rounded-md p-1 shadow-sm group cursor-pointer">
+                    <BsFillInfoCircleFill size={15} />
 
-                <h5 className="json-title">{venue.name}</h5>
+                    <div className="hidden group-hover:flex absolute right-0 mt-2 bg-pink-600 text-white text-xs px-3 py-2 rounded shadow-xl w-[250px] z-50">
+                      This venue is verified and highly rated by customers.
+                    </div>
+                  </div>
 
-                <p className="json-city text-muted">
-                  📍 {venue.city}
-                </p>
+                  {/* Image */}
+                  <img src={venue.image} alt={venue.name} className="card-img-top json-img" />
 
-                <p className="json-rating">
-                  ⭐ {venue.rating}
-                </p>
+                  {/* Name + Rating */}
+                  <div className="d-flex pt-2">
+                    <h5 className="json-title">{venue.name}</h5>
 
-                <p className="json-price">
-                  Veg: ₹{venue.veg-price} per plate <br />
-                  Non-Veg: ₹{venue.nonveg-price} per plate
-                </p>
+                    <span className="json-rating ms-auto d-flex">
+                      <TiStarFullOutline className="mt-[2px] text-pink-600 me-1" size={20} />
+                      {venue.rating}
+                      <p className="text-muted text-sm ms-2 mt-[2px]">{venue.review || ""}</p>
+                    </span>
+                  </div>
 
-                <p className="json-extra">
-                  {venue.pax-range} · {venue.rooms} Rooms
-                </p>
+                  {/* Location + Venue Type */}
+                  <span className="nowrap json-city d-flex text-gray-500">
+                    <span className="d-flex">
+                      <FaLocationDot className="mt-1" />
+                      {venue.city}
+                    </span>
 
+                    <PiBankFill size={18} className="mt-[2px] ms-4" />
+
+                    <span className="ms-1 truncate max-w-[160px]">
+                      {venue["venue-type"]}
+                    </span>
+                  </span>
+
+                  {/* Price */}
+                  <span className="d-flex json-price">
+                    <span className="text-gray-400 text-xs font-normal">
+                      Veg
+                      <p className="text-gray-700 text-lg font-bold">
+                        {venue.veg_price}
+                        <span className="text-xs ms-1 text-gray-600 font-normal">{venue.quantity}</span>
+                      </p>
+                    </span>
+
+                    <span className="text-gray-400 text-xs ms-5 font-normal">
+                      Non Veg
+                      <p className="text-gray-700 text-lg font-bold">
+                        {venue.nonveg_price}
+                        <span className="text-xs ms-1 text-gray-600 font-normal">{venue.quantity}</span>
+                      </p>
+                    </span>
+                  </span>
+
+                  {/* Extra */}
+                  <div className="json-extra text-xs">
+                    <span className="bg-gray-100 px-2 py-1">{venue.pax_range}</span>
+                    <span className="bg-gray-100 ms-2 px-2 py-1">{venue.rooms} Rooms</span>
+                    <span className="ms-2 font-bold text-gray-400">{venue.extra}</span>
+                  </div>
+
+                </div>
               </div>
-
-            </div>
-          </div>
-        ))}
+            ))
+          ) : (
+            <h4 className="text-center mt-4">No venues found 😕</h4>
+          )}
+        </div>
       </div>
-
-      {/* No Results */}
-      {filteredData.length === 0 && (
-        <p className="text-center mt-5">No venues found.</p>
-      )}
     </div>
   );
 }

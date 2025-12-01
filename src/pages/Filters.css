@@ -1,0 +1,50 @@
+.wmg-filter-wrapper {
+  background: white;
+}
+
+.wmg-filter-container {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center !important;
+  padding: 8px 0;
+}
+
+.wmg-filter-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #444;
+  padding: 5px 14px;
+  white-space: nowrap;
+  border-radius: 6px;
+}
+
+.wmg-filter-item:hover {
+  color: #e91e63;
+}
+
+.wmg-sections-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 25px;
+  background: #fafafa;
+  padding: 25px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.wmg-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.wmg-section label {
+  display: block;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #444;
+}
