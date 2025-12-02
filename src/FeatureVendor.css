@@ -43,3 +43,11 @@
 @media (min-width: 1024px) {
   .feature-vendor-card { width: calc((100% - 32px) / 3); }
 }
+
+.custom-arrow.side1{
+  left: -10px !important;
+}
+
+.custom-arrow.side2{
+  right: -10px !important;
+}

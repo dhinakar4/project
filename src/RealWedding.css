@@ -129,12 +129,12 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-.custom-arrow.left {
+.custom-arrow.lefter {
   left: -15px !important;
 }
 
-.custom-arrow.right {
-  right: 0 !important;
+.custom-arrow.righter {
+  right: -2px !important;
 }
 
 @media (max-width: 575px) {
@@ -142,6 +142,9 @@
     width: 34px;
     height: 34px;
     font-size: 18px;
+  }
+  .custom-arrow.lefter{
+    left: -2px !important;
   }
 }
 

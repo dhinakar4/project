@@ -87,7 +87,7 @@ function FeatureVendor() {
       <h4 className="feature-vendor-heading mb-3 text-center text-md-start ">Featured Vendors</h4>
 
       <div className="feature-vendor-wrapper position-relative">
-        {showLeft && <button className="custom-arrow left" onClick={() => scroll("left")}>&#10094;</button>}
+        {showLeft && <button className="custom-arrow side1" onClick={() => scroll("left")}>&#10094;</button>}
 
         <div className="feature-vendor-row" ref={carouselRef}>
           {slides.map((vendor, idx) => (
@@ -109,7 +109,7 @@ function FeatureVendor() {
           ))}
         </div>
 
-        {showRight && <button className="custom-arrow right" onClick={() => scroll("right")}>&#10095;</button>}
+        {showRight && <button className="custom-arrow side2" onClick={() => scroll("right")}>&#10095;</button>}
       </div>
     </Container>
   );

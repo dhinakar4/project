@@ -98,7 +98,7 @@ function RealWedding() {
 
       <div className="real-wedding-wrapper">
         {showLeft && (
-          <button className="custom-arrow left" onClick={() => scroll("left")} aria-label="Previous">
+          <button className="custom-arrow lefter" onClick={() => scroll("left")} aria-label="Previous">
             &#10094;
           </button>
         )}
@@ -120,7 +120,7 @@ function RealWedding() {
         </div>
 
         {showRight && (
-          <button className="custom-arrow right" onClick={() => scroll("right")} aria-label="Next">
+          <button className="custom-arrow righter" onClick={() => scroll("right")} aria-label="Next">
             &#10095;
           </button>
         )}

@@ -208,6 +208,14 @@
     font-size: 18px;
   }
 
+  .venue-arrow-left{
+    left: 0 !important;
+  }
+
+  .venue-arrow-right{
+    right: 0 !important;
+  }
+  
   .venue-carousel-row {
     gap: 0 !important;
     padding: 0 !important;

@@ -68,7 +68,7 @@
   color: rgb(234, 42, 135);
 }
 
-.custom-arrow {
+.carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -86,22 +86,22 @@
   transition: color 0.2s ease;
 }
 
-.custom-arrow.left {
+.carousel-arrow.left {
   left: -15px !important;
 }
 
-.custom-arrow.right {
+.carousel-arrow.right {
   right: -15px !important;
 }
 
-.custom-arrow:hover {
+.carousel-arrow:hover {
   color: rgb(234, 42, 135);
 }
 
 /* Mobile view - 1 image per view */
 @media (max-width: 767px) {
   .carousel-row {
-    gap: 0;
+    gap: 20px !important;
     padding: 0;
   }
 
@@ -110,8 +110,7 @@
   }
 
   .carousel-card {
-    width: 100%;
-    min-width: 100%;
+    width: 100% !important;
     box-sizing: border-box;
     margin: 0;
     border-radius: 6px;
@@ -126,7 +125,7 @@
     padding: 6px 0;
   }
 
-  .custom-arrow {
+  .carousel-arrow {
     width: 30px;
     height: 30px;
     font-size: 18px;

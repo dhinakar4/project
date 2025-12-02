@@ -5,7 +5,7 @@
 .wmg-filter-container {
   display: flex;
   gap: 14px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center !important;
   padding: 8px 0;
 }
@@ -19,6 +19,7 @@
   padding: 5px 14px;
   white-space: nowrap;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .wmg-filter-item:hover {
@@ -27,24 +28,55 @@
 
 .wmg-sections-row {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   width: 100%;
-  gap: 25px;
-  background: #fafafa;
-  padding: 25px;
-  flex-wrap: nowrap;
-  overflow: hidden;
+  gap: 20px;
+  padding: 5px;
+  overflow-y: visible !important;
+  max-height: unset !important;
+  flex-wrap: wrap;
+  row-gap: 20px !important; 
+  column-gap: 40px;
 }
 
 .wmg-section {
-  flex: 1;
-  min-width: 0;
+  min-width: 135px !important;
+  max-width: 195px !important;
+  white-space: nowrap;
+  margin-left: 0px !important;
 }
 
 .wmg-section label {
-  display: block;
-  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  margin: 6px 0;
   font-size: 14px;
   color: #444;
+  white-space: nowrap !important;
+  gap: 8px;
+  margin-left: 5px !important;
+}
+
+/* Rental + Rating radio buttons */
+.wmg-section input[type="radio"] {
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+/* Checkbox look for others */
+.wmg-section input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 2px solid #777;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.wmg-section input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.wmg-btn-col button {
+  min-width: 70px;
 }

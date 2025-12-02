@@ -3,7 +3,7 @@ import { TiStarFullOutline } from "react-icons/ti";
 import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { PiBankFill } from "react-icons/pi";
-import { LiaCrownSolid } from "react-icons/lia";
+import img from "../assets/handpick.png"
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import venuesData from "../data/venues.json";
 import Filters from "./Filters";
@@ -27,9 +27,9 @@ function VenueList() {
     }
 
     let updatedList = venuesData;
-    const value = valueObj.value; // { min, max } or string/type or number
+    const value = valueObj.value;
 
-    // Guests Filter (min/max)
+    // --- GUESTS ---
     if (type === "guests") {
       updatedList = updatedList.filter((v) => {
         const { min, max } = parsePax(v.pax_range);
@@ -37,58 +37,62 @@ function VenueList() {
       });
     }
 
-    // Rooms Filter (min/max)
+    // --- ROOMS ---
     if (type === "rooms") {
       updatedList = updatedList.filter(
         (v) => v.rooms >= value.min && v.rooms <= value.max
       );
     }
 
-    // Price Filter (min/max)
+    // --- VEG & NONVEG PRICE ---
     if (type === "price") {
       updatedList = updatedList.filter((v) => {
-        const p = toNumber(v.veg_price);
-        return p >= value.min && p <= value.max;
+        const veg = toNumber(v.veg_price);
+        const nonveg = toNumber(v.nonveg_price);
+
+        const isVegOk = veg >= value.min && veg <= value.max;
+        const isNonVegOk = nonveg >= value.min && nonveg <= value.max;
+
+        return isVegOk || isNonVegOk;
       });
     }
 
-
-    if (type === "rental" && value) {
+    // --- RENTAL COST (correct JSON key rental-cost) ---
+    if (type === "rental") {
       updatedList = updatedList.filter((v) => {
-        const rental = Number(v.rental_cost.replace(/\D/g, ""));
+        const rental = Number(v["rental-cost"]?.replace(/\D/g, "")) || 0;
         return rental >= value.min && rental <= value.max;
       });
     }
 
-    // Venue Type (string)
+    // --- VENUE TYPE ---
     if (type === "type") {
       updatedList = updatedList.filter((v) =>
-        v["venue-type"].toLowerCase().includes(value.toLowerCase())
+        v["venue-type"]?.toLowerCase().includes(value.trim().toLowerCase())
       );
     }
 
-
-    if (type === "space" && value) {
+    // --- SPACE ---
+    if (type === "space") {
       updatedList = updatedList.filter((v) =>
-        v.space.toLowerCase().includes(value.toLowerCase())
+        v.space?.toLowerCase().includes(value.trim().toLowerCase())
       );
     }
 
-
-    if (type === "features" && value) {
+    // --- FEATURES ---
+    if (type === "features") {
       updatedList = updatedList.filter((v) =>
-        v.features.toLowerCase().includes(value.toLowerCase())
+        v.features?.toLowerCase().includes(value.trim().toLowerCase())
       );
     }
 
-    // Rating (number)
+    // --- RATING ---
     if (type === "rating") {
       updatedList = updatedList.filter((v) => v.rating >= value);
     }
 
     setFilteredData(updatedList);
   };
-
 
   return (
     <div>
@@ -104,42 +108,33 @@ function VenueList() {
                 onClick={() => navigate(`/venue/${venue.id}`)}
                 style={{ cursor: "pointer" }}
               >
-                <div className="card json-card border border-0 p-[10px] pb-4 hover:shadow-lg transition-all relative">
+                <div className="card json-card border-0 p-[10px] pb-4 hover:shadow-lg transition-all relative">
 
-                  {/* Handpicked Badge */}
-                  <div className="absolute top-[10px] left-[10px] flex items-center bg-pink-600 text-white px-2 py-[4px] font-semibold text-sm rounded-sm shadow-md group cursor-pointer">
-                    <LiaCrownSolid size={18} className="mr-1" />
-                    Handpicked
-
-                    <div className="hidden group-hover:flex absolute left-0 mt-2 bg-pink-600 text-white text-xs px-3 py-2 rounded shadow-xl w-[260px] z-50">
+                  <div className="absolute top-[10px] left-[10px] flex items-center text-white font-semibold text-sm rounded-sm shadow-md group cursor-pointer">
+                    <img src={img} alt="" />
+                    <div className="tooltip-box hidden group-hover:flex absolute left-29 bg-pink-600 text-white text-xs px-2 py-2 rounded-sm shadow-xl w-[235px] z-50">
                       Handpicked showcases sponsored, top-rated vendors across budgets.
                     </div>
                   </div>
 
-                  {/* Info Icon */}
-                  <div className="absolute top-[10px] right-[10px] text-gray-700 bg-white rounded-md p-1 shadow-sm group cursor-pointer">
+                  <div className="absolute top-49 right-[20px] text-gray-500 bg-white rounded-md p-1 shadow-sm group cursor-pointer">
                     <BsFillInfoCircleFill size={15} />
-
-                    <div className="hidden group-hover:flex absolute right-0 mt-2 bg-pink-600 text-white text-xs px-3 py-2 rounded shadow-xl w-[250px] z-50">
+                    <div className="absolute hidden group-hover:flex absolute right-8 bottom-0 mt-2 bg-gray-100 text-black text-xs px-2 py-1 rounded-sm shadow-xl w-[240px] z-50">
                       This venue is verified and highly rated by customers.
                     </div>
                   </div>
 
-                  {/* Image */}
                   <img src={venue.image} alt={venue.name} className="card-img-top json-img" />
 
-                  {/* Name + Rating */}
                   <div className="d-flex pt-2">
                     <h5 className="json-title">{venue.name}</h5>
 
                     <span className="json-rating ms-auto d-flex">
                       <TiStarFullOutline className="mt-[2px] text-pink-600 me-1" size={20} />
                       {venue.rating}
-                      <p className="text-muted text-sm ms-2 mt-[2px]">{venue.review || ""}</p>
                     </span>
                   </div>
 
-                  {/* Location + Venue Type */}
                   <span className="nowrap json-city d-flex text-gray-500">
                     <span className="d-flex">
                       <FaLocationDot className="mt-1" />
@@ -147,13 +142,9 @@ function VenueList() {
                     </span>
 
                     <PiBankFill size={18} className="mt-[2px] ms-4" />
-
-                    <span className="ms-1 truncate max-w-[160px]">
-                      {venue["venue-type"]}
-                    </span>
+                    <span className="ms-1 truncate max-w-[160px]">{venue["venue-type"]}</span>
                   </span>
 
-                  {/* Price */}
                   <span className="d-flex json-price">
                     <span className="text-gray-400 text-xs font-normal">
                       Veg
@@ -172,11 +163,10 @@ function VenueList() {
                     </span>
                   </span>
 
-                  {/* Extra */}
                   <div className="json-extra text-xs">
                     <span className="bg-gray-100 px-2 py-1">{venue.pax_range}</span>
                     <span className="bg-gray-100 ms-2 px-2 py-1">{venue.rooms} Rooms</span>
-                    <span className="ms-2 font-bold text-gray-400">{venue.extra}</span>
+                    <a className="ms-2 font-bold !text-gray-400">{venue.extra}</a>
                   </div>
 
                 </div>

@@ -102,7 +102,7 @@ function Gallery() {
       <div className="gallery-carousel-wrapper">
         {showLeft && (
           <button
-            className="custom-arrow left"
+            className="custom-arrow leftside"
             onClick={() => scroll("left")}
           >
             &#10094;
@@ -126,7 +126,7 @@ function Gallery() {
 
         {showRight && (
           <button
-            className="custom-arrow right"
+            className="custom-arrow rightside"
             onClick={() => scroll("right")}
           >
             &#10095;

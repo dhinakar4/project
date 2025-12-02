@@ -87,10 +87,10 @@ function PopularSearch() {
   return (
     <Container className="pv-search mt-4 p-5">
       <h5 className="popular-heading">Popular Searches</h5>
-      <div className="carousel-wrapper">
+      <div className="carousel-wrapper ">
         {showLeft && (
           <button
-            className="custom-arrow left"
+            className="carousel-arrow left shadow-sm"
             onClick={() => scroll("left")}
           >
             &#10094;
@@ -114,7 +114,7 @@ function PopularSearch() {
 
         {showRight && (
           <button
-            className="custom-arrow right"
+            className="carousel-arrow right shadow-sm"
             onClick={() => scroll("right")}
           >
             &#10095;
