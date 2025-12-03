@@ -141,10 +141,10 @@
 }
 
 /* Tablet view - 2 images per view */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .gallery-card {
-        width: calc(50% - 10px);
-        min-width: calc(50% - 10px);
+       width: calc(33% - 12px) !important;
+    min-width: calc(33% - 12px) !important;
     }
 
     .gallery-image-wrapper {
@@ -153,10 +153,10 @@
 }
 
 /* Laptop/Desktop view - 4 images per view */
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
     .gallery-card {
-        width: calc(25% - 15px);
-        min-width: calc(25% - 15px);
+    width: calc(20% - 14px) !important;
+    min-width: calc(20% - 14px) !important;
     }
 
     .gallery-image-wrapper {

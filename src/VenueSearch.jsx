@@ -38,7 +38,6 @@ function VenueSearch() {
     if (!firstCard) return;
 
     cardWidthRef.current = firstCard.offsetWidth;
-
     const middle = baseSlides.length * cardWidthRef.current;
 
     el.style.scrollBehavior = "auto";
@@ -108,13 +107,21 @@ function VenueSearch() {
             <div
               key={index}
               className="venue-card"
-              onClick={() => navigate(`/venues?type=${slide.type}`)}
               style={{ cursor: "pointer" }}
+              onClick={() =>
+                navigate(
+                  `/venues?type=${slide.type}`,
+                  { state: { title: slide.title } }
+                )
+              }
             >
               <img src={slide.img} alt={slide.title} className="venue-image" />
+
               <div className="venue-text">
                 <p className="venue-title">{slide.title}</p>
-                <span className="venue-cities">Mumbai | Bangalore | Pune |</span>
+                <span className="venue-cities">
+                  Mumbai | Bangalore | Pune |
+                </span>
                 <span className="venue-more">More</span>
               </div>
             </div>

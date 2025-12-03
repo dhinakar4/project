@@ -20,11 +20,8 @@ function Filters({ onFilterChange }) {
 
   const options = {
     guests: ["<100", "100-250", "250-500", "500-1000", ">1000"],
-
     rooms: ["<30", "31-60", "61-100", "101-150", "151-200", "200+"],
-
     price: ["<1000", "1000-1500", "1500-2000", "2000-3000", ">3000"],
-
     rental: [
       "< ₹1 Lakh",
       "₹1 Lakh - ₹2 Lakhs",
@@ -32,24 +29,14 @@ function Filters({ onFilterChange }) {
       "₹4 Lakhs - ₹6 Lakhs",
       "> ₹6 Lakhs",
     ],
-
     type: [
       "Banquet Halls",
       "4 Star & Above Wedding Hotels",
       "5 Star Hotels",
       "3 Star Hotels with Banquets",
     ],
-
     space: ["Indoor", "Outdoor", "Poolside", "Terrace / Rooftop"],
-
-    features: [
-      "Beach view",
-      "Mountain view",
-      "Lake view",
-      "Sea view",
-      "Pet Friendly",
-    ],
-
+    features: ["Beach view", "Mountain view", "Lake view", "Sea view", "Pet Friendly"],
     rating: ["4", "4.5", "4.8"],
   };
 
@@ -67,21 +54,17 @@ function Filters({ onFilterChange }) {
   const parseRange = (text) => {
     if (text.includes("Lakh")) {
       const nums = text.match(/\d+/g).map(Number);
-
       if (text.startsWith("<")) return { min: 0, max: nums[0] * 100000 };
       if (text.startsWith(">")) return { min: nums[0] * 100000, max: Infinity };
       return { min: nums[0] * 100000, max: nums[1] * 100000 };
     }
-
     const nums = text.match(/\d+/g)?.map(Number) || [];
-
     if (nums.length === 1) {
       const val = nums[0];
       if (text.startsWith("<")) return { min: 0, max: val };
       if (text.startsWith(">")) return { min: val, max: Infinity };
       return { min: val, max: val };
     }
-
     return { min: nums[0], max: nums[1] };
   };
 
@@ -115,7 +98,6 @@ function Filters({ onFilterChange }) {
       features: null,
       rating: null,
     });
-
     onFilterChange("reset", null);
     setIsOpen(false);
     setActiveFilter(null);
@@ -159,45 +141,33 @@ function Filters({ onFilterChange }) {
       </div>
 
       {isOpen && (
-        <div className="wmg-sections-row  ms-5" ref={dropdownRef}>
+        <div
+          className="wmg-sections-row ms-5"
+          ref={dropdownRef}
+        >
           {filters.map((f) => (
-            <div
-              key={f.key}
-              className={`wmg-section  ${
-                f.key === "rating" ? "rating-section" : ""
-              }`}
-            >
+            <div key={f.key} className="wmg-section">
               {options[f.key].map((item) => (
                 <label key={item}>
                   <input
-                    type={
-                      ["rental", "rating"].includes(f.key)
-                        ? "radio"
-                        : "checkbox"
-                    }
-                    name={
-                      ["rental", "rating"].includes(f.key) ? f.key : undefined
-                    }
+                    type={["rental", "rating"].includes(f.key) ? "radio" : "checkbox"}
+                    name={["rental", "rating"].includes(f.key) ? f.key : undefined}
                     checked={selectedFilters[f.key]?.label === item}
                     onChange={() => {
                       if (["rental", "rating"].includes(f.key)) {
                         const value =
                           f.key === "rating" ? Number(item) : parseRange(item);
-
                         updateSelected(f.key, { label: item, value });
                         return;
                       }
-
                       if (selectedFilters[f.key]?.label === item) {
                         updateSelected(f.key, null);
                         return;
                       }
-
                       const value =
                         ["type", "space", "features"].includes(f.key)
                           ? item
                           : parseRange(item);
-
                       updateSelected(f.key, { label: item, value });
                     }}
                   />
@@ -207,16 +177,10 @@ function Filters({ onFilterChange }) {
 
               {f.key === "rating" && (
                 <div className="wmg-btn-col mt-4">
-                  <button
-                    className="btn btn-sm btn-danger"
-                    onClick={clearFilters}
-                  >
+                  <button className="btn btn-sm btn-danger" onClick={clearFilters}>
                     Clear
                   </button>
-                  <button
-                    className="btn btn-sm btn-primary ms-2"
-                    onClick={applyFilters}
-                  >
+                  <button className="btn btn-sm btn-primary ms-2" onClick={applyFilters}>
                     Search
                   </button>
                 </div>

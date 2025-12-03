@@ -56,13 +56,11 @@
   margin-left: 5px !important;
 }
 
-/* Rental + Rating radio buttons */
 .wmg-section input[type="radio"] {
   margin-right: 7px;
   cursor: pointer;
 }
 
-/* Checkbox look for others */
 .wmg-section input[type="checkbox"] {
   width: 14px;
   height: 14px;

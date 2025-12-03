@@ -11,7 +11,7 @@ import Img6 from "./assets/popularsearch/Img6.avif";
 function PopularSearch() {
   const baseSlides = [
     { img: Img1, title: "Bridal Wear in Mumbai" },
-    { img: Img2, title: "Bridal Makeup Artists in Mumbai" },
+    { img: Img2, title: "Makeup Artists in Mumbai" },
     { img: Img3, title: "Photographers in Mumbai" },
     { img: Img4, title: "Invitations in Mumbai" },
     { img: Img5, title: "Catering Services in Mumbai" },
@@ -85,7 +85,7 @@ function PopularSearch() {
   };
 
   return (
-    <Container className="pv-search mt-4 p-5">
+    <Container className="pv-search mt-4 p-3 p-md-5">
       <h5 className="popular-heading">Popular Searches</h5>
       <div className="carousel-wrapper ">
         {showLeft && (

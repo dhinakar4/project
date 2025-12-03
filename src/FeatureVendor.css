@@ -33,7 +33,7 @@
 
 
 @media (max-width: 575px) {
-  .feature-vendor-card { width: calc(100% - 16px); }
+  .feature-vendor-card { width: calc(100% - 14px); }
 }
 
 @media (min-width: 576px) and (max-width: 1023px) {
@@ -41,13 +41,13 @@
 }
 
 @media (min-width: 1024px) {
-  .feature-vendor-card { width: calc((100% - 32px) / 3); }
+  .feature-vendor-card { width: calc((100% - 50px) / 4); }
 }
 
 .custom-arrow.side1{
-  left: -10px !important;
+  left: -15px !important;
 }
 
 .custom-arrow.side2{
-  right: -10px !important;
+  right: -15px !important;
 }
