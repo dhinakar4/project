@@ -9,6 +9,10 @@ import { IoSearchSharp } from "react-icons/io5";
 import venuesData from "../data/venues.json";
 import Filters from "./Filters";
 import "./VenueList.css";
+import { TbMathGreater } from "react-icons/tb";
+import { MdCancel } from "react-icons/md";
+
+
 
 import img1 from "../assets/img1.avif";
 import img2 from "../assets/img2.avif";
@@ -78,12 +82,28 @@ function VenueList() {
   };
 
   useEffect(() => {
+    if (selectedType === "all") {
+      setFilteredData(allVenues);
+      return;
+    }
+
     setFilteredData(getFilteredData());
   }, [selectedType, searchText]);
+
 
   const handleFilterChange = (type, valueObj) => {
     let updatedList = getFilteredData();
     const value = valueObj?.value;
+
+    if (type === "type") {
+      const selectedTypes = Array.isArray(value) ? value : [value]; 
+      updatedList = updatedList.filter((v) =>
+        selectedTypes.some((val) =>
+          v["venue-type"]?.toLowerCase().includes(val.toLowerCase())
+        )
+      );
+    }
+
 
     if (type === "reset") {
       setSearchText("");
@@ -143,24 +163,33 @@ function VenueList() {
 
       <div className="container p-3">
         <div className="px-4 py-3">
-          {/* Home Link */}
-          <div
-            className="text-gray-400 py-3 hover:text-pink-600 text-sm cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            Home
+          <div className="text-gray-400 py-3 text-sm flex gap-2">
+            <span
+              className="cursor-pointer hover:text-pink-600 flex"
+              onClick={() => navigate("/")}
+            >
+              Home
+            </span>
+            <span
+              className="cursor-pointer hover:text-pink-600 flex"
+              onClick={() => {
+                navigate("/venues?type=all", { state: { title: "Wedding Venues" } });
+                setFilteredData(allVenues);
+              }}
+            >
+              <TbMathGreater className="mt-1 me-2" />  Wedding Venues
+            </span>
           </div>
 
-          {/* Header + Search */}
+
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
             <span className="flex-1">
               <h4 className="text-lg md:text-xl font-semibold">{passedTitle || "Wedding Venues"}</h4>
-              <p className="text-sm text-gray-500 mt-1">
-                Showing <strong>{filteredData.length}</strong> results as per your search criteria
+              <p className="text-sm  mt-1">
+                Showing <strong>{filteredData.length} results</strong>  as per your search criteria
               </p>
             </span>
 
-            {/* Search Bar */}
             <div className="relative w-full md:w-80">
               <div className="relative w-full">
                 <IoSearchSharp
@@ -219,8 +248,37 @@ function VenueList() {
             </div>
           </div>
 
-          {/* Top Cities */}
-          {/* Top Cities */}
+          <div className="flex items-center gap-3 my-4">
+
+            {selectedType && selectedType !== "all" && (
+              <div className="px-3 py-1 font-base rounded-full border text-gray-500 text-sm flex items-center gap-2">
+                <span>{typeMapping[selectedType]}</span>
+                <button
+                  onClick={() => {
+                    navigate("/venues?type=all");
+                    setFilteredData(allVenues);
+                  }}
+                >
+                  <MdCancel />
+                </button>
+              </div>
+            )}
+
+            {(selectedType && selectedType !== "all") || searchText ? (
+              <button
+                className="!text-sm font-semibold underline"
+                onClick={() => {
+                  navigate("/venues?type=all");
+                  setSearchText("");
+                  setFilteredData(allVenues);
+                }}
+              >
+                Clear all
+              </button>
+            ) : null}
+          </div>
+
+
           <div className="flex flex-wrap justify-start md:justify-start gap-4 mt-4 text-sm">
             {[img2, img1, img3, img4, img5].map((imgSrc, idx) => (
               <div key={idx} className="text-center w-20 md:w-24">
@@ -236,7 +294,6 @@ function VenueList() {
 
         </div>
 
-        {/* VENUE CARDS */}
         <div className="row mt-4">
           {filteredData.length > 0 ? (
             filteredData.map((venue) => (
@@ -248,7 +305,6 @@ function VenueList() {
               >
                 <div className="card json-card border-0 p-[10px] pb-4 hover:shadow-lg transition-all relative">
 
-                  {/* Handpicked */}
                   <div className="absolute top-[10px] left-[10px] flex items-center text-white font-semibold text-sm rounded-sm shadow-md group cursor-pointer">
                     <img src={img} alt="" />
                     <div className="tooltip-box hidden group-hover:flex absolute left-29 bg-pink-600 text-white text-xs px-2 py-2 rounded-sm shadow-xl w-[235px] z-50">
@@ -256,7 +312,6 @@ function VenueList() {
                     </div>
                   </div>
 
-                  {/* Info icon */}
                   <div className="absolute top-49 right-[20px] text-gray-500 bg-white rounded-md p-1 shadow-sm group cursor-pointer">
                     <BsFillInfoCircleFill size={15} />
                     <div className="absolute hidden group-hover:flex right-8 bottom-0 mt-2 bg-gray-100 text-black text-xs px-2 py-1 rounded-sm shadow-xl w-[240px] z-50">
@@ -264,10 +319,8 @@ function VenueList() {
                     </div>
                   </div>
 
-                  {/* Image */}
                   <img src={venue.image} alt={venue.name} className="card-img-top json-img" />
 
-                  {/* Title */}
                   <div className="d-flex pt-2">
                     <h5 className="json-title">{venue.name}</h5>
                     <span className="json-rating ms-auto d-flex">
@@ -276,7 +329,6 @@ function VenueList() {
                     </span>
                   </div>
 
-                  {/* City + Venue Type */}
                   <span className="nowrap json-city d-flex text-gray-500">
                     <span className="d-flex">
                       <FaLocationDot className="mt-1" />
@@ -286,7 +338,6 @@ function VenueList() {
                     <span className="ms-1 truncate max-w-[160px]">{venue["venue-type"]}</span>
                   </span>
 
-                  {/* Prices */}
                   <span className="d-flex json-price">
                     <span className="text-gray-400 text-xs font-normal">
                       Veg
@@ -308,7 +359,6 @@ function VenueList() {
                     </span>
                   </span>
 
-                  {/* Extras */}
                   <div className="json-extra text-xs">
                     <span className="bg-gray-100 px-2 py-1">{venue.pax_range}</span>
                     <span className="bg-gray-100 ms-2 px-2 py-1">{venue.rooms} Rooms</span>

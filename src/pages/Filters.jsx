@@ -32,7 +32,7 @@ function Filters({ onFilterChange }) {
     type: [
       "Banquet Halls",
       "4 Star & Above Wedding Hotels",
-      "5 Star Hotels",
+      "Marriage Garden",
       "3 Star Hotels with Banquets",
     ],
     space: ["Indoor", "Outdoor", "Poolside", "Terrace / Rooftop"],
