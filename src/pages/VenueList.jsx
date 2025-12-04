@@ -142,98 +142,98 @@ function VenueList() {
       <Filters onFilterChange={handleFilterChange} />
 
       <div className="container p-3">
-        <div
-          className="text-gray-400 py-3 hover:text-pink-600"
-          style={{ fontSize: "14px" }}
-          onClick={() => navigate("/")}
-        >
-          Home
-        </div>
+        <div className="px-4 py-3">
+          {/* Home Link */}
+          <div
+            className="text-gray-400 py-3 hover:text-pink-600 text-sm cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            Home
+          </div>
 
-        <div className="d-flex justify-content-between align-items-center">
-          <span>
-            <h4>{passedTitle || "Wedding Venues"}</h4>
-            <p className="text-sm">
-              Showing <strong>{filteredData.length} results</strong> as per your search criteria
-            </p>
-          </span>
+          {/* Header + Search */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
+            <span className="flex-1">
+              <h4 className="text-lg md:text-xl font-semibold">{passedTitle || "Wedding Venues"}</h4>
+              <p className="text-sm text-gray-500 mt-1">
+                Showing <strong>{filteredData.length}</strong> results as per your search criteria
+              </p>
+            </span>
 
-          {/* SEARCH BAR */}
-          <div className="relative w-full max-w-[400px]">
-            <div className="search-wrapper position-relative !w-[260px]">
-              <IoSearchSharp
-                className="position-absolute"
-                style={{
-                  left: "12px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  fontSize: "18px",
-                  color: "#8d8d8dff",
-                }}
-              />
+            {/* Search Bar */}
+            <div className="relative w-full md:w-80">
+              <div className="relative w-full">
+                <IoSearchSharp
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"
+                />
 
-              <input
-                type="text"
-                className="form-control !ps-[40px] !text-sm !p-[10px]"
-                placeholder="Search Wedding Venues..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value.toLowerCase())}
-              />
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder="Search Wedding Venues..."
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value.toLowerCase())}
+                />
 
-              {searchText && (
-                <button
-                  className="absolute right-3 top-1/2 translate-y-1/2 text-gray-500"
-                  onClick={() => setSearchText("")}
-                >
-                  <i className="fa fa-times text-[14px]"></i>
-                </button>
-              )}
-            </div>
-
-            {searchText && (
-              <div className="absolute mt-1 w-full bg-white border rounded-lg shadow-lg max-h-[350px] overflow-y-auto z-50">
-                <p className="text-center text-gray-500 text-xs py-2">
-                  Select a suggestion from below.
-                </p>
-
-                {filteredData.length > 0 ? (
-                  filteredData.map((v) => (
-                    <div
-                      key={v.id}
-                      className="flex items-center gap-3 hover:bg-gray-100 p-2"
-                      onClick={() => navigate(`/venue/${v.id}`)}
-                    >
-                      <img
-                        src={v.image}
-                        alt={v.name}
-                        className="w-14 h-14 object-cover rounded mb-1"
-                      />
-                      <div>
-                        <h6 className="!font-normal !text-[14px]">{v.name}</h6>
-                        <p className="text-gray-500 text-xs">
-                          Wedding Venues, {v.city}
-                        </p>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-center text-gray-400">No results found!</p>
+                {searchText && (
+                  <button
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    onClick={() => setSearchText("")}
+                  >
+                    <i className="fa fa-times text-sm"></i>
+                  </button>
                 )}
               </div>
-            )}
-          </div>
-        </div>
 
-        {/* TOP CITIES */}
-        <div className="flex text-sm mt-3">
-          {[img2, img1, img3, img4, img5].map((imgSrc, idx) => (
-            <div className="text-center ms-5" key={idx}>
-              <img src={imgSrc} alt="" className="link-img" />
-              <p className="mt-2">
-                {["Chennai", "Hyderabad", "Delhi", "Kolkata", "Mumbai"][idx]}
-              </p>
+              {searchText && (
+                <div className="absolute mt-1 w-full bg-white border rounded-lg shadow-lg max-h-80 overflow-y-auto z-50">
+                  <p className="text-center text-gray-500 text-xs py-2">
+                    Select a suggestion from below.
+                  </p>
+
+                  {filteredData.length > 0 ? (
+                    filteredData.map((v) => (
+                      <div
+                        key={v.id}
+                        className="flex items-center gap-3 hover:bg-gray-100 p-2 cursor-pointer"
+                        onClick={() => navigate(`/venue/${v.id}`)}
+                      >
+                        <img
+                          src={v.image}
+                          alt={v.name}
+                          className="w-12 h-12 md:w-14 md:h-14 object-cover rounded"
+                        />
+                        <div>
+                          <h6 className="text-sm font-normal">{v.name}</h6>
+                          <p className="text-gray-500 text-xs">
+                            Wedding Venues, {v.city}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-center text-gray-400 py-2">No results found!</p>
+                  )}
+                </div>
+              )}
             </div>
-          ))}
+          </div>
+
+          {/* Top Cities */}
+          {/* Top Cities */}
+          <div className="flex flex-wrap justify-start md:justify-start gap-4 mt-4 text-sm">
+            {[img2, img1, img3, img4, img5].map((imgSrc, idx) => (
+              <div key={idx} className="text-center w-20 md:w-24">
+                <img
+                  src={imgSrc}
+                  alt=""
+                  className="mx-auto w-16 h-16 md:w-20 md:h-20 object-cover rounded-full"
+                />
+                <p className="mt-2">{["Chennai", "Hyderabad", "Delhi", "Kolkata", "Mumbai"][idx]}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* VENUE CARDS */}
@@ -323,7 +323,7 @@ function VenueList() {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
