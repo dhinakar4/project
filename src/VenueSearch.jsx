@@ -22,7 +22,7 @@ function VenueSearch() {
     { img: Img6, title: "Wedding Resorts", type: "resort" },
   ];
 
-  const slides = [...baseSlides, ...baseSlides, ...baseSlides];
+  const slides = [...baseSlides, ...baseSlides, ...baseSlides]; // for infinite scroll
 
   const carouselRef = useRef(null);
   const cardWidthRef = useRef(0);
@@ -88,7 +88,6 @@ function VenueSearch() {
       <h5 className="venue-heading">Popular Venue Searches</h5>
 
       <div className="venue-carousel-wrapper">
-
         {showLeft && (
           <button
             className="venue-arrow venue-arrow-left"
@@ -109,19 +108,15 @@ function VenueSearch() {
               className="venue-card"
               style={{ cursor: "pointer" }}
               onClick={() =>
-                navigate(
-                  `/venues?type=${slide.type}`,
-                  { state: { title: slide.title } }
-                )
+                navigate(`/venues?type=${slide.type}`, {
+                  state: { title: slide.title },
+                })
               }
             >
               <img src={slide.img} alt={slide.title} className="venue-image" />
-
               <div className="venue-text">
                 <p className="venue-title">{slide.title}</p>
-                <span className="venue-cities">
-                  Mumbai | Bangalore | Pune |
-                </span>
+                <span className="venue-cities">Mumbai | Bangalore | Pune |</span>
                 <span className="venue-more">More</span>
               </div>
             </div>
