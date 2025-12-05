@@ -12,8 +12,6 @@ import "./VenueList.css";
 import { TbMathGreater } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
 
-
-
 import img1 from "../assets/img1.avif";
 import img2 from "../assets/img2.avif";
 import img3 from "../assets/img3.avif";
@@ -96,7 +94,7 @@ function VenueList() {
     const value = valueObj?.value;
 
     if (type === "type") {
-      const selectedTypes = Array.isArray(value) ? value : [value]; 
+      const selectedTypes = Array.isArray(value) ? value : [value];
       updatedList = updatedList.filter((v) =>
         selectedTypes.some((val) =>
           v["venue-type"]?.toLowerCase().includes(val.toLowerCase())
@@ -165,19 +163,18 @@ function VenueList() {
         <div className="px-4 py-3">
           <div className="text-gray-400 py-3 text-sm flex gap-2">
             <span
-              className="cursor-pointer hover:text-pink-600 flex"
-              onClick={() => navigate("/")}
+              className="cursor-pointer  flex"
             >
-              Home
-            </span>
-            <span
-              className="cursor-pointer hover:text-pink-600 flex"
-              onClick={() => {
-                navigate("/venues?type=all", { state: { title: "Wedding Venues" } });
-                setFilteredData(allVenues);
-              }}
-            >
-              <TbMathGreater className="mt-1 me-2" />  Wedding Venues
+              <p className="hover:text-pink-600" onClick={() => navigate("/")}>Home</p>
+              <TbMathGreater className="mt-1 ml-[1px] mr-[1px]" size={14} />
+              <span
+                className="cursor-pointer flex"
+              >
+                <p className="hover:text-pink-600" onClick={() => {
+                  navigate("/venues?type=all", { state: { title: "Wedding Venues" } });
+                  setFilteredData(allVenues);
+                }}>Wedding Venues</p>
+              </span>
             </span>
           </div>
 
@@ -198,7 +195,7 @@ function VenueList() {
 
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full border border-gray-300 rounded-lg px-10 py-2 text-sm focus:outline-none"
                   placeholder="Search Wedding Venues..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value.toLowerCase())}
@@ -225,7 +222,7 @@ function VenueList() {
                       <div
                         key={v.id}
                         className="flex items-center gap-3 hover:bg-gray-100 p-2 cursor-pointer"
-                        onClick={() => navigate(`/venue/${v.id}`)}
+                        onClick={() => window.open(`/venue/${v.id}`, "_blank")}
                       >
                         <img
                           src={v.image}
@@ -315,7 +312,7 @@ function VenueList() {
                   <div className="absolute top-49 right-[20px] text-gray-500 bg-white rounded-md p-1 shadow-sm group cursor-pointer">
                     <BsFillInfoCircleFill size={15} />
                     <div className="absolute hidden group-hover:flex right-8 bottom-0 mt-2 bg-gray-100 text-black text-xs px-2 py-1 rounded-sm shadow-xl w-[240px] z-50">
-                      This venue is verified and highly rated.
+                      This venue is verified and highly rated in all cities.
                     </div>
                   </div>
 
@@ -325,20 +322,23 @@ function VenueList() {
                     <h5 className="json-title">{venue.name}</h5>
                     <span className="json-rating ms-auto d-flex">
                       <TiStarFullOutline className="mt-[2px] text-pink-600 me-1" size={20} />
-                      {venue.rating || 0}
+                      {venue.rating || 0} 
+                      <span className="text-gray-400 font-normal text-sm mt-[2px] ms-1">{venue.review}</span>
                     </span>
                   </div>
 
-                  <span className="nowrap json-city d-flex text-gray-500">
+                  <span className="nowrap json-city d-flex text-gray-400 justify-content-between">
                     <span className="d-flex">
-                      <FaLocationDot className="mt-1" />
+                      <FaLocationDot className="mt-1 me-1" />
                       {venue.city}
                     </span>
-                    <PiBankFill size={18} className="mt-[2px] ms-4" />
-                    <span className="ms-1 truncate max-w-[160px]">{venue["venue-type"]}</span>
+                    <span className="flex">
+                      <PiBankFill className="location-icon me-1" />
+                      <span className=" truncate max-w-[220px] location-text">{venue.location}</span>
+                    </span>
                   </span>
 
-                  <span className="d-flex json-price">
+                  <span className="d-flex json-price justify-content-md-start justify-content-between">
                     <span className="text-gray-400 text-xs font-normal">
                       Veg
                       <p className="text-gray-700 text-lg font-bold">
@@ -348,7 +348,7 @@ function VenueList() {
                         </span>
                       </p>
                     </span>
-                    <span className="text-gray-400 text-xs ms-5 font-normal">
+                    <span className="text-gray-400 text-xs ms-2 ms-md-5 font-normal">
                       Non Veg
                       <p className="text-gray-700 text-lg font-bold">
                         {venue.nonveg_price}
@@ -362,7 +362,7 @@ function VenueList() {
                   <div className="json-extra text-xs">
                     <span className="bg-gray-100 px-2 py-1">{venue.pax_range}</span>
                     <span className="bg-gray-100 ms-2 px-2 py-1">{venue.rooms} Rooms</span>
-                    <span className="ms-2 font-bold !text-gray-400">{venue.extra}</span>
+                    <span className="ms-2 font-bold !text-gray-400 underline">{venue.extra}</span>
                   </div>
 
                 </div>

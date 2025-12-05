@@ -72,3 +72,19 @@
   width: 80px !important;
   object-fit: cover !important;
 }
+
+.location-icon{
+  font-size: 18px !important;
+  margin-top: 2px;
+}
+
+@media(max-width: 576px) {
+  .location-text{
+    max-width: 110px !important;
+  }
+}
+
+.pax-tooltip {
+  white-space: nowrap;
+  z-index: 50;
+}
