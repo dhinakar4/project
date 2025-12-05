@@ -159,9 +159,9 @@ function VenueList() {
     <div>
       <Filters onFilterChange={handleFilterChange} />
 
-      <div className="container p-3">
-        <div className="px-4 py-3">
-          <div className="text-gray-400 py-3 text-sm flex gap-2">
+      <div className="container p-3 px-md-5">
+        <div className="px-3">
+          <div className="text-gray-400 text-sm flex gap-2">
             <span
               className="cursor-pointer  flex"
             >
@@ -181,8 +181,8 @@ function VenueList() {
 
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
             <span className="flex-1">
-              <h4 className="text-lg md:text-xl font-semibold">{passedTitle || "Wedding Venues"}</h4>
-              <p className="text-sm  mt-1">
+              <h4 className="!text-md !md:text-md font-semibold !text-gray-600">{passedTitle || "Wedding Venues"}</h4>
+              <p className="text-sm  mt-1 text-gray-600">
                 Showing <strong>{filteredData.length} results</strong>  as per your search criteria
               </p>
             </span>
@@ -195,7 +195,7 @@ function VenueList() {
 
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-10 py-2 text-sm focus:outline-none"
+                  className="w-70 border border-gray-400 font-medium rounded-lg px-10 py-2 !text-sm focus:outline-none"
                   placeholder="Search Wedding Venues..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value.toLowerCase())}
@@ -245,10 +245,10 @@ function VenueList() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 my-4">
+          <div className="flex items-center !gap-2 !md:gap-3 my-4">
 
             {selectedType && selectedType !== "all" && (
-              <div className="px-3 py-1 font-base rounded-full border text-gray-500 text-sm flex items-center gap-2">
+              <div className="clear-venues px-2  py-1 px-md-3 justify-content-between font-base rounded-full border text-gray-500 text-sm md:text-xs !text-sm !md:text-xs flex items-center gap-2">
                 <span>{typeMapping[selectedType]}</span>
                 <button
                   onClick={() => {
@@ -256,14 +256,14 @@ function VenueList() {
                     setFilteredData(allVenues);
                   }}
                 >
-                  <MdCancel />
+                  <MdCancel className="text-xs md:text-sm d-block" />
                 </button>
               </div>
             )}
 
             {(selectedType && selectedType !== "all") || searchText ? (
               <button
-                className="!text-sm font-semibold underline"
+                className="!text-xs !md:text-sm font-semibold underline"
                 onClick={() => {
                   navigate("/venues?type=all");
                   setSearchText("");

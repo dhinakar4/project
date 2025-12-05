@@ -82,9 +82,19 @@
   .location-text{
     max-width: 110px !important;
   }
+  
+.clear-venues{
+  width: 350px !important;
+  padding: 6px !important;
+}
 }
 
 .pax-tooltip {
   white-space: nowrap;
   z-index: 50;
 }
+
+.clear-venues{
+  width: 250px;
+}
+
