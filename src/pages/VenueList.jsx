@@ -316,7 +316,7 @@ function VenueList() {
                     </div>
                   </div>
 
-                  <img src={venue.image} alt={venue.name} className="card-img-top json-img" />
+                  <img src={venue?.image} alt={venue.name} className="card-img-top json-img" />
 
                   <div className="d-flex pt-2">
                     <h5 className="json-title">{venue.name}</h5>
