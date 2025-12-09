@@ -18,6 +18,12 @@
   }
 }
 
+@media (max-width: 576px){
+.centering-text{
+  margin: 0 auto !important;
+}
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

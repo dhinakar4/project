@@ -10,7 +10,7 @@ import img2 from './assets/latestblogs/googleplay.png';
 
 function ContactPage() {
     return (
-        <div className="container py-5">
+        <div className="container p-4 p-md-5">
 
             {/* TITLE SECTION */}
             <span className="fw-semibold">WedMeGood – Your Personal Wedding Planner</span>

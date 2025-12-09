@@ -25,7 +25,7 @@ function WMGservice() {
   ];
 
   return (
-    <Container className="WMG-service mt-4 p-md-1 p-sm-0 ">
+    <Container className="WMG-service mt-0 mt-md-4 p-md-5 p-3 ">
       <h5 className="WMG-heading">WMG Inhouse Services</h5>
 
       <div className="service-grid mt-[30px]">

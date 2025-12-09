@@ -97,7 +97,7 @@ function Gallery() {
 
 
   return (
-    <Container className="gallery mt-5">
+    <Container className="gallery mt-5 ">
       <h5 className="gallery-heading">Gallery to Look for</h5>
       <div className="gallery-carousel-wrapper">
         {showLeft && (

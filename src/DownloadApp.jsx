@@ -42,13 +42,13 @@ function DownloadApp() {
     setSuccess("Meassage sent!")
   };
   return (
-    <Container className="mt-4 p-5">
+    <Container className="p-md-5 p-3">
       <div className="app-download container p-4 p-md-5">
 
         <div className="row align-items-center">
 
           {/* LEFT CONTENT */}
-          <div className="col-12 col-md-7 ps-5">
+          <div className="col-12 col-md-7 ps-4 ps-md-5">
 
             <h5 className="fw-semibold mb-3" style={{ fontSize: "22px" }}>
               Download The WedMeGood Mobile App Today!
@@ -57,7 +57,7 @@ function DownloadApp() {
             {/* Icons Row */}
             <div className="d-flex align-items-center icon-colors flex-wrap gap-2">
 
-              <span className="d-flex align-items-center">
+              <span className="d-flex align-items-center ms-md-3">
                 <HiLightBulb size={24} className="me-1" />
                 Save Wedding Ideas
               </span>
@@ -103,7 +103,7 @@ function DownloadApp() {
             )}
 
             {/* Button */}
-            <button className="download-btn text-white fw-semibold  mt-5 h-50 p-[15px] w-[250px]"
+            <button className="download-btn text-white fw-semibold  mt-3 mt-md-4 h-50 p-[15px] w-[220px] md:w-[250px]"
               onClick={handleDownload}>
               <span className="button-text">Download the App</span>
             </button>

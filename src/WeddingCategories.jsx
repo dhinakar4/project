@@ -27,8 +27,8 @@ function WeddingCategories() {
   ];
 
   return (
-    <Container className="wedding-categories mt-4 p-5">
-      <h4 className="text-xl font-semibold">Wedding Categories</h4>
+    <Container className="wedding-categories mt-2 mt-md-4 p-3 p-md-5">
+      <h4 className="text-xl font-semibold centering-text">Wedding Categories</h4>
 
       <div className="row mt-4">
         {items.map((item) => (
