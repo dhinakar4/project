@@ -333,8 +333,8 @@ function VenueList() {
                       {venue.city}
                     </span>
                     <span className="flex">
-                      <PiBankFill className="location-icon me-1" />
-                      <span className=" truncate max-w-[220px] location-text">{venue.location}</span>
+                      <PiBankFill className="location-icon me-1 ms-1" />
+                      <span className=" truncate max-w-[210px] location-text ">{venue.location}</span>
                     </span>
                   </span>
 
