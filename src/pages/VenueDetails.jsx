@@ -1,121 +1,251 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import venuesData from "../data/venues.json";
 import { TiStarFullOutline } from "react-icons/ti";
-import { PiBankFill } from "react-icons/pi";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiPhoto } from "react-icons/hi2";
 import { MdCall } from "react-icons/md";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { ImPencil } from "react-icons/im";
 import { GoShareAndroid } from "react-icons/go";
-import './VenueDetails.css';
-import img from '../assets/handpicked.avif';
 import { TbMathGreater } from "react-icons/tb";
-import { useNavigate, useLocation } from "react-router-dom";
-
-
+import img from "../assets/handpicked.avif";
+import "./VenueDetails.css";
+import { useState } from "react";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const allVenues = Object.values(venuesData).flat();
 
 function VenueDetails() {
-
     const { id } = useParams();
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
-    const venue = allVenues.find(v => String(v.id) === String(id));
-    if (!venue) return <h4>Venue Not Found!</h4>
+    const venue = allVenues.find((v) => String(v.id) === String(id));
+    if (!venue) return <h1 className="text-center mt-10">Venue Not Found</h1>;
 
     return (
-        <div className="container">
-            <div className="text-gray-400 text-sm flex gap-2 mt-3 px-5">
-                <span className="cursor-pointer  flex">
-                    <p className="hover:text-pink-600" onClick={() => navigate("/")}>Home</p>
-                    <TbMathGreater className="mt-1 ml-[1px] mr-[1px]" size={14} />
-                    <span className="cursor-pointer flex">
-                        <p className="hover:text-pink-600" onClick={() => {
-                            navigate("/venues?type=all", { state: { title: "Wedding Venues" } });
-                            setFilteredData(allVenues);
-                        }}>Wedding Venues</p>
+        <div className="px-5 mt-4 flex gap-3 justify-content-center">
+            <div className="w-[50%]">
+                {/* Breadcrumb */}
+                <div className="text-gray-500 text-sm flex gap-2 mb-3">
+                    <span onClick={() => navigate("/")} className="hover:text-pink-600 cursor-pointer">
+                        Home
                     </span>
-                    <TbMathGreater className="mt-1 ml-[1px] mr-[1px]" size={14} />
-                    <span className="flex">
-                        <p className="hover:text-pink-600" onClick={() => {
-                            navigate(`/venue?city=${venue.city}`, { state: { title: venue.city } })
-                        }}>
-                            Wedding Venues {venue.city} 
-                        </p>
+                    <TbMathGreater className="mt-1" size={12} />
+                    <span onClick={() => navigate("/venues?type=all")} className="hover:text-pink-600 cursor-pointer">
+                        Wedding Venues
                     </span>
-                </span>
+                    <TbMathGreater className="mt-1" size={12} />
+                    <span className="hover:text-pink-600 cursor-pointer">
+                        Wedding Venues {venue.city}
+                    </span>
+                </div>
+
+                <div className="relative">
+
+                    <div className="absolute  z-10 group cursor-pointer">
+                        <img src={img} alt="" className="" />
+                        <div className="hidden group-hover:block absolute bg-orange-500 text-white text-xs p-2 rounded shadow-xl w-[180px] bottom-1 left-10">
+                            Showcases sponsored, top rated vendors across budgets
+                        </div>
+                    </div>
+
+                    <img src={venue.image} className="w-full rounded shadow-sm" />
+
+                    <div className="absolute left-6 right-6 top-85 bg-white shadow-md rounded">
+
+                        <div className="flex items-center px-4 pt-3">
+                            <h4 className="!text-gray-600 font-semibold">{venue.name}</h4>
+                            <span className="ml-auto bg-green-600 text-white px-3 py-1 rounded-sm flex items-center gap-1">
+                                <TiStarFullOutline /> {venue.rating}
+                            </span>
+                        </div>
+
+                        {/* Location */}
+                        <div className="flex text-gray-600 mt-1 items-start px-4 ">
+                            <FaLocationDot className="text-gray-600 mt-[3px]" />
+                            <div className="ml-1">
+                                <strong className="!text-md">{venue.city}</strong> <span className="text-sm">(View on Map)</span>
+                                <div className="text-gray-500 text-sm">{venue.area}, India</div>
+                            </div>
+
+                            <span className="ml-auto text-md">{venue.review}</span>
+                        </div>
+
+                        {/* Contact */}
+                        <div className="flex text-green-600 mt-3 font-medium text-md px-4">
+                            <MdCall size={18} className="mr-1 mt-1" />
+                            Contact
+                        </div>
+
+                        <div className="flex items-center justify-between mt-6 bg-gray-50 border-gray-200 text-sm py-3 px-4">
+
+                            {/* Photos */}
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                                <HiPhoto size={18} />
+                                <span>22 Photos</span>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="h-6 w-[1px] bg-gray-300"></div>
+
+                            {/* Shortlist */}
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                                <IoIosHeartEmpty size={18} />
+                                <span>Shortlist</span>
+                            </div>
+
+                            <div className="h-6 w-[1px] bg-gray-300"></div>
+
+                            {/* Review */}
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                                <ImPencil size={16} />
+                                <span>Write a Review</span>
+                            </div>
+
+                            <div className="h-6 w-[1px] bg-gray-300"></div>
+
+                            {/* Share */}
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                                <GoShareAndroid size={18} />
+                                <span>Share</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {/* Tabs */}
+                <div className="mt-45 bg-white shadow-sm border border-light p-[15px] flex gap-8 text-md">
+                    <span className="cursor-pointer">Banquets</span>
+                    <span className="cursor-pointer">Projects</span>
+                    <span className="cursor-pointer">About</span>
+                    <span className="cursor-pointer">Reviews</span>
+                </div>
+
+                {/* Areas Available */}
+                <div className="bg-white shadow-sm border mt-4 p-[13px] text-2xl">
+                    Areas Available
+                </div>
             </div>
-            <div className="relative px-5 mt-1">
-                <div className="absolute left-[48px] flex items-center text-white font-semibold text-sm rounded-sm shadow-md group cursor-pointer">
-                    <img src={img} alt="" />
-                    <div className="tooltip-boxes hidden group-hover:flex absolute left-10 bg-orange-400 text-white text-xs px-2 py-2 rounded-sm shadow-xl w-[235px] z-50">
-                        Showcases sponsored,top rated vendors across budgets
-                    </div>
-                </div>
-                <img src={venue?.image} alt={venue.name} className=" rounded-sm detail-image" />
-                <div className="absolute bg-white shadow-sm top-85 rounded-sm w-[620px] py-4 ms-[20px] h-58">
-                    <div className="flex text-2xl font-semibold px-4">
-                        {venue.name}
-                        <span className="detail-page-rating ms-auto d-flex text-white bg-green-600 py-2 px-3 rounded-xs ">
-                            <TiStarFullOutline className="mt-[2px] text-white me-1 " size={20} />
-                            {venue.rating || 0} </span>
-                    </div>
-                    <div>
-                        <span className="d-flex text-gray-500 px-4">
-                            <FaLocationDot className="mt-[4px] me-1 text-gray-600" size={14} />
-                            <strong className="me-1 text-gray-600">{venue.city}</strong> (View on Map)
-                            <span className="ms-auto font-normal text-md mt-[1px] me-1">{venue.review}</span>
+
+            <div className="w-[35%] mt-[32px]">
+
+                <div className="bg-white shadow-md rounded-md py-2 border">
+                    {/* Header */}
+                    <div className="flex justify-between items-center border-b border-gray-300 px-4 py-3">
+                        <h6 className="text-lg font-semibold">Local Price</h6>
+
+                        {/* Only the arrow toggles */}
+                        <span
+                            className="text-pink-600 text-sm cursor-pointer flex items-center gap-1"
+                            onClick={() => setOpen(!open)}
+                        >
+                            Pricing Info
+                            {open ? <IoIosArrowUp size={16} /> : <IoIosArrowDown size={16} />}
                         </span>
-                        <span className="px-[40px] text-gray-500 text-sm">{venue.area},India</span>
-                    </div>
-                    <div className="flex text-green-600 mt-3 font-medium px-4" >
-                        <MdCall className="mt-[5px] me-2" />
-                        Contact
                     </div>
 
-                    <div className="flex bg-light mt-[30px] p-[8px] items-center justify-center ">
-                        <div className="flex col-3 justify-content-center text-sm pl-4">
-                            <HiPhoto className=" me-1" size={20} />
-                            21 Photos
+                    {/* DROPDOWN CONTENT */}
+                    {open && (
+                        <div className="grid grid-cols-2 mt-3 px-4 border-b border-gray-300">
+                            <div>
+                                <p className="font-medium text-sm">Room Price</p>
+                                <p className="text-gray-500 text-sm">₹ 6,500 per room</p>
+                            </div>
+                            <div>
+                                <p className="font-medium text-sm">Starting Price of Decor</p>
+                                <p className="text-gray-500 text-sm">₹ 60,000</p>
+                            </div>
                         </div>
-                        <span className="border-l text-gray-300 h-8 mx-2"></span>
-                        <div className="flex col-3 justify-content-center text-sm">
-                            <IoIosHeartEmpty className=" me-1" size={20} />
-                            Shortlist
-                        </div>
-                        <span className="border-l text-gray-300 h-8 mx-2"></span>
-                        <div className="flex col-3 justify-content-center text-sm">
-                            <ImPencil className=" me-1 " size={18} />
-                            Write a Review
-                        </div>
-                        <span className="border-l text-gray-300 h-8 mx-2"></span>
-                        <div className="flex col-3 justify-content-center text-sm !pr-4">
-                            <GoShareAndroid className=" me-1" size={20} />
-                            Share
-                        </div>
+                    )}
+
+                    {/* Veg price */}
+                    <div className="flex justify-between items-center px-4 border-b border-gray-300">
+                        <p className="mt-2">
+                            <span className="text-pink-600 font-semibold text-xl ">₹ 1,650</span>
+                            <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
+                        </p>
+                        <span className="text-gray-500 text-sm">Veg price</span>
                     </div>
 
-                </div>
-
-                <div>
-
-                </div>
-                <div className="flex bg-white shadow-sm border-2 border-light mt-[220px] p-[15px] " style={{width:'660px'}}>
-                    <div className="flex items-center gap-6 text-md ms-3">
-                        <span>Banquets</span>
-                        <span>Projects</span>
-                        <span>About</span>
-                        <span>Reviews</span>
+                    {/* Non-Veg price */}
+                    <div className="flex justify-between items-center px-4">
+                        <p className="mt-2">
+                            <span className="text-pink-600 font-semibold text-xl">₹ 1,750</span>
+                            <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
+                        </p>
+                        <span className="text-gray-500 text-sm">Non Veg price</span>
                     </div>
                 </div>
-                <div className="flex bg-white shadow-sm border-bottom border-secondary mt-4 p-[15px]" style={{width:'660px'}}>
-                    <span className="text-2xl ">Areas Available</span>
+
+
+
+                {/* Destination Price */}
+                <div className="bg-red-100 shadow-md rounded mt-4 py-3">
+                    <span className="px-4 ">Destination Price</span> <hr />
+                    <div className="text-3xl font-semibold text-gray-900 flex justify-content-between px-4">₹22.50 Lakhs
+                        <div className="text-sm text-gray-500 ">/day for 73 rooms<br /> (Incl. Rooms + Meals + Venue)</div>
+                    </div>
                 </div>
 
+                {/* Buttons */}
+                <div className="flex gap-4 mt-5">
+                    <button className="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold flex-1">
+                        Send Message
+                    </button>
+                    <button className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex-1">
+                        View Contact
+                    </button>
+                </div>
+
+                {/* Enquiry Form */}
+                <div className="bg-white shadow-md p-5 rounded mt-4">
+
+                    <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                        Hi {venue.name},
+                    </h3>
+
+                    <form className="grid grid-cols-2 gap-4 text-sm">
+
+                        <input type="text" placeholder="Name" className="border p-2 rounded" />
+                        <input type="text" placeholder="Phone" className="border p-2 rounded" />
+
+                        <input type="email" placeholder="Email" className="border p-2 rounded col-span-2" />
+                        <input type="date" className="border p-2 rounded" />
+
+                        <input type="number" placeholder="Guests Min" className="border p-2 rounded" />
+                        <input type="number" placeholder="Guests Max" className="border p-2 rounded" />
+
+                        {/* Function Type */}
+                        <div className="col-span-2 mt-2">
+                            <p className="font-semibold mb-2">Function Type</p>
+                            <div className="flex gap-6">
+                                <label><input type="radio" name="f1" /> Pre-Wedding</label>
+                                <label><input type="radio" name="f1" /> Wedding</label>
+                                <label><input type="radio" name="f1" /> Reception</label>
+                            </div>
+                        </div>
+
+                        {/* Function Time */}
+                        <div className="col-span-2 mt-2">
+                            <p className="font-semibold mb-2">Function Time</p>
+                            <div className="flex gap-6">
+                                <label><input type="radio" name="time" /> Evening</label>
+                                <label><input type="radio" name="time" /> Day</label>
+                            </div>
+                        </div>
+
+                        <button className="bg-pink-600 text-white p-3 rounded mt-4 col-span-2">
+                            Send Enquiry
+                        </button>
+                    </form>
+
+                </div>
             </div>
 
         </div>
-    )
-}; export default VenueDetails;
+    );
+}
+
+export default VenueDetails;
