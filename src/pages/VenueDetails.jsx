@@ -12,6 +12,15 @@ import img from "../assets/handpicked.avif";
 import "./VenueDetails.css";
 import { useState } from "react";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { LuMail } from "react-icons/lu";
+import { FaPhone } from "react-icons/fa6";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+
+
+
 
 const allVenues = Object.values(venuesData).flat();
 
@@ -20,12 +29,85 @@ function VenueDetails() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
+    const [showMessageForm, setShowMessageForm] = useState(true);
+    const [showContactForm, setShowContactForm] = useState(false);
+
+
+    const [form, setForm] = useState({
+        name: "",
+        phone: "+91",
+        email: "",
+        date: "",
+        guests: "",
+        rooms: ""
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        let newErrors = { ...errors };
+
+        switch (name) {
+            case "name":
+                if (!value.trim()) newErrors.name = "Required.";
+                else delete newErrors.name;
+                break;
+
+            case "phone":
+                if (!value.trim()) newErrors.phone = "Required.";
+                else if (!/^[0-9]{10}$/.test(value))
+                    newErrors.phone = "Enter a valid 10-digit phone number.";
+                else delete newErrors.phone;
+                break;
+
+            case "email":
+                if (value && !/\S+@\S+\.\S+/.test(value))
+                    newErrors.email = "Enter a valid email address.";
+                else delete newErrors.email;
+                break;
+
+            case "date":
+                if (!value) newErrors.date = "Function date is required.";
+                else delete newErrors.date;
+                break;
+
+            case "guests":
+                if (!value || Number(value) < 50)
+                    newErrors.guests = "Minimum 50 guests required.";
+                else delete newErrors.guests;
+                break;
+
+            case "rooms":
+                if (!value) newErrors.rooms = "Rooms count is required.";
+                else delete newErrors.rooms;
+                break;
+
+            default:
+                break;
+        }
+
+        setErrors(newErrors);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (Object.keys(errors).length === 0) {
+            alert("Form submitted!");
+        }
+    };
+
+
     const venue = allVenues.find((v) => String(v.id) === String(id));
     if (!venue) return <h1 className="text-center mt-10">Venue Not Found</h1>;
 
     return (
-        <div className="px-5 mt-4 flex gap-3 justify-content-center">
-            <div className="w-[50%]">
+        <div className="px-3 sm:px-5 mt-4 flex flex-col lg:flex-row gap-4 justify-center">
+            <div className="w-full lg:w-[55%]">
                 {/* Breadcrumb */}
                 <div className="text-gray-500 text-sm flex gap-2 mb-3">
                     <span onClick={() => navigate("/")} className="hover:text-pink-600 cursor-pointer">
@@ -43,16 +125,16 @@ function VenueDetails() {
 
                 <div className="relative">
 
-                    <div className="absolute  z-10 group cursor-pointer">
+                    <div className="absolute z-10 group cursor-pointer">
                         <img src={img} alt="" className="" />
                         <div className="hidden group-hover:block absolute bg-orange-500 text-white text-xs p-2 rounded shadow-xl w-[180px] bottom-1 left-10">
                             Showcases sponsored, top rated vendors across budgets
                         </div>
                     </div>
 
-                    <img src={venue.image} className="w-full rounded shadow-sm" />
+                    <img src={venue.image} className="w-full h-auto rounded shadow-sm" />
 
-                    <div className="absolute left-6 right-6 top-85 bg-white shadow-md rounded">
+                    <div className="absolute left-6 right-6 top-[130px] md:top-85 bg-white shadow-md rounded">
 
                         <div className="flex items-center px-4 pt-3">
                             <h4 className="!text-gray-600 font-semibold">{venue.name}</h4>
@@ -78,45 +160,48 @@ function VenueDetails() {
                             Contact
                         </div>
 
-                        <div className="flex items-center justify-between mt-6 bg-gray-50 border-gray-200 text-sm py-3 px-4">
+                        <div className="flex flex-wrap items-center justify-between mt-6 bg-gray-50 border-gray-200 text-sm py-3 px-4">
 
                             {/* Photos */}
-                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                            <div className="flex items-center gap-1 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-2 sm:mb-0 ml-0 sm:ml-5">
                                 <HiPhoto size={18} />
                                 <span>22 Photos</span>
                             </div>
 
                             {/* Divider */}
-                            <div className="h-6 w-[1px] bg-gray-300"></div>
+                            <div className="hidden sm:block h-6 w-[1px] bg-gray-300"></div>
 
                             {/* Shortlist */}
-                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-2    sm:mb-0">
                                 <IoIosHeartEmpty size={18} />
                                 <span>Shortlist</span>
                             </div>
 
-                            <div className="h-6 w-[1px] bg-gray-300"></div>
+                            <div className="hidden sm:block h-6 w-[1px] bg-gray-300"></div>
 
                             {/* Review */}
-                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto sm:mb-0">
                                 <ImPencil size={16} />
                                 <span>Write a Review</span>
                             </div>
 
-                            <div className="h-6 w-[1px] bg-gray-300"></div>
+                            <div className="hidden sm:block h-6 w-[1px] bg-gray-300"></div>
 
                             {/* Share */}
-                            <div className="flex items-center gap-2 cursor-pointer text-gray-600">
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mr-0 sm:mr-5">
                                 <GoShareAndroid size={18} />
                                 <span>Share</span>
                             </div>
+
                         </div>
+
 
                     </div>
                 </div>
 
                 {/* Tabs */}
-                <div className="mt-45 bg-white shadow-sm border border-light p-[15px] flex gap-8 text-md">
+                <div className="mt-78 sm:mt-35 bg-white shadow-sm border border-light p-[15px] 
+                    flex gap-4 sm:gap-8 text-sm ">
                     <span className="cursor-pointer">Banquets</span>
                     <span className="cursor-pointer">Projects</span>
                     <span className="cursor-pointer">About</span>
@@ -127,9 +212,9 @@ function VenueDetails() {
                 <div className="bg-white shadow-sm border mt-4 p-[13px] text-2xl">
                     Areas Available
                 </div>
-            </div>
+            </div >
 
-            <div className="w-[35%] mt-[32px]">
+            <div className="w-full lg:w-[40%] mt-4 lg:mt-[32px]">
 
                 <div className="bg-white shadow-md rounded-md py-2 border">
                     {/* Header */}
@@ -189,62 +274,241 @@ function VenueDetails() {
                     </div>
                 </div>
 
-                {/* Buttons */}
-                <div className="flex gap-4 mt-5">
-                    <button className="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold flex-1">
-                        Send Message
-                    </button>
-                    <button className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex-1">
-                        View Contact
-                    </button>
-                </div>
 
                 {/* Enquiry Form */}
-                <div className="bg-white shadow-md p-5 rounded mt-4">
+                <div className="bg-white shadow-md border border-light rounded mt-4">
 
-                    <h3 className="text-lg font-semibold text-gray-700 mb-4">
-                        Hi {venue.name},
-                    </h3>
+                    {/* Top Buttons */}
+                    <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 px-3 py-3 border-b relative
+                        ${showMessageForm ? "border-pink-500" : "border-green-500"} `}>
 
-                    <form className="grid grid-cols-2 gap-4 text-sm">
-
-                        <input type="text" placeholder="Name" className="border p-2 rounded" />
-                        <input type="text" placeholder="Phone" className="border p-2 rounded" />
-
-                        <input type="email" placeholder="Email" className="border p-2 rounded col-span-2" />
-                        <input type="date" className="border p-2 rounded" />
-
-                        <input type="number" placeholder="Guests Min" className="border p-2 rounded" />
-                        <input type="number" placeholder="Guests Max" className="border p-2 rounded" />
-
-                        {/* Function Type */}
-                        <div className="col-span-2 mt-2">
-                            <p className="font-semibold mb-2">Function Type</p>
-                            <div className="flex gap-6">
-                                <label><input type="radio" name="f1" /> Pre-Wedding</label>
-                                <label><input type="radio" name="f1" /> Wedding</label>
-                                <label><input type="radio" name="f1" /> Reception</label>
-                            </div>
-                        </div>
-
-                        {/* Function Time */}
-                        <div className="col-span-2 mt-2">
-                            <p className="font-semibold mb-2">Function Time</p>
-                            <div className="flex gap-6">
-                                <label><input type="radio" name="time" /> Evening</label>
-                                <label><input type="radio" name="time" /> Day</label>
-                            </div>
-                        </div>
-
-                        <button className="bg-pink-600 text-white p-3 rounded mt-4 col-span-2">
-                            Send Enquiry
+                        <button
+                            onClick={() => {
+                                setShowMessageForm(true);
+                                setShowContactForm(false);
+                            }}
+                            className="flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-[40px] py-3 !rounded-full font-semibold"
+                        >
+                            <LuMail size={22} />
+                            Send Message
                         </button>
-                    </form>
+
+                        <button
+                            onClick={() => {
+                                setShowContactForm(true);
+                                setShowMessageForm(false);
+                            }}
+                            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-[40px] py-3 !rounded-full font-semibold"
+                        >
+                            <FaPhone size={22} />
+                            View Contact
+                        </button>
+
+                        <div
+                            className={`absolute -bottom-[6px] bg-white px-[2px] transition-all duration-300
+                            ${showMessageForm ? "left-[50px] sm:left-[105px]" : "left-[200px] sm:left-[330px]"}`}
+                        >
+
+                            <div className={`w-3 h-3 border-b border-r rotate-45 
+                            ${showMessageForm ? "border-pink-500" : "border-green-500"}`}></div>
+                        </div>
+
+                    </div>
+
+                    {showContactForm && (
+                        <div className="px-4 pb-6 pt-5">
+
+                            <p className="font-semibold text-gray-700 mb-4">
+                                Verify your mobile to contact the vendor
+                            </p>
+
+                            {/* Full Name Input */}
+                            <div className="grid grid-cols-2 gap-4 mb-4 px-4" onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    placeholder="Full name*"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border-b border-pink-500 outline-none p-2 ${errors.name ? "border-red-500" : ""}`}
+                                />
+                                {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+                                <div className="relative w-full">
+                                    <img
+                                        src="https://flagcdn.com/w20/in.png"
+                                        className="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-4"
+                                        alt="India flag"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        placeholder="Phone*"
+                                        value={form.phone}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`border-b p-2 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
+                                    />
+                                    {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+                                </div>
+
+                            </div>
+
+
+                            {/* WhatsApp Toggle */}
+                            <div className="flex items-center justify-between mb-5">
+                                <p className="font-semibold">Notify me on Whatsapp</p>
+                                <label className="relative inline-flex cursor-pointer items-center">
+                                    <input type="checkbox" className="sr-only peer" defaultChecked />
+                                    <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:absolute after:top-[3px] after:left-[4px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
+                                </label>
+                            </div>
+
+                            {/* Final Submit Button */}
+                            <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 !rounded-full font-semibold">
+                                View Contact
+                            </button>
+
+                        </div>
+                    )}
+
+
+                    {showMessageForm && (
+                        <div className="py-2">
+                            <span className="!text-lg font-semibold text-gray-700 mb-5 px-4">
+                                Hi {venue.name},
+                            </span>
+                            <div className="mt-3">
+                                <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm px-4 pb-6" onSubmit={handleSubmit}>
+
+                                    {/* Name */}
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Full Name*"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.name ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+                                    </div>
+
+                                    {/* Phone */}
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="phone"
+                                            placeholder="Phone*"
+                                            value={form.phone}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+                                    </div>
+
+                                    {/* Email */}
+                                    <div>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            value={form.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.email ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+                                    </div>
+
+                                    {/* Date */}
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="date"
+                                            placeholder="Function Date*"
+                                            value={form.date}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.date ? "border-red-500" : ""
+                                                }`}
+                                        />
+
+                                        {errors.date && (
+                                            <p className="text-red-500 text-xs">{errors.date}</p>
+                                        )}
+                                    </div>
+
+
+
+
+                                    {/* Guests */}
+                                    <div>
+                                        <input
+                                            type="number"
+                                            name="guests"
+                                            placeholder="No. of Guests (min 50)"
+                                            value={form.guests}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.guests ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.guests && <p className="text-red-500 text-xs">{errors.guests}</p>}
+                                    </div>
+
+                                    {/* Rooms */}
+                                    <div>
+                                        <input
+                                            type="number"
+                                            name="rooms"
+                                            placeholder="No. of Rooms"
+                                            value={form.rooms}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`border-b p-2 outline-none w-full ${errors.rooms ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.rooms && <p className="text-red-500 text-xs">{errors.rooms}</p>}
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+
+                            {/* Function Type */}
+                            <div className="flex flex-col sm:flex-row gap-6 sm:gap-[37px] px-4 text-sm">
+
+                                <div className="mt-2">
+                                    <p className="font-semibold mb-3">Function Type</p>
+                                    <div className="flex gap-6">
+                                        <label><input type="radio" name="ft" /> Pre-Wedding</label>
+                                        <label><input type="radio" name="ft" /> Wedding</label>
+                                    </div>
+                                </div>
+
+                                <div className="mt-2">
+                                    <p className="font-semibold mb-3">Function Time</p>
+                                    <div className="flex gap-8">
+                                        <label><input type="radio" name="time" /> Evening</label>
+                                        <label><input type="radio" name="time" /> Day</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button className="ms-4 bg-pink-600 text-white p-3 w-[90%]  justify-content-center mt-4 font-semibold !px-2">
+                                Check Availability & Prices
+                            </button>
+
+                        </div>
+                    )}
 
                 </div>
+
             </div>
 
-        </div>
+        </div >
     );
 }
 
