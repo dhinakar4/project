@@ -14,10 +14,10 @@ import { useState } from "react";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { LuMail } from "react-icons/lu";
 import { FaPhone } from "react-icons/fa6";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
+import { FaFlag } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+
 
 
 
@@ -107,9 +107,9 @@ function VenueDetails() {
 
     return (
         <div className="px-3 sm:px-5 mt-4 flex flex-col lg:flex-row gap-4 justify-center">
-            <div className="w-full lg:w-[55%]">
+            <div className="w-full lg:w-[45%]">
                 {/* Breadcrumb */}
-                <div className="text-gray-500 text-sm flex gap-2 mb-3">
+                <div className="text-gray-500 text-sm flex gap-1 mb-3">
                     <span onClick={() => navigate("/")} className="hover:text-pink-600 cursor-pointer">
                         Home
                     </span>
@@ -132,7 +132,7 @@ function VenueDetails() {
                         </div>
                     </div>
 
-                    <img src={venue.image} className="w-full h-auto rounded shadow-sm" />
+                    <img src={venue.image} className="w-full h-auto rounded-sm shadow-sm" />
 
                     <div className="absolute left-6 right-6 top-[130px] md:top-85 bg-white shadow-md rounded">
 
@@ -147,11 +147,11 @@ function VenueDetails() {
                         <div className="flex text-gray-600 mt-1 items-start px-4 ">
                             <FaLocationDot className="text-gray-600 mt-[3px]" />
                             <div className="ml-1">
-                                <strong className="!text-md">{venue.city}</strong> <span className="text-sm">(View on Map)</span>
+                                <strong className="!text-md">{venue.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
                                 <div className="text-gray-500 text-sm">{venue.area}, India</div>
                             </div>
 
-                            <span className="ml-auto text-md">{venue.review}</span>
+                            <span className="ml-auto text-xs sm:text-sm">{venue.review}</span>
                         </div>
 
                         {/* Contact */}
@@ -200,7 +200,7 @@ function VenueDetails() {
                 </div>
 
                 {/* Tabs */}
-                <div className="mt-78 sm:mt-35 bg-white shadow-sm border border-light p-[15px] 
+                <div className="mt-85 sm:mt-55 bg-white shadow-sm border border-light p-[15px] 
                     flex gap-4 sm:gap-8 text-sm ">
                     <span className="cursor-pointer">Banquets</span>
                     <span className="cursor-pointer">Projects</span>
@@ -214,9 +214,9 @@ function VenueDetails() {
                 </div>
             </div >
 
-            <div className="w-full lg:w-[40%] mt-4 lg:mt-[32px]">
+            <div className="w-full lg:w-[30%] mt-[25px] lg:mt-[32px]">
 
-                <div className="bg-white shadow-md rounded-md py-2 border">
+                <div className="bg-white shadow-sm rounded-sm py-2 ">
                     {/* Header */}
                     <div className="flex justify-between items-center border-b border-gray-300 px-4 py-3">
                         <h6 className="text-lg font-semibold">Local Price</h6>
@@ -267,7 +267,7 @@ function VenueDetails() {
 
 
                 {/* Destination Price */}
-                <div className="bg-red-100 shadow-md rounded mt-4 py-3">
+                <div className="bg-red-100 shadow-sm rounded-sm mt-4 py-3">
                     <span className="px-4 ">Destination Price</span> <hr />
                     <div className="text-3xl font-semibold text-gray-900 flex justify-content-between px-4">₹22.50 Lakhs
                         <div className="text-sm text-gray-500 ">/day for 73 rooms<br /> (Incl. Rooms + Meals + Venue)</div>
@@ -276,10 +276,10 @@ function VenueDetails() {
 
 
                 {/* Enquiry Form */}
-                <div className="bg-white shadow-md border border-light rounded mt-4">
+                <div className="bg-white shadow-sm border border-light rounded-sm mt-4">
 
                     {/* Top Buttons */}
-                    <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 px-3 py-3 border-b relative
+                    <div className={`flex flex-col sm:flex-row gap-4 sm:gap-4 px-3 py-3 border-b relative
                         ${showMessageForm ? "border-pink-500" : "border-green-500"} `}>
 
                         <button
@@ -287,7 +287,7 @@ function VenueDetails() {
                                 setShowMessageForm(true);
                                 setShowContactForm(false);
                             }}
-                            className="flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-[40px] py-3 !rounded-full font-semibold"
+                            className="flex items-center justify-center gap-1 bg-pink-600 hover:bg-pink-700 text-white px-[32px] py-3 !rounded-full font-semibold"
                         >
                             <LuMail size={22} />
                             Send Message
@@ -298,7 +298,7 @@ function VenueDetails() {
                                 setShowContactForm(true);
                                 setShowMessageForm(false);
                             }}
-                            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-[40px] py-3 !rounded-full font-semibold"
+                            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-[32px] py-3 !rounded-full font-semibold"
                         >
                             <FaPhone size={22} />
                             View Contact
@@ -316,28 +316,28 @@ function VenueDetails() {
                     </div>
 
                     {showContactForm && (
-                        <div className="px-4 pb-6 pt-5">
+                        <div className="px-4 pb-6 pt-3">
 
                             <p className="font-semibold text-gray-700 mb-4">
                                 Verify your mobile to contact the vendor
                             </p>
 
                             {/* Full Name Input */}
-                            <div className="grid grid-cols-2 gap-4 mb-4 px-4" onSubmit={handleSubmit}>
+                            <div className="grid grid-cols-2 gap-4 mb-4 text-sm" onSubmit={handleSubmit}>
                                 <input
                                     type="text"
                                     placeholder="Full name*"
                                     value={form.name}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className={`w-full border-b border-pink-500 outline-none p-2 ${errors.name ? "border-red-500" : ""}`}
+                                    className={`w-full border-b border-gray-400 outline-none p-2 ${errors.name ? "border-red-500" : ""}`}
                                 />
-                                {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
-                                <div className="relative w-full">
+                                {errors.name && <p className="text-red-500 !text-xs">{errors.name}</p>}
+                                <div className="flex w-full">
                                     <img
                                         src="https://flagcdn.com/w20/in.png"
-                                        className="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-4"
-                                        alt="India flag"
+                                        alt="India"
+                                        className="me-2 border-b border-gray-400 pb-1 pt-[20px]"
                                     />
                                     <input
                                         type="text"
@@ -346,7 +346,7 @@ function VenueDetails() {
                                         value={form.phone}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        className={`border-b p-2 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
+                                        className={`border-b border-gray-400 pt-2 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
                                     />
                                     {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
                                 </div>
@@ -355,16 +355,16 @@ function VenueDetails() {
 
 
                             {/* WhatsApp Toggle */}
-                            <div className="flex items-center justify-between mb-5">
+                            <div className="flex items-center justify-between mb-3">
                                 <p className="font-semibold">Notify me on Whatsapp</p>
                                 <label className="relative inline-flex cursor-pointer items-center">
                                     <input type="checkbox" className="sr-only peer" defaultChecked />
-                                    <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:absolute after:top-[3px] after:left-[4px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
+                                    <div className="w-[46px] h-[26px] bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:absolute after:top-[3px] after:left-[4px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
                                 </label>
                             </div>
 
                             {/* Final Submit Button */}
-                            <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 !rounded-full font-semibold">
+                            <button className="w-full bg-green-600 hover:bg-green-700 text-white py-[10px] !text-lg font-semibold">
                                 View Contact
                             </button>
 
@@ -389,13 +389,18 @@ function VenueDetails() {
                                             value={form.name}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.name ? "border-red-500" : ""}`}
+                                            className={`border-b border-gray-400 p-2 outline-none w-full ${errors.name ? "border-red-500" : ""}`}
                                         />
                                         {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
                                     </div>
 
                                     {/* Phone */}
-                                    <div>
+                                    <div className="flex">
+                                        <img
+                                            src="https://flagcdn.com/w20/in.png"
+                                            alt="India"
+                                            className="me-2 border-b border-gray-400 pb-2 pt-[15px]"
+                                        />
                                         <input
                                             type="text"
                                             name="phone"
@@ -403,7 +408,7 @@ function VenueDetails() {
                                             value={form.phone}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
+                                            className={`border-b border-gray-400 outline-none w-full ${errors.phone ? "border-red-500" : ""}`}
                                         />
                                         {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
                                     </div>
@@ -417,7 +422,7 @@ function VenueDetails() {
                                             value={form.email}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.email ? "border-red-500" : ""}`}
+                                            className={`border-b border-gray-400 p-2 outline-none w-full ${errors.email ? "border-red-500" : ""}`}
                                         />
                                         {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
                                     </div>
@@ -431,7 +436,7 @@ function VenueDetails() {
                                             value={form.date}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.date ? "border-red-500" : ""
+                                            className={`border-b border-gray-400 p-2 outline-none w-full ${errors.date ? "border-red-500" : ""
                                                 }`}
                                         />
 
@@ -452,7 +457,7 @@ function VenueDetails() {
                                             value={form.guests}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.guests ? "border-red-500" : ""}`}
+                                            className={`border-b border-gray-400 p-2 outline-none w-full ${errors.guests ? "border-red-500" : ""}`}
                                         />
                                         {errors.guests && <p className="text-red-500 text-xs">{errors.guests}</p>}
                                     </div>
@@ -466,7 +471,7 @@ function VenueDetails() {
                                             value={form.rooms}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className={`border-b p-2 outline-none w-full ${errors.rooms ? "border-red-500" : ""}`}
+                                            className={`border-b border-gray-400 p-2 outline-none w-full ${errors.rooms ? "border-red-500" : ""}`}
                                         />
                                         {errors.rooms && <p className="text-red-500 text-xs">{errors.rooms}</p>}
                                     </div>
@@ -477,11 +482,11 @@ function VenueDetails() {
                             </div>
 
                             {/* Function Type */}
-                            <div className="flex flex-col sm:flex-row gap-6 sm:gap-[37px] px-4 text-sm">
+                            <div className="flex flex-col sm:flex-row gap-6 sm:gap-[30px] px-4 text-sm">
 
                                 <div className="mt-2">
                                     <p className="font-semibold mb-3">Function Type</p>
-                                    <div className="flex gap-6">
+                                    <div className="flex gap-6 !text-xs">
                                         <label><input type="radio" name="ft" /> Pre-Wedding</label>
                                         <label><input type="radio" name="ft" /> Wedding</label>
                                     </div>
@@ -489,7 +494,7 @@ function VenueDetails() {
 
                                 <div className="mt-2">
                                     <p className="font-semibold mb-3">Function Time</p>
-                                    <div className="flex gap-8">
+                                    <div className="flex gap-8 !text-xs">
                                         <label><input type="radio" name="time" /> Evening</label>
                                         <label><input type="radio" name="time" /> Day</label>
                                     </div>
@@ -497,13 +502,31 @@ function VenueDetails() {
 
                             </div>
 
-                            <button className="ms-4 bg-pink-600 text-white p-3 w-[90%]  justify-content-center mt-4 font-semibold !px-2">
+                            {/* WhatsApp Toggle */}
+                            <div className="flex items-center justify-between mt-4 px-4">
+                                <p className="font-semibold text-sm mt-1">Notify me on Whatsapp</p>
+                                <label className="relative inline-flex cursor-pointer items-center">
+                                    <input type="checkbox" className="sr-only peer" defaultChecked />
+                                    <div className="w-[46px] h-[26px] bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:absolute after:top-[3px] after:left-[4px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
+                                </label>
+                            </div>
+
+                            <button className="ms-4 !text-lg bg-pink-600 text-white p-3 w-[90%]  justify-content-center mt-4 font-semibold !px-2">
                                 Check Availability & Prices
                             </button>
-
                         </div>
                     )}
+                    <span className="text-xs px-3 text-gray-400 !pt-2">Complete Information ensures you got accurate and timely vendor responses</span>
 
+                    <div className="flex gap-2 items-center justify-center p-3">
+                        <span className="bg-red-100 px-2 py-[2px] text-xs">In High Demand</span>
+                        <span className="text-sm">13 enquires last week</span>
+                    </div>
+                </div>
+
+                <div className="flex justify-center gap-3 text-red-600 mt-3">
+                    <FaFlag className="mt-[5px]" />
+                    <span onClick={() => navigate('/login')}>Report Inaccurate Info</span>
                 </div>
 
             </div>
