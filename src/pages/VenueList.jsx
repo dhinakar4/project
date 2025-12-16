@@ -25,7 +25,7 @@ const allVenues = Object.values(venuesData)
 
 const typeMapping = {
   "4star": "4star & Above Wedding Hotel",
-  "banquet": "Banquet Halls",
+  "banquet": "Banquet Hall",
   "garden": "Marriage Garden / Lawns",
   "3star": "3 Star Hotels with Banquets",
   "club": "Country / Golf Club",
@@ -89,71 +89,106 @@ function VenueList() {
   }, [selectedType, searchText]);
 
 
-  const handleFilterChange = (type, valueObj) => {
+  const handleFilterChange = (filters) => {
     let updatedList = getFilteredData();
-    const value = valueObj?.value;
 
-    if (type === "type") {
-      const selectedTypes = Array.isArray(value) ? value : [value];
+    // 1️⃣ PAX RANGE
+    if (filters.paxrange && filters.paxrange.length > 0) {
+      updatedList = updatedList.filter((v) => {
+        const nums = v.pax_range?.match(/\d+/g)?.map(Number) || [];
+        const minPax = nums[0] || 0;
+        const maxPax = nums[1] || Infinity;
+
+        return filters.paxrange.some((range) => {
+          const rNums = range.match(/\d+/g)?.map(Number) || [];
+          const rMin = rNums[0] || 0;
+          const rMax = rNums[1] || Infinity;
+
+          return maxPax >= rMin && minPax <= rMax;
+        });
+      });
+    }
+
+    // 2️⃣ ROOMS
+    if (filters.rooms && filters.rooms.length > 0) {
       updatedList = updatedList.filter((v) =>
-        selectedTypes.some((val) =>
-          v["venue-type"]?.toLowerCase().includes(val.toLowerCase())
+        filters.rooms.some((range) => {
+          const nums = range.match(/\d+/g)?.map(Number) || [];
+          const minRooms = nums[0] || 0;
+          const maxRooms = nums[1] || Infinity;
+          return v.rooms >= minRooms && v.rooms <= maxRooms;
+        })
+      );
+    }
+
+    // 3️⃣ PRICE
+    if (filters.price && filters.price.length > 0) {
+      updatedList = updatedList.filter((v) =>
+        filters.price.some((range) => {
+          const nums = range.match(/\d+/g)?.map(Number) || [];
+          const minPrice = nums[0] || 0;
+          const maxPrice = nums[1] || Infinity;
+
+          const veg = toNumber(v.veg_price);
+          const nonveg = toNumber(v.nonveg_price);
+
+          return (
+            (veg >= minPrice && veg <= maxPrice) ||
+            (nonveg >= minPrice && nonveg <= maxPrice)
+          );
+        })
+      );
+    }
+
+    // 4️⃣ RENTAL
+    if (filters.rental) {
+      const nums = filters.rental.match(/\d+/g)?.map(Number) || [];
+      const minRent = nums[0] || 0;
+      const maxRent = nums[1] || Infinity;
+
+      updatedList = updatedList.filter((v) => {
+        const rent = Number(v["rental-cost"]?.replace(/\D/g, "")) || 0;
+        return rent >= minRent && rent <= maxRent;
+      });
+    }
+
+    // 5️⃣ TYPE
+    if (filters.type && filters.type.length > 0) {
+      updatedList = updatedList.filter((v) =>
+        filters.type.some((t) =>
+          v["venue-type"]?.toLowerCase().includes(t.toLowerCase())
         )
       );
     }
 
-
-    if (type === "reset") {
-      setSearchText("");
-      updatedList = getFilteredData();
+    // 6️⃣ SPACE
+    if (filters.space && filters.space.length > 0) {
+      updatedList = updatedList.filter((v) =>
+        filters.space.some((s) =>
+          v.space?.toLowerCase().includes(s.toLowerCase())
+        )
+      );
     }
 
-    if (type === "guests") {
-      updatedList = updatedList.filter((v) => {
-        const { min, max } = parsePax(v.pax_range);
-        return min >= value.min && max <= value.max;
-      });
+    // 7️⃣ FEATURES
+    if (filters.features && filters.features.length > 0) {
+      updatedList = updatedList.filter((v) =>
+        filters.features.some((f) =>
+          v.features?.toLowerCase().includes(f.toLowerCase())
+        )
+      );
     }
 
-    if (type === "rooms") {
+    // 8️⃣ RATING
+    if (filters.rating) {
       updatedList = updatedList.filter(
-        (v) => (v.rooms || 0) >= value.min && (v.rooms || 0) <= value.max
+        (v) => (v.rating || 0) >= parseFloat(filters.rating)
       );
-    }
-
-    if (type === "price") {
-      updatedList = updatedList.filter((v) => {
-        const veg = toNumber(v.veg_price);
-        const nonveg = toNumber(v.nonveg_price);
-        return (veg >= value.min && veg <= value.max) || (nonveg >= value.min && nonveg <= value.max);
-      });
-    }
-
-    if (type === "rental") {
-      updatedList = updatedList.filter((v) => {
-        const rental = Number(v["rental-cost"]?.replace(/\D/g, "")) || 0;
-        return rental >= value.min && rental <= value.max;
-      });
-    }
-
-    if (type === "space") {
-      updatedList = updatedList.filter((v) =>
-        v.space?.toLowerCase().includes(value.trim().toLowerCase())
-      );
-    }
-
-    if (type === "features") {
-      updatedList = updatedList.filter((v) =>
-        v.features?.toLowerCase().includes(value.trim().toLowerCase())
-      );
-    }
-
-    if (type === "rating") {
-      updatedList = updatedList.filter((v) => (v.rating || 0) >= value);
     }
 
     setFilteredData(updatedList);
   };
+
 
   return (
     <div>
@@ -222,12 +257,12 @@ function VenueList() {
                       <div
                         key={v.id}
                         className="flex items-center gap-3 hover:bg-gray-100 p-2 cursor-pointer"
-                        onClick={() => window.open(`/venue/${v.id}`, "_blank")}
+                        onClick={() => window.open(`/venue/${v.image}`, "_blank")}
                       >
                         <img
                           src={v.image}
                           alt={v.name}
-                          className="w-12 h-12 md:w-14 md:h-14 object-cover rounded"
+                          className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-sm"
                         />
                         <div>
                           <h6 className="text-sm font-normal">{v.name}</h6>
@@ -322,7 +357,7 @@ function VenueList() {
                     <h5 className="json-title">{venue.name}</h5>
                     <span className="json-rating ms-auto d-flex">
                       <TiStarFullOutline className="mt-[2px] text-pink-600 me-1" size={20} />
-                      {venue.rating || 0} 
+                      {venue.rating || 0}
                       <span className="text-gray-400 font-normal text-sm mt-[2px] ms-1">{venue.review}</span>
                     </span>
                   </div>

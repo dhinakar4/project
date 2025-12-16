@@ -22,3 +22,91 @@
   border-bottom: 6px solid transparent;
   border-right: 8px solid #fc8932; 
 }
+.Venue-Detail-Img{
+  object-fit:cover !important;
+  width: 100%;
+  height: auto;
+}
+.venue-detail-message-button {
+  background: linear-gradient(
+    to bottom right,
+    #fb3379 85%,
+    #c00757 13%
+  );
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.venue-detail-message-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #9e0849;
+  opacity: 0;
+  transition: 0.7s ease-in-out;
+  clip-path: polygon(
+    100% 100%,
+    100% 70%,
+    70% 100%,
+    100% 100%
+  );
+}
+
+.venue-detail-message-button:hover:after {
+  opacity: 1;
+  clip-path: polygon(
+    20% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    0% 40%
+  );
+}
+
+.venue-detail-contact-button {
+  background: linear-gradient(
+    to bottom right,
+    rgb(3, 162, 3) 85%,
+    green 15%
+  );
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.venue-detail-contact-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: green;
+  opacity: 0;
+  transition: 0.7s ease-in-out;
+  clip-path: polygon(
+    100% 100%,
+    100% 70%,
+    70% 100%,
+    100% 100%
+  );
+}
+
+.venue-detail-contact-button:hover:after {
+  opacity: 1;
+  clip-path: polygon(
+    20% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    0% 40%
+  );
+}
+
+@media (max-width: 576px) {
+  .venue-detail-message-button{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}

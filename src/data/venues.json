@@ -185,7 +185,7 @@
 
 "4star Hotels": [
   {
-    "id": 1,
+    "id": 10,
     "name": "Radisson Blu Plaza",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -205,7 +205,7 @@
     "image": "/4starhotel/img1.avif"
   },
   {
-    "id": 2,
+    "id": 11,
     "name": "ITC Maurya",
     "city": "Coimbatore",
     "area": "Coimbatore,Tamil Nadu",
@@ -225,7 +225,7 @@
     "image": "/4starhotel/img2.avif"
   },
   {
-    "id": 3,
+    "id": 12,
     "name": "The Leela Palace",
     "city": "Salem",
     "area": "Salem,Tamil Nadu",
@@ -245,7 +245,7 @@
     "image": "/4starhotel/img3.avif"
   },
   {
-    "id": 4,
+    "id": 13,
     "name": "Emerald Banquet Hall",
     "city": "Chennai",
     "area": "Chennai,Tamil Nadu",
@@ -265,7 +265,7 @@
     "image": "/4starhotel/img4.avif"
   },
   {
-    "id": 5,
+    "id": 14,
     "name": "Golden Crown Banquet",
     "city": "Kochin",
     "area": "Kochin,Kerala",
@@ -285,7 +285,7 @@
     "image": "/4starhotel/img5.avif"
   },
   {
-    "id": 6,
+    "id": 15,
     "name": "Royal Garden Venue",
     "city": "Thiruvananthapuram",
     "area": "Thiruvananthapuram,Kerala",
@@ -305,7 +305,7 @@
     "image": "/4starhotel/img6.avif"
   },
   {
-    "id": 7,
+    "id": 16,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Coimbatore,Tamil Nadu",
@@ -325,7 +325,7 @@
     "image": "/4starhotel/img7.avif"
   },
   {
-    "id": 8,
+    "id": 17,
     "name": "Comfort Inn",
     "city": "Chennai",
     "area": "Broadway,Chennai,Tamil Nadu",
@@ -345,7 +345,7 @@
     "image": "/4starhotel/img8.avif"
   },
   {
-    "id": 9,
+    "id": 18,
     "name": "Classic Comfort Hotel",
     "city": "Chennai",
     "area": "Tiruvanmiyur,Chennai,Tamil Nadu",
@@ -368,7 +368,7 @@
 
 "Banquet Halls": [
   {
-    "id": 1,
+    "id": 19,
     "name": "Radisson Blu Plaza",
     "city": "Kochin",
     "area": "Kochin,Kerala",
@@ -388,7 +388,7 @@
     "image": "/banquethall/img1.avif"
   },
   {
-    "id": 2,
+    "id": 20,
     "name": "ITC Maurya",
     "city": "Bangalore",
     "area": "Bangalore,Karnataka",
@@ -408,7 +408,7 @@
     "image": "/banquethall/img2.avif"
   },
   {
-    "id": 3,
+    "id": 21,
     "name": "The Leela Palace",
     "city": "Salem",
     "area": "Salem,Tamil Nadu",
@@ -428,7 +428,7 @@
     "image": "/banquethall/img3.avif"
   },
   {
-    "id": 4,
+    "id": 22,
     "name": "Emerald Banquet Hall",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -448,7 +448,7 @@
     "image": "/banquethall/img4.avif"
   },
   {
-    "id": 5,
+    "id": 23,
     "name": "Golden Crown Banquet",
     "city": "Thrissur",
     "area": "Thrissur,Kerala",
@@ -468,7 +468,7 @@
     "image": "/banquethall/img5.avif"
   },
   {
-    "id": 6,
+    "id": 24,
     "name": "Royal Garden Venue",
     "city": "Chennai",
     "area": "Tiruvanmiyur,Chennai,Tamil Nadu",
@@ -488,7 +488,7 @@
     "image": "/banquethall/img6.avif"
   },
   {
-    "id": 7,
+    "id": 25,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Gandhipuram,Coimbatore,Tamil Nadu",
@@ -508,7 +508,7 @@
     "image": "/banquethall/img7.avif"
   },
   {
-    "id": 8,
+    "id": 26,
     "name": "Comfort Inn",
     "city": "Chennai",
     "area": "Adyar,Chennai,Tamil Nadu",
@@ -528,7 +528,7 @@
     "image": "/banquethall/img8.avif"
   },
   {
-    "id": 9,
+    "id": 27,
     "name": "Classic Comfort Hotel",
     "city": "Bangalore",
     "area": "Bangalore,Karnataka",
@@ -551,7 +551,7 @@
 
 "Marriage Garden": [
   {
-    "id": 1,
+    "id": 28,
     "name": "Radisson Blu Plaza",
     "city": "Madurai",
     "area": "Madurai,Tamil Nadu",
@@ -571,7 +571,7 @@
     "image": "/marriagegarden/img1.avif"
   },
   {
-    "id": 2,
+    "id": 29,
     "name": "ITC Maurya",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -591,7 +591,7 @@
     "image": "/marriagegarden/img2.avif"
   },
   {
-    "id": 3,
+    "id": 30,
     "name": "The Leela Palace",
     "city": "Thiruvananthapuram",
     "area": "Thiruvananthapuram,Kerala",
@@ -611,7 +611,7 @@
     "image": "/marriagegarden/img3.avif"
   },
   {
-    "id": 4,
+    "id": 31,
     "name": "Emerald Banquet Hall",
     "city": "Coimbatore",
     "area": "Coimbatore,Tamil Nadu",
@@ -631,7 +631,7 @@
     "image": "/marriagegarden/img4.avif"
   },
   {
-    "id": 5,
+    "id": 32,
     "name": "Golden Crown Banquet",
     "city": "Chennai",
     "area": "Chennai,Tamil Nadu",
@@ -651,7 +651,7 @@
     "image": "/marriagegarden/img5.avif"
   },
   {
-    "id": 6,
+    "id": 33,
     "name": "Royal Garden Venue",
     "city": "Bangalore",
     "area": "Bangalore,Karnataka",
@@ -671,7 +671,7 @@
     "image": "/marriagegarden/img6.avif"
   },
   {
-    "id": 7,
+    "id": 34,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Gandhipuram,Coimbatore,Tamil Nadu",
@@ -691,7 +691,7 @@
     "image": "/marriagegarden/img7.avif"
   },
   {
-    "id": 8,
+    "id": 35,
     "name": "Comfort Inn",
     "city": "Chennai",
     "area": "Tiruvanmiyur,Chennai,Tamil Nadu",
@@ -711,7 +711,7 @@
     "image": "/marriagegarden/img8.avif"
   },
   {
-    "id": 9,
+    "id": 36,
     "name": "Classic Comfort Hotel",
     "city": "Thrissur",
     "area": "Thrissur,Kerala",
@@ -734,7 +734,7 @@
 
 "3star Hotels": [
   {
-    "id": 1,
+    "id": 37,
     "name": "Radisson Blu Plaza",
     "city": "Madurai",
     "area": "Madurai,Tamil Nadu",
@@ -754,7 +754,7 @@
     "image": "/3starhotel/img1.avif"
   },
   {
-    "id": 2,
+    "id": 38,
     "name": "ITC Maurya",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -774,7 +774,7 @@
     "image": "/3starhotel/img2.avif"
   },
   {
-    "id": 3,
+    "id": 39,
     "name": "The Leela Palace",
     "city": "Salem",
     "area": "Salem,Tamil Nadu",
@@ -794,7 +794,7 @@
     "image": "/3starhotel/img3.avif"
   },
   {
-    "id": 4,
+    "id": 40,
     "name": "Emerald Banquet Hall",
     "city": "Kochin",
     "area": "Kochin,Kerala",
@@ -814,7 +814,7 @@
     "image": "/3starhotel/img4.avif"
   },
   {
-    "id": 5,
+    "id": 41,
     "name": "Golden Crown Banquet",
     "city": "Chennai",
     "area": "Chennai,Tamil Nadu",
@@ -834,7 +834,7 @@
     "image": "/3starhotel/img5.avif"
   },
   {
-    "id": 6,
+    "id": 42,
     "name": "Royal Garden Venue",
     "city": "Madurai",
     "area": "Madurai,Tamil Nadu",
@@ -854,7 +854,7 @@
     "image": "/3starhotel/img6.avif"
   },
   {
-    "id": 7,
+    "id": 43,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Saravanampatti,Coimbatore,Tamil Nadu",
@@ -874,7 +874,7 @@
     "image": "/3starhotel/img7.avif"
   },
   {
-    "id": 8,
+    "id": 44,
     "name": "Comfort Inn",
     "city": "Chennai",
     "area": "Adyar,Chennai,Tamil Nadu",
@@ -894,7 +894,7 @@
     "image": "/3starhotel/img8.avif"
   },
   {
-    "id": 9,
+    "id": 45,
     "name": "Classic Comfort Hotel",
     "city": "Chennai",
     "area": "Broadway,Chennai,Tamil Nadu",
@@ -917,7 +917,7 @@
 
 "Country": [
   {
-    "id": 1,
+    "id": 46,
     "name": "Radisson Blu Plaza",
     "city": "Thrissur",
     "area": "Thrissur,Kerala",
@@ -937,7 +937,7 @@
     "image": "/country/img1.avif"
   },
   {
-    "id": 2,
+    "id": 47,
     "name": "ITC Maurya",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -957,7 +957,7 @@
     "image": "/country/img2.avif"
   },
   {
-    "id": 3,
+    "id": 48,
     "name": "The Leela Palace",
     "city": "Bangalore",
     "area": "Bangalore,Karnataka",
@@ -977,7 +977,7 @@
     "image": "/country/img3.avif"
   },
   {
-    "id": 4,
+    "id": 49,
     "name": "Emerald Banquet Hall",
     "city": "Madurai",
     "area": "Madurai,Tamil Nadu",
@@ -997,7 +997,7 @@
     "image": "/country/img4.avif"
   },
   {
-    "id": 5,
+    "id": 50,
     "name": "Golden Crown Banquet",
     "city": "Salem",
     "area": "Salem,Tamil Nadu",
@@ -1017,7 +1017,7 @@
     "image": "/country/img5.avif"
   },
   {
-    "id": 6,
+    "id": 51,
     "name": "Royal Garden Venue",
     "city": "Thiruvananthapuram",
     "area": "Thiruvananthapuram,Kerala",
@@ -1037,7 +1037,7 @@
     "image": "/country/img6.avif"
   },
   {
-    "id": 7,
+    "id": 52,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Coimbatore,Tamil Nadu",
@@ -1057,7 +1057,7 @@
     "image": "/country/img7.avif"
   },
   {
-    "id": 8,
+    "id": 53,
     "name": "Comfort Inn",
     "city": "Chennai",
     "area": "Adyar,Chennai,Tamil Nadu",
@@ -1077,7 +1077,7 @@
     "image": "/country/img8.avif"
   },
   {
-    "id": 9,
+    "id": 54,
     "name": "Classic Comfort Hotel",
     "city": "Chennai",
     "area": "Tiruvanmiyur,Chennai,Tamil Nadu",
@@ -1100,7 +1100,7 @@
 
 "Wedding Resorts": [
   {
-    "id": 1,
+    "id": 55,
     "name": "Radisson Blu Plaza",
     "city": "Kochin",
     "area": "Kochin,Kerala",
@@ -1120,7 +1120,7 @@
     "image": "/weddingresort/img1.avif"
   },
   {
-    "id": 2,
+    "id": 56,
     "name": "ITC Maurya",
     "city": "Coimbatore",
     "area": "Gandhipuram,Coimbatore,Tamil Nadu",
@@ -1140,7 +1140,7 @@
     "image": "/weddingresort/img2.avif"
   },
   {
-    "id": 3,
+    "id": 57,
     "name": "The Leela Palace",
     "city": "Salem",
     "area": "Salem,Tamil Nadu",
@@ -1160,7 +1160,7 @@
     "image": "/weddingresort/img3.avif"
   },
   {
-    "id": 4,
+    "id": 58,
     "name": "Emerald Banquet Hall",
     "city": "Chennai",
     "area": "Broadway,Chennai,Tamil Nadu",
@@ -1180,7 +1180,7 @@
     "image": "/weddingresort/img4.avif"
   },
   {
-    "id": 5,
+    "id": 59,
     "name": "Golden Crown Banquet",
     "city": "Madurai",
     "area": "Madurai,Tamil Nadu",
@@ -1200,7 +1200,7 @@
     "image": "/weddingresort/img5.avif"
   },
   {
-    "id": 6,
+    "id": 60,
     "name": "Royal Garden Venue",
     "city": "Bangalore",
     "area": "Bangalore,Karnataka",
@@ -1220,7 +1220,7 @@
     "image": "/weddingresort/img6.avif"
   },
   {
-    "id": 7,
+    "id": 61,
     "name": "Green Meadows Lawn",
     "city": "Coimbatore",
     "area": "Coimbatore,Tamil Nadu",
@@ -1240,7 +1240,7 @@
     "image": "/weddingresort/img7.avif"
   },
   {
-    "id": 8,
+    "id": 62,
     "name": "Comfort Inn",
     "city": "Mysore",
     "area": "Mysore,Karnataka",
@@ -1260,7 +1260,7 @@
     "image": "/weddingresort/img8.avif"
   },
   {
-    "id": 9,
+    "id": 63,
     "name": "Classic Comfort Hotel",
     "city": "Thrissur",
     "area": "Thrissur,Kerala",

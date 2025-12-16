@@ -8,7 +8,7 @@ function Filters({ onFilterChange }) {
   const dropdownRef = useRef(null);
 
   const filters = [
-    { label: "No. of Guests", key: "guests" },
+    { label: "No. of Guests", key: "paxrange" },
     { label: "Room Count", key: "rooms" },
     { label: "Price per plate (Rs)", key: "price" },
     { label: "Rental Cost", key: "rental" },
@@ -19,86 +19,67 @@ function Filters({ onFilterChange }) {
   ];
 
   const options = {
-    guests: ["<100", "100-250", "250-500", "500-1000", ">1000"],
+    paxrange: ["<100", "100-250", "250-500", "500-1000", ">1000"],
     rooms: ["<30", "31-60", "61-100", "101-150", "151-200", "200+"],
     price: ["<1000", "1000-1500", "1500-2000", "2000-3000", ">3000"],
-    rental: [
-      "< ₹1 Lakh",
-      "₹1 Lakh - ₹2 Lakhs",
-      "₹2 Lakhs - ₹4 Lakhs",
-      "₹4 Lakhs - ₹6 Lakhs",
-      "> ₹6 Lakhs",
-    ],
-    type: [
-      "Banquet Halls",
-      "4 Star & Above Wedding Hotels",
-      "Marriage Garden",
-      "3 Star Hotels with Banquets",
-    ],
+    rental: ["< ₹1 Lakh", "₹1 Lakh - ₹2 Lakhs", "₹2 Lakhs - ₹4 Lakhs", "₹4 Lakhs - ₹6 Lakhs", "> ₹6 Lakhs"],
+    type: ["Banquet Halls", "4 Star & Above Wedding Hotels", "Marriage Garden", "3 Star Hotels with Banquets"],
     space: ["Indoor", "Outdoor", "Poolside", "Terrace / Rooftop"],
     features: ["Beach view", "Mountain view", "Lake view", "Sea view", "Pet Friendly"],
     rating: ["4", "4.5", "4.8"],
   };
 
   const [selectedFilters, setSelectedFilters] = useState({
-    guests: null,
-    rooms: null,
-    price: null,
+    paxrange: [],
+    rooms: [],
+    price: [],
     rental: null,
-    type: null,
-    space: null,
-    features: null,
+    type: [],
+    space: [],
+    features: [],
     rating: null,
   });
 
-  const parseRange = (text) => {
-    if (text.includes("Lakh")) {
-      const nums = text.match(/\d+/g).map(Number);
-      if (text.startsWith("<")) return { min: 0, max: nums[0] * 100000 };
-      if (text.startsWith(">")) return { min: nums[0] * 100000, max: Infinity };
-      return { min: nums[0] * 100000, max: nums[1] * 100000 };
-    }
-    const nums = text.match(/\d+/g)?.map(Number) || [];
-    if (nums.length === 1) {
-      const val = nums[0];
-      if (text.startsWith("<")) return { min: 0, max: val };
-      if (text.startsWith(">")) return { min: val, max: Infinity };
-      return { min: val, max: val };
-    }
-    return { min: nums[0], max: nums[1] };
-  };
-
   const handleFilterClick = (key) => {
-    if (activeFilter === key) setIsOpen(!isOpen);
-    else {
-      setActiveFilter(key);
-      setIsOpen(true);
-    }
+    setActiveFilter(activeFilter === key && isOpen ? null : key);
+    setIsOpen(activeFilter !== key || !isOpen);
   };
 
-  const updateSelected = (key, val) =>
-    setSelectedFilters((prev) => ({ ...prev, [key]: val }));
+  const handleChange = (filterKey, option) => {
+    if (["rental", "rating"].includes(filterKey)) {
+      // Single selection (radio)
+      setSelectedFilters((prev) => ({ ...prev, [filterKey]: option }));
+    } else {
+      // Multiple selection (checkbox)
+      setSelectedFilters((prev) => {
+        const current = prev[filterKey] || [];
+        if (current.includes(option)) {
+          return { ...prev, [filterKey]: current.filter((o) => o !== option) };
+        } else {
+          return { ...prev, [filterKey]: [...current, option] };
+        }
+      });
+    }
+  };
 
   const applyFilters = () => {
-    Object.entries(selectedFilters).forEach(([key, val]) => {
-      if (val) onFilterChange(key, val);
-    });
+    onFilterChange(selectedFilters);
     setIsOpen(false);
     setActiveFilter(null);
   };
 
   const clearFilters = () => {
     setSelectedFilters({
-      guests: null,
-      rooms: null,
-      price: null,
+      paxrange: [],
+      rooms: [],
+      price: [],
       rental: null,
-      type: null,
-      space: null,
-      features: null,
+      type: [],
+      space: [],
+      features: [],
       rating: null,
     });
-    onFilterChange("reset", null);
+    onFilterChange({});
     setIsOpen(false);
     setActiveFilter(null);
   };
@@ -118,33 +99,32 @@ function Filters({ onFilterChange }) {
     return () => document.removeEventListener("mousedown", handleOutside);
   }, []);
 
+  const isChecked = (filterKey, option) => {
+    if (["rental", "rating"].includes(filterKey)) return selectedFilters[filterKey] === option;
+    return selectedFilters[filterKey]?.includes(option);
+  };
+
   return (
     <div className="wmg-filter-wrapper shadow-sm">
       <div className="wmg-filter-container">
+        
         {filters.map((f) => (
           <div
             key={f.key}
-            className={`wmg-filter-item ml-[38px] ${
-              activeFilter === f.key ? "active" : ""
-            }`}
+            className={`wmg-filter-item ml-[38px] ${activeFilter === f.key ? "active" : ""}`}
             onClick={() => handleFilterClick(f.key)}
           >
             {f.label}
             <IoMdArrowDropdown
               size={20}
-              className={`mt-1 transition-all ${
-                activeFilter === f.key ? "rotate-180" : "rotate-0"
-              }`}
+              className={`mt-1 transition-all ${activeFilter === f.key ? "rotate-180" : "rotate-0"}`}
             />
           </div>
         ))}
       </div>
 
       {isOpen && (
-        <div
-          className="wmg-sections-row ms-5"
-          ref={dropdownRef}
-        >
+        <div className="wmg-sections-row ms-5" ref={dropdownRef}>
           {filters.map((f) => (
             <div key={f.key} className="wmg-section">
               {options[f.key].map((item) => (
@@ -152,24 +132,8 @@ function Filters({ onFilterChange }) {
                   <input
                     type={["rental", "rating"].includes(f.key) ? "radio" : "checkbox"}
                     name={["rental", "rating"].includes(f.key) ? f.key : undefined}
-                    checked={selectedFilters[f.key]?.label === item}
-                    onChange={() => {
-                      if (["rental", "rating"].includes(f.key)) {
-                        const value =
-                          f.key === "rating" ? Number(item) : parseRange(item);
-                        updateSelected(f.key, { label: item, value });
-                        return;
-                      }
-                      if (selectedFilters[f.key]?.label === item) {
-                        updateSelected(f.key, null);
-                        return;
-                      }
-                      const value =
-                        ["type", "space", "features"].includes(f.key)
-                          ? item
-                          : parseRange(item);
-                      updateSelected(f.key, { label: item, value });
-                    }}
+                    checked={isChecked(f.key, item)}
+                    onChange={() => handleChange(f.key, item)}
                   />
                   {item}
                 </label>

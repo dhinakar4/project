@@ -132,9 +132,9 @@ function VenueDetails() {
                         </div>
                     </div>
 
-                    <img src={venue.image} className="w-full h-auto rounded-sm shadow-sm" />
+                    <img src={venue.image} className="rounded-sm shadow-sm Venue-Detail-Img" />
 
-                    <div className="absolute left-6 right-6 top-[130px] md:top-85 bg-white shadow-md rounded">
+                    <div className="absolute w-[100%] md:w-[93%] left-0 md:left-6 right-6 top-[180px] md:top-85 bg-white shadow-md rounded-sm">
 
                         <div className="flex items-center px-4 pt-3">
                             <h4 className="!text-gray-600 font-semibold">{venue.name}</h4>
@@ -144,14 +144,14 @@ function VenueDetails() {
                         </div>
 
                         {/* Location */}
-                        <div className="flex text-gray-600 mt-1 items-start px-4 ">
+                        <div className="flex text-gray-600 mt-1 items-start px-4 md:px-4 ">
                             <FaLocationDot className="text-gray-600 mt-[3px]" />
                             <div className="ml-1">
-                                <strong className="!text-md">{venue.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
+                                <strong className="!text-md !md:text-md !font-semibold">{venue.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
                                 <div className="text-gray-500 text-sm">{venue.area}, India</div>
                             </div>
 
-                            <span className="ml-auto text-xs sm:text-sm">{venue.review}</span>
+                            <span className="ml-auto text-xs md:text-sm ">{venue.review}</span>
                         </div>
 
                         {/* Contact */}
@@ -163,7 +163,7 @@ function VenueDetails() {
                         <div className="flex flex-wrap items-center justify-between mt-6 bg-gray-50 border-gray-200 text-sm py-3 px-4">
 
                             {/* Photos */}
-                            <div className="flex items-center gap-1 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-2 sm:mb-0 ml-0 sm:ml-5">
+                            <div className="flex items-center gap-1 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-3 sm:mb-0 ml-0 sm:ml-5">
                                 <HiPhoto size={18} />
                                 <span>22 Photos</span>
                             </div>
@@ -172,8 +172,9 @@ function VenueDetails() {
                             <div className="hidden sm:block h-6 w-[1px] bg-gray-300"></div>
 
                             {/* Shortlist */}
-                            <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-2    sm:mb-0">
-                                <IoIosHeartEmpty size={18} />
+                            <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-3 sm:mb-0 "
+                            onClick={() => navigate('/login')}>
+                                <IoIosHeartEmpty className="!ml-2 !md:ml-0" size={18} />
                                 <span>Shortlist</span>
                             </div>
 
@@ -189,7 +190,7 @@ function VenueDetails() {
 
                             {/* Share */}
                             <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mr-0 sm:mr-5">
-                                <GoShareAndroid size={18} />
+                                <GoShareAndroid className="!ml-2 !md:ml-0"  size={18} />
                                 <span>Share</span>
                             </div>
 
@@ -214,7 +215,7 @@ function VenueDetails() {
                 </div>
             </div >
 
-            <div className="w-full lg:w-[30%] mt-[25px] lg:mt-[32px]">
+            <div className="w-full lg:w-[32%] mt-[25px] lg:mt-[32px]">
 
                 <div className="bg-white shadow-sm rounded-sm py-2 ">
                     {/* Header */}
@@ -279,7 +280,7 @@ function VenueDetails() {
                 <div className="bg-white shadow-sm border border-light rounded-sm mt-4">
 
                     {/* Top Buttons */}
-                    <div className={`flex flex-col sm:flex-row gap-4 sm:gap-4 px-3 py-3 border-b relative
+                    <div className={`flex flex-col sm:flex-row gap-2 sm:gap-2 px-3 py-3 border-b relative
                         ${showMessageForm ? "border-pink-500" : "border-green-500"} `}>
 
                         <button
@@ -287,10 +288,11 @@ function VenueDetails() {
                                 setShowMessageForm(true);
                                 setShowContactForm(false);
                             }}
-                            className="flex items-center justify-center gap-1 bg-pink-600 hover:bg-pink-700 text-white px-[32px] py-3 !rounded-full font-semibold"
+                            className="venue-detail-message-button flex items-center justify-center gap-1 
+                             text-white w-45 md:w-52 !py-2 md:!py-3 mx-auto !text-sm md:!text-base !rounded-full font-semibold"
                         >
-                            <LuMail size={22} />
-                            Send Message
+                            <LuMail size={22} className="z-50" />
+                            <span className="z-50 relative">Send Message</span>
                         </button>
 
                         <button
@@ -298,10 +300,11 @@ function VenueDetails() {
                                 setShowContactForm(true);
                                 setShowMessageForm(false);
                             }}
-                            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-[32px] py-3 !rounded-full font-semibold"
+                            className="venue-detail-contact-button flex items-center justify-center gap-2
+                            text-white w-45 md:w-52 !py-2 md:!py-3 mx-auto !text-sm md:!text-base !rounded-full font-semibold"
                         >
-                            <FaPhone size={22} />
-                            View Contact
+                            <FaPhone size={22} className="z-50" />
+                            <span className="z-50 relative">View Contact</span>
                         </button>
 
                         <div
@@ -330,7 +333,7 @@ function VenueDetails() {
                                     value={form.name}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className={`w-full border-b border-gray-400 outline-none p-2 ${errors.name ? "border-red-500" : ""}`}
+                                    className={`w-full border-b border-gray-400 outline-none ${errors.name ? "border-red-500" : ""}`}
                                 />
                                 {errors.name && <p className="text-red-500 !text-xs">{errors.name}</p>}
                                 <div className="flex w-full">
@@ -364,7 +367,7 @@ function VenueDetails() {
                             </div>
 
                             {/* Final Submit Button */}
-                            <button className="w-full bg-green-600 hover:bg-green-700 text-white py-[10px] !text-lg font-semibold">
+                            <button className="w-full bg-green-600 hover:bg-green-700 text-white py-[8px] md:py-[10px] !text-md md:!text-lg font-semibold">
                                 View Contact
                             </button>
 
@@ -482,7 +485,7 @@ function VenueDetails() {
                             </div>
 
                             {/* Function Type */}
-                            <div className="flex flex-col sm:flex-row gap-6 sm:gap-[30px] px-4 text-sm">
+                            <div className="flex flex-col sm:flex-row gap-6 sm:gap-[50px] px-4 text-sm ">
 
                                 <div className="mt-2">
                                     <p className="font-semibold mb-3">Function Type</p>
@@ -504,19 +507,19 @@ function VenueDetails() {
 
                             {/* WhatsApp Toggle */}
                             <div className="flex items-center justify-between mt-4 px-4">
-                                <p className="font-semibold text-sm mt-1">Notify me on Whatsapp</p>
+                                <p className="font-semibold text-sm mt-2">Notify me on Whatsapp</p>
                                 <label className="relative inline-flex cursor-pointer items-center">
                                     <input type="checkbox" className="sr-only peer" defaultChecked />
                                     <div className="w-[46px] h-[26px] bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:absolute after:top-[3px] after:left-[4px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full"></div>
                                 </label>
                             </div>
 
-                            <button className="ms-4 !text-lg bg-pink-600 text-white p-3 w-[90%]  justify-content-center mt-4 font-semibold !px-2">
+                            <button className="!ml-6 !text-md md:!text-lg bg-pink-600 text-white p-3 w-59 md:w-[90%] mt-4 font-semibold ">
                                 Check Availability & Prices
                             </button>
                         </div>
                     )}
-                    <span className="text-xs px-3 text-gray-400 !pt-2">Complete Information ensures you got accurate and timely vendor responses</span>
+                    <span className="text-xs px-[37px] md:px-[30px] text-gray-400 !pt-0 md:!pt-2 flex ">Complete Information ensures you got accurate and timely vendor responses</span>
 
                     <div className="flex gap-2 items-center justify-center p-3">
                         <span className="bg-red-100 px-2 py-[2px] text-xs">In High Demand</span>
@@ -524,7 +527,7 @@ function VenueDetails() {
                     </div>
                 </div>
 
-                <div className="flex justify-center gap-3 text-red-600 mt-3">
+                <div className="flex justify-center gap-3 text-red-600 p-3 ">
                     <FaFlag className="mt-[5px]" />
                     <span onClick={() => navigate('/login')}>Report Inaccurate Info</span>
                 </div>
