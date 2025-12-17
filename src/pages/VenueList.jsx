@@ -20,187 +20,186 @@ import img5 from "../assets/img5.jpg";
 import img6 from "../assets/img6.avif";
 import img7 from "../assets/img7.jpg";
 
-// Flatten nested JSON safely
-const allVenues = Object.values(venuesData)
-  .flat()
-  .filter(v => v && v.name && v.id); // ensure name and id exist
+/* ---------- STATIC DATA ---------- */
+const cities = [
+  "Chennai",
+  "Coimbatore",
+  "Bangalore",
+  "Cochin",
+  "Mysore",
+  "Madurai",
+  "Thrissur",
+];
+
+const typeToJsonKey = {
+  "4star": "4star Hotels",
+  "banquet": "Banquet Halls",
+  "garden": "Marriage Garden",
+  "3star": "3star Hotels",
+  "club": "Country",
+  "resort": "Wedding Resorts",
+};
+
 
 const typeMapping = {
-  "4star": "4star & Above Wedding Hotel",
-  "banquet": "Banquet Hall",
-  "garden": "Marriage Garden / Lawns",
+  "4star": "4 Star & Above Wedding Hotels",
+  "banquet": "Banquet Halls",
+  "garden": "Marriage Garden",
   "3star": "3 Star Hotels with Banquets",
   "club": "Country / Golf Club",
   "resort": "Wedding Resorts",
 };
 
+const allVenues = Object.values(venuesData)
+  .flat()
+  .filter(v => v?.id && v?.name);
+
+const toNumber = (val) => Number(val?.replace(/\D/g, "")) || 0;
+
+const parseRange = (range) => {
+  if (!range) return { min: 0, max: Infinity };
+
+  if (range.includes("<")) {
+    return { min: 0, max: Number(range.replace(/\D/g, "")) };
+  }
+
+  if (range.includes(">") || range.includes("+")) {
+    return { min: Number(range.replace(/\D/g, "")), max: Infinity };
+  }
+
+  const nums = range.match(/\d+/g)?.map(Number) || [];
+  return { min: nums[0], max: nums[1] || nums[0] };
+};
+
+const parseLakhs = (text) => {
+  const nums = text.match(/\d+/g)?.map(Number) || [];
+  return {
+    min: (nums[0] || 0) * 100000,
+    max: (nums[1] || Infinity) * 100000,
+  };
+};
+
 function VenueList() {
-  const cities = [
-    "Chennai",
-    "Coimbatore",
-    "Bangalore",
-    "Cochin",
-    "Mysore",
-    "Madurai",
-    "Thrissur",
-  ];
-
-
   const [filteredData, setFilteredData] = useState(allVenues);
   const [searchText, setSearchText] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
+  const passedTitle = location.state?.title;
+
+  const allWeddingVenues = Object.values(venuesData).flat();
 
   const params = new URLSearchParams(location.search);
   const selectedType = params.get("type");
-  const passedTitle = location.state?.title;
 
-  const toNumber = (price) => Number(price?.replace(/\D/g, "") || 0);
-  const parsePax = (range) => {
-    const nums = range?.match(/\d+/g);
-    return nums ? { min: Number(nums[0]), max: Number(nums[1]) } : { min: 0, max: 0 };
-  };
+  const selectedKey = typeToJsonKey[selectedType];
 
-  const getFilteredData = () => {
-    let updatedList = allVenues;
+  const baseData =
+    selectedType && selectedKey
+      ? venuesData[selectedKey] || []   
+      : allWeddingVenues;               
 
-    // Filter by type
-    if (selectedType && typeMapping[selectedType]) {
-      const keywords = typeMapping[selectedType]
-        .toLowerCase()
-        .split(/[,/]/)
-        .map(k => k.trim());
 
-      updatedList = updatedList.filter((v) => {
-        const types = v["venue-type"]?.toLowerCase()?.split(",").map(t => t.trim()) || [];
-        return types.some(t => keywords.some(k => t.includes(k)));
-      });
-    }
+  const getBaseData = () => {
+    let data = [...allVenues];
 
-    // Filter by search text
-    if (searchText.trim() !== "") {
+    if (searchText.trim()) {
       const text = searchText.toLowerCase();
-      updatedList = updatedList.filter(
-        v =>
-          v.name?.toLowerCase().includes(text) ||
-          v.city?.toLowerCase().includes(text) ||
-          v["venue-type"]?.toLowerCase().includes(text)
+      data = data.filter(v =>
+        v.name?.toLowerCase().includes(text) ||
+        v.city?.toLowerCase().includes(text) ||
+        v["venue-type"]?.toLowerCase().includes(text)
       );
     }
 
-    return updatedList;
+    return data;
   };
 
   useEffect(() => {
-    if (selectedType === "all") {
-      setFilteredData(allVenues);
-      return;
-    }
-
-    setFilteredData(getFilteredData());
-  }, [selectedType, searchText]);
-
+    setFilteredData(getBaseData());
+  }, [searchText]);
 
   const handleFilterChange = (filters) => {
-    let updatedList = getFilteredData();
+    let updated = getBaseData();
 
-    // 1️⃣ PAX RANGE
-    if (filters.paxrange && filters.paxrange.length > 0) {
-      updatedList = updatedList.filter((v) => {
-        const nums = v.pax_range?.match(/\d+/g)?.map(Number) || [];
-        const minPax = nums[0] || 0;
-        const maxPax = nums[1] || Infinity;
-
-        return filters.paxrange.some((range) => {
-          const rNums = range.match(/\d+/g)?.map(Number) || [];
-          const rMin = rNums[0] || 0;
-          const rMax = rNums[1] || Infinity;
-
-          return maxPax >= rMin && minPax <= rMax;
+    if (filters.paxrange?.length) {
+      updated = updated.filter(v => {
+        const venue = parseRange(v.pax_range);
+        return filters.paxrange.some(r => {
+          const selected = parseRange(r);
+          return venue.max >= selected.min && venue.min <= selected.max;
         });
       });
     }
 
-    // 2️⃣ ROOMS
-    if (filters.rooms && filters.rooms.length > 0) {
-      updatedList = updatedList.filter((v) =>
-        filters.rooms.some((range) => {
-          const nums = range.match(/\d+/g)?.map(Number) || [];
-          const minRooms = nums[0] || 0;
-          const maxRooms = nums[1] || Infinity;
-          return v.rooms >= minRooms && v.rooms <= maxRooms;
+    if (filters.rooms?.length) {
+      updated = updated.filter(v =>
+        filters.rooms.some(r => {
+          const { min, max } = parseRange(r);
+          return v.rooms >= min && v.rooms <= max;
         })
       );
     }
 
-    // 3️⃣ PRICE
-    if (filters.price && filters.price.length > 0) {
-      updatedList = updatedList.filter((v) =>
-        filters.price.some((range) => {
-          const nums = range.match(/\d+/g)?.map(Number) || [];
-          const minPrice = nums[0] || 0;
-          const maxPrice = nums[1] || Infinity;
-
+    if (filters.price?.length) {
+      updated = updated.filter(v =>
+        filters.price.some(r => {
+          const { min, max } = parseRange(r);
           const veg = toNumber(v.veg_price);
           const nonveg = toNumber(v.nonveg_price);
-
           return (
-            (veg >= minPrice && veg <= maxPrice) ||
-            (nonveg >= minPrice && nonveg <= maxPrice)
+            (veg >= min && veg <= max) ||
+            (nonveg >= min && nonveg <= max)
           );
         })
       );
     }
 
-    // 4️⃣ RENTAL
     if (filters.rental) {
-      const nums = filters.rental.match(/\d+/g)?.map(Number) || [];
-      const minRent = nums[0] || 0;
-      const maxRent = nums[1] || Infinity;
-
-      updatedList = updatedList.filter((v) => {
-        const rent = Number(v["rental-cost"]?.replace(/\D/g, "")) || 0;
-        return rent >= minRent && rent <= maxRent;
+      const { min, max } = parseLakhs(filters.rental);
+      updated = updated.filter(v => {
+        const rent = toNumber(v["rental-cost"]);
+        return rent >= min && rent <= max;
       });
     }
 
-    // 5️⃣ TYPE
-    if (filters.type && filters.type.length > 0) {
-      updatedList = updatedList.filter((v) =>
-        filters.type.some((t) =>
+    if (filters.type?.length) {
+      updated = updated.filter(v =>
+        filters.type.some(t =>
           v["venue-type"]?.toLowerCase().includes(t.toLowerCase())
         )
       );
     }
 
-    // 6️⃣ SPACE
-    if (filters.space && filters.space.length > 0) {
-      updatedList = updatedList.filter((v) =>
-        filters.space.some((s) =>
+    if (filters.space?.length) {
+      updated = updated.filter(v =>
+        filters.space.some(s =>
           v.space?.toLowerCase().includes(s.toLowerCase())
         )
       );
     }
 
-    // 7️⃣ FEATURES
-    if (filters.features && filters.features.length > 0) {
-      updatedList = updatedList.filter((v) =>
-        filters.features.some((f) =>
+    if (filters.features?.length) {
+      updated = updated.filter(v =>
+        filters.features.some(f =>
           v.features?.toLowerCase().includes(f.toLowerCase())
         )
       );
     }
 
-    // 8️⃣ RATING
     if (filters.rating) {
-      updatedList = updatedList.filter(
-        (v) => (v.rating || 0) >= parseFloat(filters.rating)
+      updated = updated.filter(
+        v => Number(v.rating || 0) >= Number(filters.rating)
       );
     }
 
-    setFilteredData(updatedList);
+    setFilteredData(updated);
   };
+
+  useEffect(() => {
+    setFilteredData(baseData);
+  }, [selectedType]);
+
 
 
   return (
@@ -300,7 +299,7 @@ function VenueList() {
                 <span>{typeMapping[selectedType]}</span>
                 <button
                   onClick={() => {
-                    navigate("/venues?type=all");
+                    navigate("/venues");
                     setFilteredData(allVenues);
                   }}
                 >

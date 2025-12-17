@@ -1,10 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdFunnel } from "react-icons/io";
 import "./Filters.css";
 
 function Filters({ onFilterChange }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState(null);
+  const [isOpen, setIsOpen] = useState(false); // sidebar for mobile
+  const [showAllFilters, setShowAllFilters] = useState(false); // show full panel for desktop
+  const [selectedFilters, setSelectedFilters] = useState({
+    paxrange: [],
+    rooms: [],
+    price: [],
+    rental: null,
+    type: [],
+    space: [],
+    features: [],
+    rating: null,
+  });
+
   const dropdownRef = useRef(null);
 
   const filters = [
@@ -22,54 +33,52 @@ function Filters({ onFilterChange }) {
     paxrange: ["<100", "100-250", "250-500", "500-1000", ">1000"],
     rooms: ["<30", "31-60", "61-100", "101-150", "151-200", "200+"],
     price: ["<1000", "1000-1500", "1500-2000", "2000-3000", ">3000"],
-    rental: ["< ₹1 Lakh", "₹1 Lakh - ₹2 Lakhs", "₹2 Lakhs - ₹4 Lakhs", "₹4 Lakhs - ₹6 Lakhs", "> ₹6 Lakhs"],
-    type: ["Banquet Halls", "4 Star & Above Wedding Hotels", "Marriage Garden", "3 Star Hotels with Banquets"],
+    rental: [
+      "< ₹1 Lakh",
+      "₹1 Lakh - ₹2 Lakhs",
+      "₹2 Lakhs - ₹4 Lakhs",
+      "₹4 Lakhs - ₹6 Lakhs",
+      "> ₹6 Lakhs",
+    ],
+    type: [
+      "Banquet Halls",
+      "4 Star Hotels",
+      "Marriage Garden",
+      "3 Star Hotels ",
+    ],
     space: ["Indoor", "Outdoor", "Poolside", "Terrace / Rooftop"],
     features: ["Beach view", "Mountain view", "Lake view", "Sea view", "Pet Friendly"],
     rating: ["4", "4.5", "4.8"],
   };
 
-  const [selectedFilters, setSelectedFilters] = useState({
-    paxrange: [],
-    rooms: [],
-    price: [],
-    rental: null,
-    type: [],
-    space: [],
-    features: [],
-    rating: null,
-  });
-
-  const handleFilterClick = (key) => {
-    setActiveFilter(activeFilter === key && isOpen ? null : key);
-    setIsOpen(activeFilter !== key || !isOpen);
+  const handleFilterClick = () => {
+    setShowAllFilters((prev) => !prev); 
   };
 
   const handleChange = (filterKey, option) => {
     if (["rental", "rating"].includes(filterKey)) {
-      // Single selection (radio)
       setSelectedFilters((prev) => ({ ...prev, [filterKey]: option }));
     } else {
-      // Multiple selection (checkbox)
       setSelectedFilters((prev) => {
         const current = prev[filterKey] || [];
-        if (current.includes(option)) {
-          return { ...prev, [filterKey]: current.filter((o) => o !== option) };
-        } else {
-          return { ...prev, [filterKey]: [...current, option] };
-        }
+        return {
+          ...prev,
+          [filterKey]: current.includes(option)
+            ? current.filter((o) => o !== option)
+            : [...current, option],
+        };
       });
     }
   };
 
   const applyFilters = () => {
     onFilterChange(selectedFilters);
+    setShowAllFilters(false);
     setIsOpen(false);
-    setActiveFilter(null);
   };
 
   const clearFilters = () => {
-    setSelectedFilters({
+    const cleared = {
       paxrange: [],
       rooms: [],
       price: [],
@@ -78,10 +87,11 @@ function Filters({ onFilterChange }) {
       space: [],
       features: [],
       rating: null,
-    });
-    onFilterChange({});
+    };
+    setSelectedFilters(cleared);
+    onFilterChange(cleared);
+    setShowAllFilters(false);
     setIsOpen(false);
-    setActiveFilter(null);
   };
 
   useEffect(() => {
@@ -91,8 +101,8 @@ function Filters({ onFilterChange }) {
         !dropdownRef.current.contains(e.target) &&
         !e.target.closest(".wmg-filter-item")
       ) {
+        setShowAllFilters(false);
         setIsOpen(false);
-        setActiveFilter(null);
       }
     };
     document.addEventListener("mousedown", handleOutside);
@@ -100,33 +110,40 @@ function Filters({ onFilterChange }) {
   }, []);
 
   const isChecked = (filterKey, option) => {
-    if (["rental", "rating"].includes(filterKey)) return selectedFilters[filterKey] === option;
+    if (["rental", "rating"].includes(filterKey)) {
+      return selectedFilters[filterKey] === option;
+    }
     return selectedFilters[filterKey]?.includes(option);
   };
 
   return (
     <div className="wmg-filter-wrapper shadow-sm">
-      <div className="wmg-filter-container">
-        
+      {/* Mobile Filter Button */}
+      <div className="mobile-filter-btn d-lg-none">
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <IoMdFunnel size={22} /> Filter
+        </button>
+      </div>
+
+      {/* Desktop / Laptop Filters */}
+      <div className="wmg-filter-container d-none d-lg-flex">
         {filters.map((f) => (
           <div
             key={f.key}
-            className={`wmg-filter-item ml-[38px] ${activeFilter === f.key ? "active" : ""}`}
-            onClick={() => handleFilterClick(f.key)}
+            className="wmg-filter-item"
+            onClick={handleFilterClick} 
           >
             {f.label}
-            <IoMdArrowDropdown
-              size={20}
-              className={`mt-1 transition-all ${activeFilter === f.key ? "rotate-180" : "rotate-0"}`}
-            />
+            <IoMdArrowDropdown size={20} className="mt-1 transition-all" />
           </div>
         ))}
       </div>
 
-      {isOpen && (
-        <div className="wmg-sections-row ms-5" ref={dropdownRef}>
+      {/* Full Filter Panel for Desktop */}
+      {showAllFilters && (
+        <div className="wmg-full-panel !text-sm" ref={dropdownRef}>
           {filters.map((f) => (
-            <div key={f.key} className="wmg-section">
+            <div className="wmg-section" key={f.key}>
               {options[f.key].map((item) => (
                 <label key={item}>
                   <input
@@ -139,18 +156,51 @@ function Filters({ onFilterChange }) {
                 </label>
               ))}
 
+              {/* Add buttons inside rating column */}
               {f.key === "rating" && (
-                <div className="wmg-btn-col mt-4">
+                <div className="wmg-btn-col mt-2 ">
                   <button className="btn btn-sm btn-danger" onClick={clearFilters}>
                     Clear
                   </button>
-                  <button className="btn btn-sm btn-primary ms-2" onClick={applyFilters}>
-                    Search
+                  <button className="btn btn-sm btn-primary " onClick={applyFilters}>
+                    Apply
                   </button>
                 </div>
               )}
             </div>
           ))}
+        </div>
+      )}
+
+
+      {/* Mobile Filter Sidebar */}
+      {isOpen && (
+        <div className="mobile-filter-sidebar" ref={dropdownRef}>
+          {filters.map((f) => (
+            <div className="mobile-filter-category" key={f.key}>
+              <h5>{f.label}</h5>
+              {options[f.key].map((item) => (
+                <label key={item}>
+                  <input
+                    type={["rental", "rating"].includes(f.key) ? "radio" : "checkbox"}
+                    name={["rental", "rating"].includes(f.key) ? f.key : undefined}
+                    checked={isChecked(f.key, item)}
+                    onChange={() => handleChange(f.key, item)}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          ))}
+
+          <div className="wmg-btn-col mt-4">
+            <button className="btn btn-sm btn-danger" onClick={clearFilters}>
+              Clear
+            </button>
+            <button className="btn btn-sm btn-primary ms-2" onClick={applyFilters}>
+              Apply
+            </button>
+          </div>
         </div>
       )}
     </div>
