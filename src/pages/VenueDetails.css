@@ -110,3 +110,52 @@
     padding-right: 10px !important;
   }
 }
+
+/* Calendar container */
+.react-datepicker {
+  background-color:rgb(236, 21, 111); 
+  color: white;
+  border-radius: 100%;
+}
+
+/* Header (month & year) */
+.react-datepicker__header {
+  background-color:rgb(236, 21, 111) !important; 
+  color: white !important;
+}
+
+/* Day names (Mon, Tue...) */
+.react-datepicker__day-name {
+  color: #94a3b8;
+}
+
+/* Normal day */
+.react-datepicker__day {
+  color: white;
+}
+
+/* Hover */
+.react-datepicker__day:hover {
+  background-color: rgb(181, 181, 181);
+  border-radius: 100% !important;
+}
+
+/* Selected day */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color:rgb(236, 21, 111) !important;
+  color: white !important;
+  border-radius: 100% !important;
+}
+
+/* Today */
+.react-datepicker__day--today {
+background-color: rgb(236, 21, 111);
+border-radius: 100%;
+color: white !important;
+}
+
+/* Disabled day */
+.react-datepicker__day--disabled {
+  color: white;
+}

@@ -25,7 +25,7 @@ function ContactPage() {
                 <div className="col-12 col-md-6 col-lg-5">
                     <div className="fw-semibold mb-2 text-lg">Contact us to get best deals</div>
                     <div className="d-flex align-items-start mt-3">
-                        <div className="me-4">
+                        <div className="mr-3 md:mr-4 text-xs md:text-sm">
                             <div className="fw-semibold">For Vendors</div>
                             <p className="pt-1 fw-normal mb-0">vendors@wedmegood.com</p>
                             <p className="fw-normal">0124-6812346</p>
@@ -33,7 +33,7 @@ function ContactPage() {
 
                         <div className="d-none d-md-block" style={{ width: "1px", height: "60px", background: "#a8a7a7ff", marginRight: '1rem' }}></div>
 
-                        <div>
+                        <div className="text-xs md:text-sm">
                             <div className="fw-semibold">For Users</div>
                             <p className="pt-1 fw-normal mb-0">info@wedmegood.com</p>
                             <p className="fw-normal">0124-6812345</p>
