@@ -24,8 +24,8 @@ function ContactPage() {
 
                 <div className="col-12 col-md-6 col-lg-5">
                     <div className="fw-semibold mb-2 text-lg">Contact us to get best deals</div>
-                    <div className="d-flex align-items-start mt-3">
-                        <div className="mr-3 md:mr-4 text-xs md:text-sm">
+                    <div className="d-flex align-items-start mt-3 ">
+                        <div className="mr-3 md:mr-4 text-xs sm:text-sm md:text-md">
                             <div className="fw-semibold">For Vendors</div>
                             <p className="pt-1 fw-normal mb-0">vendors@wedmegood.com</p>
                             <p className="fw-normal">0124-6812346</p>
@@ -33,7 +33,7 @@ function ContactPage() {
 
                         <div className="d-none d-md-block" style={{ width: "1px", height: "60px", background: "#a8a7a7ff", marginRight: '1rem' }}></div>
 
-                        <div className="text-xs md:text-sm">
+                        <div className="text-xs sm:text-sm md:text-md">
                             <div className="fw-semibold">For Users</div>
                             <p className="pt-1 fw-normal mb-0">info@wedmegood.com</p>
                             <p className="fw-normal">0124-6812345</p>
@@ -48,8 +48,8 @@ function ContactPage() {
                     </div>
                 </div>
 
-                <div className="col-md-6 col-lg-3 mt-4 mt-md-0 ">
-                    <div className="fw-semibold mb-2 text-lg ms-md-3">Follow us on:</div>
+                <div className="col-md-5 col-lg-3 mt-4 mt-md-0 ms-md-4">
+                    <div className="fw-semibold mb-2 text-lg ms-md-3 ">Follow us on:</div>
                     <ul className="list-unstyled mt-3 ms-md-3">
                         <li className="d-flex align-items-center mb-2">
                             <FaFacebookF className="me-2 text-blue-900" /> Facebook
