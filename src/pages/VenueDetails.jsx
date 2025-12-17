@@ -517,7 +517,7 @@ function VenueDetails() {
                                     </label>
                                 </div>
 
-                                <button className="!ml-6 !text-md md:!text-lg bg-pink-600 text-white p-3 w-[85%] md:w-[90%] mt-2 md:mt-4 font-semibold ">
+                                <button className="!ml-6 !text-md md:!text-lg bg-pink-600 text-white p-3 w-[85%] md:w-[93%] lg:w-[85%] xl:w-[90%] mt-2 md:mt-4 font-semibold ">
                                     Check Availability & Prices
                                 </button>
                             </div>

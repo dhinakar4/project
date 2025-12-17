@@ -12,11 +12,13 @@ import "./VenueList.css";
 import { TbMathGreater } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
 
-import img1 from "../assets/img1.avif";
-import img2 from "../assets/img2.avif";
-import img3 from "../assets/img3.avif";
-import img4 from "../assets/img4.avif";
-import img5 from "../assets/img5.avif";
+import img1 from "../assets/img1.jpg";
+import img2 from "../assets/img2.webp";
+import img3 from "../assets/img3.jpg";
+import img4 from "../assets/img4.jpg";
+import img5 from "../assets/img5.jpg";
+import img6 from "../assets/img6.avif";
+import img7 from "../assets/img7.jpg";
 
 // Flatten nested JSON safely
 const allVenues = Object.values(venuesData)
@@ -33,6 +35,17 @@ const typeMapping = {
 };
 
 function VenueList() {
+  const cities = [
+    "Chennai",
+    "Coimbatore",
+    "Bangalore",
+    "Cochin",
+    "Mysore",
+    "Madurai",
+    "Thrissur",
+  ];
+
+
   const [filteredData, setFilteredData] = useState(allVenues);
   const [searchText, setSearchText] = useState("");
 
@@ -311,18 +324,28 @@ function VenueList() {
           </div>
 
 
-          <div className="flex flex-wrap justify-start md:justify-start gap-4 mt-4 text-sm">
-            {[img2, img1, img3, img4, img5].map((imgSrc, idx) => (
+          <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm">
+            {[img1, img2, img3, img4, img5, img6, img7].map((imgSrc, idx) => (
               <div key={idx} className="text-center w-20 md:w-24">
                 <img
                   src={imgSrc}
-                  alt=""
+                  alt={cities[idx]}
                   className="mx-auto w-16 h-16 md:w-20 md:h-20 object-cover rounded-full"
                 />
-                <p className="mt-2">{["Chennai", "Hyderabad", "Delhi", "Kolkata", "Mumbai"][idx]}</p>
+                <p
+                  className="mt-2 cursor-pointer hover:text-gray-900 transition-colors duration-200"
+                  onClick={() =>
+                    navigate(`/venues?city=${cities[idx]}`, {
+                      state: { title: cities[idx] },
+                    })
+                  }
+                >
+                  {cities[idx]}
+                </p>
               </div>
             ))}
           </div>
+
 
         </div>
 
