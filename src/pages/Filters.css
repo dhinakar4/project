@@ -11,6 +11,12 @@
   flex-wrap: nowrap;
 }
 
+.wmg-btn-col {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
 .wmg-filter-item {
   cursor: pointer;
   display: flex;
@@ -40,8 +46,8 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 20px;
-  padding: 15px 20px;
+  gap: 3px;
+  padding: 15px 1px;
   background: #f9f9f9;
   border-top: 1px solid #ddd;
 }
@@ -58,6 +64,10 @@
   gap: 6px;
 }
 
+.filter-items{
+  margin-left: 60px !important;
+}
+
 .wmg-full-panel::-webkit-scrollbar {
   height: 6px;
 }
@@ -71,12 +81,19 @@
   padding: 8px;
 }
 
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #007bff;
+  cursor: pointer;
+}
+
 .mobile-filter-btn button {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #007bff;
-  color: white;
+  color: black;
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
@@ -84,13 +101,13 @@
 }
 
 .mobile-filter-sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
+  position: relative;
+  top: 29%;
+  right: 14%;
   width: 270px;
-  height: 100%;
+  height: 80%;
   background: white;
-  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+  /* box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2); */
   padding: 20px;
   overflow-y: auto;
   z-index: 1000;
@@ -99,14 +116,14 @@
 .mobile-filter-categories {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .mobile-filter-category {
-  padding: 10px 12px;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 12px;
   background: #f5f5f5;
+  border-radius: 6px;
+  font-weight: 500;
 }
 
 .mobile-filter-category.active {
@@ -121,8 +138,17 @@
 .mobile-filter-options label {
   display: flex;
   align-items: center;
-  margin: 6px 0;
   gap: 8px;
+  margin: 8px 0;
+}
+
+.mobile-filter-footer {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding-top: 10px;
+  margin-top: 20px;
+  display: flex;
 }
 
 .wmg-section label {
@@ -158,8 +184,16 @@ input[type="checkbox"]:checked {
   }
 }
 
-.wmg-btn-col {
-  display: flex;
-  gap: 6px;
-  margin-top: 10px;
+@media (max-width: 576px){
+
+  .mobile-filter-sidebar {
+  position: relative;
+  top: 29%;
+  left: 1%;
+  width: 270px;
+  height: 80%;
 }
+}
+
+
+

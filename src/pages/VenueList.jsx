@@ -20,7 +20,6 @@ import img5 from "../assets/img5.jpg";
 import img6 from "../assets/img6.avif";
 import img7 from "../assets/img7.jpg";
 
-/* ---------- STATIC DATA ---------- */
 const cities = [
   "Chennai",
   "Coimbatore",
@@ -90,22 +89,38 @@ function VenueList() {
   const allWeddingVenues = Object.values(venuesData).flat();
 
   const params = new URLSearchParams(location.search);
+  const selectedCity = params.get("city");
+
   const selectedType = params.get("type");
 
   const selectedKey = typeToJsonKey[selectedType];
 
   const baseData =
     selectedType && selectedKey
-      ? venuesData[selectedKey] || []   
-      : allWeddingVenues;               
+      ? venuesData[selectedKey] || []
+      : allWeddingVenues;
 
 
   const getBaseData = () => {
     let data = [...allVenues];
 
+    if (selectedType && selectedType !== "all") {
+      data = data.filter(v =>
+        v["venue-type"]?.toLowerCase().includes(
+          typeMapping[selectedType]?.toLowerCase().split(" ")[0]
+        )
+      );
+    }
+
+    if (selectedCity) {
+      data = data.filter(
+        (v) => v.city.toLowerCase() === selectedCity.toLowerCase()
+      );
+    }
+
     if (searchText.trim()) {
       const text = searchText.toLowerCase();
-      data = data.filter(v =>
+      data = data.filter( (v) =>
         v.name?.toLowerCase().includes(text) ||
         v.city?.toLowerCase().includes(text) ||
         v["venue-type"]?.toLowerCase().includes(text)
@@ -117,7 +132,7 @@ function VenueList() {
 
   useEffect(() => {
     setFilteredData(getBaseData());
-  }, [searchText]);
+  }, [searchText, selectedCity, selectedType]);
 
   const handleFilterChange = (filters) => {
     let updated = getBaseData();
@@ -235,7 +250,7 @@ function VenueList() {
             </span>
 
             <div className="relative w-full md:w-80">
-              <div className="relative w-full">
+              <div className="relative w-full right-3 md:right-0">
                 <IoSearchSharp
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"
                 />
@@ -295,20 +310,29 @@ function VenueList() {
           <div className="flex items-center !gap-2 !md:gap-3 my-4">
 
             {selectedType && selectedType !== "all" && (
-              <div className="clear-venues px-2  py-1 px-md-3 justify-content-between font-base rounded-full border text-gray-500 text-sm md:text-xs !text-sm !md:text-xs flex items-center gap-2">
-                <span>{typeMapping[selectedType]}</span>
+              <div className="clear-venues px-2 py-1 font-base rounded-full border text-gray-500 text-xs md:text-sm flex items-center gap-1">
+                <span className="ms-1">{typeMapping[selectedType]}</span>
                 <button
                   onClick={() => {
-                    navigate("/venues");
-                    setFilteredData(allVenues);
+                    navigate(selectedCity ? `/venues?city=${selectedCity}`: "/venues");
                   }}
                 >
-                  <MdCancel className="text-xs md:text-sm d-block" />
+                  <MdCancel className="text-sm d-block" />
                 </button>
               </div>
             )}
 
-            {(selectedType && selectedType !== "all") || searchText ? (
+            {selectedCity &&(
+            <div className=" px-2 py-1 rounded-full border font-base text-gray-500 text-xs md:text-sm flex items-center gap-1">
+            <span className="ms-1">{selectedCity}</span>
+            <button onClick={() => {
+            navigate(selectedType ? `/venues?type=${selectedType}` : "/venues" ); }}>
+            <MdCancel className="text-sm d-block" />
+            </button>
+            </div>
+            )}
+
+            {(selectedType || selectedCity || searchText !== "all") && (
               <button
                 className="!text-xs !md:text-sm font-semibold underline"
                 onClick={() => {
@@ -317,9 +341,9 @@ function VenueList() {
                   setFilteredData(allVenues);
                 }}
               >
-                Clear all
+                <span className="block">Clear all</span>
               </button>
-            ) : null}
+            )}
           </div>
 
 
@@ -334,7 +358,7 @@ function VenueList() {
                 <p
                   className="mt-2 cursor-pointer hover:text-gray-900 transition-colors duration-200"
                   onClick={() =>
-                    navigate(`/venues?city=${cities[idx]}`, {
+                    navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
                       state: { title: cities[idx] },
                     })
                   }

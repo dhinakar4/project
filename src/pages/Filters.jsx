@@ -3,6 +3,8 @@ import { IoMdArrowDropdown, IoMdFunnel } from "react-icons/io";
 import "./Filters.css";
 
 function Filters({ onFilterChange }) {
+
+  const [activeMobileFilter, setActiveMobileFilter] = useState(null);
   const [isOpen, setIsOpen] = useState(false); // sidebar for mobile
   const [showAllFilters, setShowAllFilters] = useState(false); // show full panel for desktop
   const [selectedFilters, setSelectedFilters] = useState({
@@ -52,7 +54,7 @@ function Filters({ onFilterChange }) {
   };
 
   const handleFilterClick = () => {
-    setShowAllFilters((prev) => !prev); 
+    setShowAllFilters((prev) => !prev);
   };
 
   const handleChange = (filterKey, option) => {
@@ -131,7 +133,7 @@ function Filters({ onFilterChange }) {
           <div
             key={f.key}
             className="wmg-filter-item"
-            onClick={handleFilterClick} 
+            onClick={handleFilterClick}
           >
             {f.label}
             <IoMdArrowDropdown size={20} className="mt-1 transition-all" />
@@ -145,7 +147,7 @@ function Filters({ onFilterChange }) {
           {filters.map((f) => (
             <div className="wmg-section" key={f.key}>
               {options[f.key].map((item) => (
-                <label key={item}>
+                <label key={item} className="filter-items">
                   <input
                     type={["rental", "rating"].includes(f.key) ? "radio" : "checkbox"}
                     name={["rental", "rating"].includes(f.key) ? f.key : undefined}
@@ -158,7 +160,7 @@ function Filters({ onFilterChange }) {
 
               {/* Add buttons inside rating column */}
               {f.key === "rating" && (
-                <div className="wmg-btn-col mt-2 ">
+                <div className="wmg-btn-col mt-4 ms-5">
                   <button className="btn btn-sm btn-danger" onClick={clearFilters}>
                     Clear
                   </button>
@@ -176,24 +178,59 @@ function Filters({ onFilterChange }) {
       {/* Mobile Filter Sidebar */}
       {isOpen && (
         <div className="mobile-filter-sidebar" ref={dropdownRef}>
-          {filters.map((f) => (
-            <div className="mobile-filter-category" key={f.key}>
-              <h5>{f.label}</h5>
-              {options[f.key].map((item) => (
+
+          {/* Header */}
+          <div className="mobile-filter-header">
+            {activeMobileFilter ? (
+              <button
+                className="back-btn"
+                onClick={() => setActiveMobileFilter(null)}
+              >
+                ← Filters
+              </button>
+            ) : (
+              <h6> Filters </h6>
+            )}
+          </div>
+
+          {/* STEP 1: Filter Titles */}
+          {!activeMobileFilter && (
+            <div className="mobile-filter-categories">
+              {filters.map((f) => (
+                <div
+                  key={f.key}
+                  className="mobile-filter-category"
+                  onClick={() => setActiveMobileFilter(f.key)}
+                >
+                  {f.label}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* STEP 2: Filter Options */}
+          {activeMobileFilter && (
+            <div className="mobile-filter-options">
+              <h5 className="mb-3">
+                {filters.find(f => f.key === activeMobileFilter)?.label}
+              </h5>
+
+              {options[activeMobileFilter].map((item) => (
                 <label key={item}>
                   <input
-                    type={["rental", "rating"].includes(f.key) ? "radio" : "checkbox"}
-                    name={["rental", "rating"].includes(f.key) ? f.key : undefined}
-                    checked={isChecked(f.key, item)}
-                    onChange={() => handleChange(f.key, item)}
+                    type={["rental", "rating"].includes(activeMobileFilter) ? "radio" : "checkbox"}
+                    name={["rental", "rating"].includes(activeMobileFilter) ? activeMobileFilter : undefined}
+                    checked={isChecked(activeMobileFilter, item)}
+                    onChange={() => handleChange(activeMobileFilter, item)}
                   />
                   {item}
                 </label>
               ))}
             </div>
-          ))}
+          )}
 
-          <div className="wmg-btn-col mt-4">
+          {/* Footer Buttons */}
+          <div className="mobile-filter-footer">
             <button className="btn btn-sm btn-danger" onClick={clearFilters}>
               Clear
             </button>
@@ -203,6 +240,7 @@ function Filters({ onFilterChange }) {
           </div>
         </div>
       )}
+
     </div>
   );
 }

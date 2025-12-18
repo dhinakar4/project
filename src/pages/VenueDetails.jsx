@@ -19,6 +19,9 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ContactPage from "../ContactPage";
+import Indoor from "../assets/Indoor.svg";
+import Outdoor from "../assets/Outdoor.svg";
+import Poolside from "../assets/Poolside.svg";
 
 
 const allVenues = Object.values(venuesData).flat();
@@ -34,7 +37,7 @@ function VenueDetails() {
 
     const [form, setForm] = useState({
         name: "",
-        phone: "+91",
+        phone: "",
         email: "",
         date: "",
         guests: "",
@@ -54,17 +57,20 @@ function VenueDetails() {
         switch (name) {
             case "name":
                 if (!value.trim()) newErrors.name = "Required.";
-                else if (!/^(?=[A-Z])(?=[A-Za-z]*[@#$%^&*][A-Za-z]*$)[A-Za-z@#$%^&*]{3,}$/.test(value))
+                else if (!/^[A-Z][a-zA-Z]{2,}$/.test(value))
                     newErrors.name = "Enter a valid name."
                 else delete newErrors.name;
                 break;
 
             case "phone":
-                if (!value.trim()) newErrors.phone = "Required.";
-                else if (!/^[0-9]{10}$/.test(value))
+                if (!value.trim())
+                    newErrors.phone = "Required.";
+                else if (!/^(\+91\s?)?\d{10}$/.test(value))
                     newErrors.phone = "Enter a valid 10-digit phone number.";
-                else delete newErrors.phone;
+                else
+                    delete newErrors.phone;
                 break;
+
 
             case "email":
                 if (!value.trim()) newErrors.email = "Required.";
@@ -98,10 +104,28 @@ function VenueDetails() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (Object.keys(errors).length === 0) {
-            alert("Form submitted!");
-        }
+
+        if (Object.keys(errors).length !== 0) return;
+
+        const message = `
+Hello ${venue.name},
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email}
+Date: ${form.date ? form.date.toLocaleDateString() : ""}
+Guests: ${form.guests}
+Rooms: ${form.rooms}
+
+I am interested in your venue. Please contact me.
+    `;
+
+        const whatsappNumber = "919597903616"; // venue / demo number
+
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappURL, "_blank");
     };
+
 
 
     const venue = allVenues.find((v) => String(v.id) === String(id));
@@ -166,7 +190,7 @@ function VenueDetails() {
                             <div className="flex flex-wrap items-center justify-between mt-6 bg-gray-50 border-gray-200 text-sm py-3 px-4">
 
                                 {/* Photos */}
-                                <div className="flex items-center gap-1 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-3 sm:mb-0 ml-0 sm:ml-5">
+                                <div className="adjust-text flex items-center gap-1 cursor-pointer text-gray-600 w-1/2 sm:w-auto ml-0 sm:ml-5">
                                     <HiPhoto size={18} />
                                     <span>22 Photos</span>
                                 </div>
@@ -175,7 +199,7 @@ function VenueDetails() {
                                 <div className="hidden sm:block h-6 w-[1px] bg-gray-300"></div>
 
                                 {/* Shortlist */}
-                                <div className="flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb-3 sm:mb-0 "
+                                <div className="adjust-text flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb- sm:mb-0 "
                                     onClick={() => navigate('/login')}>
                                     <IoIosHeartEmpty className="!ml-2 !md:ml-0" size={18} />
                                     <span>Shortlist</span>
@@ -213,8 +237,42 @@ function VenueDetails() {
                     </div>
 
                     {/* Areas Available */}
-                    <div className="bg-white shadow-sm border mt-4 p-[13px] text-2xl">
-                        Areas Available
+                    <div className="bg-white shadow-sm mt-4 p-[13px] text-2xl">
+                        <span className="border-b "> Areas Available (3)</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+
+                            {/* Item 1 */}
+                            <div className="flex items-start gap-3 mt-3">
+                                <img src={Indoor} alt="Hall" className="mt-1 w-9 h-11" />
+                                <div>
+                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                        300 Seating | 400 Floating <br /> Hall
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Item 2 */}
+                            <div className="flex items-start gap-3 mt-3">
+                                <img src={Outdoor} alt="Lawn" className="mt-1 w-9 h-11" />
+                                <div>
+                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                        100 Seating | 150 Floating <br /> Lawn Area
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Item 3 */}
+                            <div className="flex items-start gap-3">
+                                <img src={Poolside} alt="Poolside" className="w-9 h-11" />
+                                <div>
+                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                        150 Seating | 200 Floating <br /> Poolside
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div >
 
@@ -517,7 +575,7 @@ function VenueDetails() {
                                     </label>
                                 </div>
 
-                                <button className="!ml-6 !text-md md:!text-lg bg-pink-600 text-white p-3 w-[85%] md:w-[93%] lg:w-[85%] xl:w-[90%] mt-2 md:mt-4 font-semibold ">
+                                <button type="submit" className="!ml-6 !text-md md:!text-lg bg-pink-600 text-white p-3 w-[85%] md:w-[93%] lg:w-[85%] xl:w-[90%] mt-2 md:mt-4 font-semibold ">
                                     Check Availability & Prices
                                 </button>
                             </div>

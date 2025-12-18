@@ -109,6 +109,9 @@
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
+  .adjust-text{
+    margin-bottom: 15px;
+  }
 }
 
 /* Calendar container */
