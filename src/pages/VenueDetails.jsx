@@ -146,7 +146,7 @@ I am interested in your venue. Please contact me.
                         </span>
                         <TbMathGreater className="mt-1" size={12} />
                         <span className="hover:text-pink-600 cursor-pointer">
-                            Wedding Venues {venue.city}
+                            {venue.city}
                         </span>
                     </div>
 
@@ -154,7 +154,7 @@ I am interested in your venue. Please contact me.
 
                         <div className="absolute z-10 group cursor-pointer">
                             <img src={img} alt="" className="" />
-                            <div className="hidden group-hover:block absolute bg-orange-500 text-white text-xs p-2 rounded shadow-xl w-[180px] bottom-1 left-10">
+                            <div className="tooltip-boxes hidden group-hover:block absolute bg-orange-400 text-white text-xs px-2 py-1 rounded shadow-xl w-[180px] left-9 top-[-5px]">
                                 Showcases sponsored, top rated vendors across budgets
                             </div>
                         </div>
@@ -237,25 +237,26 @@ I am interested in your venue. Please contact me.
                     </div>
 
                     {/* Areas Available */}
-                    <div className="bg-white shadow-sm mt-4 p-[13px] text-2xl">
-                        <span className="border-b "> Areas Available (3)</span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+                    <div className="bg-white shadow-sm mt-4 py-2">
+                        <span className="p-3 text-2xl"> Areas Available (3)</span>
+                        <hr />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 px-3">
 
                             {/* Item 1 */}
-                            <div className="flex items-start gap-3 mt-3">
+                            <div className="flex items-start gap-3 ">
                                 <img src={Indoor} alt="Hall" className="mt-1 w-9 h-11" />
                                 <div>
-                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
                                         300 Seating | 400 Floating <br /> Hall
                                     </p>
                                 </div>
                             </div>
 
                             {/* Item 2 */}
-                            <div className="flex items-start gap-3 mt-3">
+                            <div className="flex items-start gap-3">
                                 <img src={Outdoor} alt="Lawn" className="mt-1 w-9 h-11" />
                                 <div>
-                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
                                         100 Seating | 150 Floating <br /> Lawn Area
                                     </p>
                                 </div>
@@ -265,7 +266,7 @@ I am interested in your venue. Please contact me.
                             <div className="flex items-start gap-3">
                                 <img src={Poolside} alt="Poolside" className="w-9 h-11" />
                                 <div>
-                                    <p className="text-[15px] font-semibold text-gray-800 leading-snug">
+                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
                                         150 Seating | 200 Floating <br /> Poolside
                                     </p>
                                 </div>
@@ -404,7 +405,7 @@ I am interested in your venue. Please contact me.
                                         <img
                                             src="https://flagcdn.com/w20/in.png"
                                             alt="India"
-                                            className="me-2 border-b border-gray-400 pb-1 pt-[20px]"
+                                            className="me-2 border-b border-gray-400 pb-2 pt-[15px]"
                                         />
                                         <input
                                             type="text"

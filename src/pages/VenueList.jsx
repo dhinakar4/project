@@ -120,7 +120,7 @@ function VenueList() {
 
     if (searchText.trim()) {
       const text = searchText.toLowerCase();
-      data = data.filter( (v) =>
+      data = data.filter((v) =>
         v.name?.toLowerCase().includes(text) ||
         v.city?.toLowerCase().includes(text) ||
         v["venue-type"]?.toLowerCase().includes(text)
@@ -314,7 +314,7 @@ function VenueList() {
                 <span className="ms-1">{typeMapping[selectedType]}</span>
                 <button
                   onClick={() => {
-                    navigate(selectedCity ? `/venues?city=${selectedCity}`: "/venues");
+                    navigate(selectedCity ? `/venues?city=${selectedCity}` : "/venues");
                   }}
                 >
                   <MdCancel className="text-sm d-block" />
@@ -322,14 +322,15 @@ function VenueList() {
               </div>
             )}
 
-            {selectedCity &&(
-            <div className=" px-2 py-1 rounded-full border font-base text-gray-500 text-xs md:text-sm flex items-center gap-1">
-            <span className="ms-1">{selectedCity}</span>
-            <button onClick={() => {
-            navigate(selectedType ? `/venues?type=${selectedType}` : "/venues" ); }}>
-            <MdCancel className="text-sm d-block" />
-            </button>
-            </div>
+            {selectedCity && (
+              <div className=" px-2 py-1 rounded-full border font-base text-gray-500 text-xs md:text-sm flex items-center gap-1">
+                <span className="ms-1">{selectedCity}</span>
+                <button onClick={() => {
+                  navigate(selectedType ? `/venues?type=${selectedType}` : "/venues");
+                }}>
+                  <MdCancel className="text-sm d-block" />
+                </button>
+              </div>
             )}
 
             {(selectedType || selectedCity || searchText !== "all") && (
@@ -347,9 +348,14 @@ function VenueList() {
           </div>
 
 
-          <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm">
+          <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm" >
             {[img1, img2, img3, img4, img5, img6, img7].map((imgSrc, idx) => (
-              <div key={idx} className="text-center w-20 md:w-24">
+              <div key={idx} className="text-center w-20 md:w-24"
+               onClick={() =>
+                navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
+                state: { title: cities[idx] },
+                })
+              } >
                 <img
                   src={imgSrc}
                   alt={cities[idx]}
@@ -357,11 +363,7 @@ function VenueList() {
                 />
                 <p
                   className="mt-2 cursor-pointer hover:text-gray-900 transition-colors duration-200"
-                  onClick={() =>
-                    navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
-                      state: { title: cities[idx] },
-                    })
-                  }
+
                 >
                   {cities[idx]}
                 </p>

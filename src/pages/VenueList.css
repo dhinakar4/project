@@ -83,10 +83,10 @@
     max-width: 110px !important;
   }
   
-.clear-venues{
+/* .clear-venues{
   width: 250px !important;
   padding: 6px !important;
-}
+} */
 }
 
 .pax-tooltip {
@@ -94,7 +94,5 @@
   z-index: 50;
 }
 
-.clear-venues{
-  width: 250px;
-}
+
 
