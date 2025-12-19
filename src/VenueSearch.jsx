@@ -116,7 +116,7 @@ function VenueSearch() {
               <img src={slide.img} alt={slide.title} className="venue-image" />
               <div className="venue-text">
                 <p className="venue-title">{slide.title}</p>
-                <span className="venue-cities">Mumbai | Bangalore | Pune |</span>
+                <span className="venue-cities">Chennai | Bangalore | Cochin </span>
                 <span className="venue-more">More</span>
               </div>
             </div>

@@ -161,7 +161,7 @@ I am interested in your venue. Please contact me.
 
                         <img src={venue.image} className="rounded-sm shadow-sm Venue-Detail-Img" />
 
-                        <div className="absolute w-[100%] md:w-[93%] left-0 md:left-6 lg:left-4 right-6 sm:top-[180px] md:top-85 lg:top-50 xl:top-80 bg-white shadow-md rounded-sm">
+                        <div className="absolute w-[100%] md:w-[93%] left-0 md:left-6 lg:left-6 right-6 sm:top-[180px] md:top-85 lg:top-50 xl:top-80 bg-white shadow-md rounded-sm">
 
                             <div className="flex items-center px-4 pt-3">
                                 <h4 className="!text-gray-600 font-semibold">{venue.name}</h4>

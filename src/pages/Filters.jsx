@@ -189,7 +189,7 @@ function Filters({ onFilterChange }) {
                 ← Filters
               </button>
             ) : (
-              <h6> Filters </h6>
+              <h6>Types of Filters </h6>
             )}
           </div>
 

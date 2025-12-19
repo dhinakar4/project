@@ -81,7 +81,7 @@
 
 .divider-line {
   width: 1px;
-  height: 60%;
+  height: 60% !important;
   background: #dcdcdc;
 }
 
@@ -150,7 +150,7 @@
   cursor: pointer;
   font-size: 15px;
   transition: all 0.2s ease;
-  width: 150px;
+  width: 230px;
 }
 
 .social-icon.fb {
@@ -222,8 +222,8 @@
   }
 
   .login-heading {
-    font-size: 28px;
-    top: 50%;
+    font-size: 32px !important;
+    top: 10% !important;
     left: 20px;
   }
 
@@ -239,6 +239,12 @@
 }
 
 @media (max-width: 600px) {
+
+  .login-heading{
+    top: 15% !important;
+    font-size: 22px !important;
+  }
+  
   .signin-title {
     font-size: 24px;
   }
@@ -268,12 +274,16 @@
     flex-direction: column;
     margin-top: 30px;
   }
+
+  .login-input{
+    font-size: 14px !important;
+  }
 }
 
 @media (max-width: 400px) {
   .login-heading {
     font-size: 22px;
-    top: 50%;
+    top: 15% !important;
   }
 
   .signin-title {

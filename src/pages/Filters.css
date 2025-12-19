@@ -182,6 +182,13 @@ input[type="checkbox"]:checked {
   .wmg-filter-container {
     display: none;
   }
+  .mobile-filter-sidebar {
+  position: relative;
+  top: 29%;
+  left: 1%;
+  width: 270px;
+  height: 80%;
+}
 }
 
 @media (max-width: 576px){

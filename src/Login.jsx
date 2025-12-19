@@ -31,7 +31,7 @@ function Login() {
                         className={`input-group ${isFocused ? "input-active" : ""}`}
                     >
                         <IoMdContact className="input-icon" />
-                        <div className="divider-line"></div>
+                        <div className="divider-line "></div>
 
                         <input
                             type="text"
@@ -57,12 +57,12 @@ function Login() {
                             <p className="continue-text">Continue With</p>
 
                             <div className="social-buttons">
-                                <button className="social-btn w-50 p-3"
+                                <button className="social-btn"
                                     onClick={() => (window.location.href = "https://www.facebook.com/login")} >
                                     <FaFacebookF className="social-icon fb" />
                                     Facebook
                                 </button>
-                                <button className="social-btn w-50"
+                                <button className="social-btn"
                                     onClick={() => (window.location.href = "https://accounts.google.com/o/oauth2/v2/auth")} >
                                     <FaGoogle className="social-icon google" />
                                     Google
