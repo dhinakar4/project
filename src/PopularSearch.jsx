@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import "./PopularSearch.css";
 import Img1 from "./assets/popularsearch/Img1.avif";
@@ -10,17 +11,19 @@ import Img6 from "./assets/popularsearch/Img6.avif";
 
 function PopularSearch() {
   const baseSlides = [
-    { img: Img1, title: "Bridal Wear in Mumbai" },
-    { img: Img2, title: "Makeup Artists in Mumbai" },
-    { img: Img3, title: "Photographers in Mumbai" },
-    { img: Img4, title: "Invitations in Mumbai" },
-    { img: Img5, title: "Catering Services in Mumbai" },
-    { img: Img6, title: "Decorators in Mumbai" },
+    { img: Img1, title: "Bridal Wear", type: "BridalWear" },
+    { img: Img2, title: "Makeup Artists", type: "Bridal Makeup Artists" },
+    { img: Img3, title: "Photographers", type: "Photographers" },
+    { img: Img4, title: "Invitations", type: "Invitations" },
+    { img: Img5, title: "Catering Services" },
+    { img: Img6, title: "Decorators" },
   ];
 
   const carouselRef = useRef(null);
   const cardWidthRef = useRef(0);
   const hasScrolledRight = useRef(false);
+
+  const navigate = useNavigate();
 
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
@@ -99,7 +102,11 @@ function PopularSearch() {
 
         <div className="carousel-row" ref={carouselRef}>
           {slides.map((slide, index) => (
-            <div key={index} className="carousel-card">
+            <div key={index} className="carousel-card" onClick={() =>
+              navigate(`/venues?type=${slide.type}`, {
+                state: { title: slide.title },
+              })
+            }>
               <div className="carousel-image-wrapper">
                 <img
                   src={slide.img}
@@ -121,7 +128,7 @@ function PopularSearch() {
           </button>
         )}
       </div>
-    </Container>
+    </Container >
   );
 }
 

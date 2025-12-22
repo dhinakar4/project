@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import venuesData from "../data/venues.json";
+import popularsearchData from "../data/popularsearch.json";
 import { TiStarFullOutline } from "react-icons/ti";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiPhoto } from "react-icons/hi2";
@@ -24,7 +25,11 @@ import Outdoor from "../assets/Outdoor.svg";
 import Poolside from "../assets/Poolside.svg";
 
 
-const allVenues = Object.values(venuesData).flat();
+const allItems = [
+    ...Object.values(venuesData).flat(),
+    ...Object.values(popularsearchData).flat(),
+];
+
 
 function VenueDetails() {
     const { id } = useParams();
@@ -128,8 +133,16 @@ I am interested in your venue. Please contact me.
 
 
 
-    const venue = allVenues.find((v) => String(v.id) === String(id));
-    if (!venue) return <h1 className="text-center mt-10">Venue Not Found</h1>;
+    const item = allItems.find(
+        (v) => String(v.id) === String(id)
+    );
+
+    if (!item) {
+        return <h2 className="text-center mt-5">Details not found 😕</h2>;
+    }
+
+    const isVendor = Boolean(item["search-type"]);
+
 
     return (
         <div>
@@ -141,12 +154,22 @@ I am interested in your venue. Please contact me.
                             Home
                         </span>
                         <TbMathGreater className="mt-1" size={12} />
-                        <span onClick={() => navigate("/venues?type=all")} className="hover:text-pink-600 cursor-pointer">
-                            Wedding Venues
+                        <span
+                            onClick={() =>
+                                navigate(
+                                    isVendor
+                                        ? `/venues?type=${venue["search-type"]}`
+                                        : "/venues?type=all"
+                                )
+                            }
+                            className="hover:text-pink-600 cursor-pointer"
+                        >
+                            {isVendor ? venue["search-type"] : "Wedding Venues"}
                         </span>
+
                         <TbMathGreater className="mt-1" size={12} />
                         <span className="hover:text-pink-600 cursor-pointer">
-                            {venue.city}
+                            {item.city}
                         </span>
                     </div>
 
@@ -159,14 +182,14 @@ I am interested in your venue. Please contact me.
                             </div>
                         </div>
 
-                        <img src={venue.image} className="rounded-sm shadow-sm Venue-Detail-Img" />
+                        <img src={item.image} className="rounded-sm shadow-sm Venue-Detail-Img" />
 
                         <div className="absolute w-[100%] md:w-[93%] left-0 md:left-6 lg:left-6 right-6 sm:top-[180px] md:top-85 lg:top-50 xl:top-80 bg-white shadow-md rounded-sm">
 
                             <div className="flex items-center px-4 pt-3">
-                                <h4 className="!text-gray-600 font-semibold">{venue.name}</h4>
+                                <h4 className="!text-gray-600 font-semibold">{item.name}</h4>
                                 <span className="ml-auto bg-green-600 text-white px-3 py-1 rounded-sm flex items-center gap-1">
-                                    <TiStarFullOutline /> {venue.rating}
+                                    <TiStarFullOutline /> {item.rating}
                                 </span>
                             </div>
 
@@ -174,11 +197,13 @@ I am interested in your venue. Please contact me.
                             <div className="flex text-gray-600 mt-1 items-start px-4 md:px-4 ">
                                 <FaLocationDot className="text-gray-600 mt-[3px]" />
                                 <div className="ml-1">
-                                    <strong className="!text-md !md:text-md !font-semibold">{venue.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
-                                    <div className="text-gray-500 text-sm">{venue.area}, India</div>
+                                    <strong className="!text-md !md:text-md !font-semibold">{item.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
+                                    <div className="text-gray-500 text-sm">
+                                        {item.location || item.area || item.city}, India
+                                    </div>
                                 </div>
 
-                                <span className="ml-auto text-xs md:text-sm ">{venue.review}</span>
+                                <span className="ml-auto text-xs md:text-sm ">{item.review}</span>
                             </div>
 
                             {/* Contact */}
@@ -230,51 +255,52 @@ I am interested in your venue. Please contact me.
                     {/* Tabs */}
                     <div className="!mt-76 md:!mt-45 lg:!mt-55 bg-white shadow-sm border border-light p-[15px] 
                     flex gap-4 sm:gap-8 text-sm ">
-                        <span className="cursor-pointer">Banquets</span>
+                        <span>{isVendor ? "Services" : "Banquets"}</span>
                         <span className="cursor-pointer">Projects</span>
                         <span className="cursor-pointer">About</span>
                         <span className="cursor-pointer">Reviews</span>
                     </div>
 
                     {/* Areas Available */}
-                    <div className="bg-white shadow-sm mt-4 py-2">
-                        <span className="p-3 text-2xl"> Areas Available (3)</span>
-                        <hr />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 px-3">
+                    {!isVendor && (
+                        <div className="bg-white shadow-sm mt-4 py-2">
+                            <span className="p-3 text-2xl"> Areas Available (3)</span>
+                            <hr />
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 px-3">
 
-                            {/* Item 1 */}
-                            <div className="flex items-start gap-3 ">
-                                <img src={Indoor} alt="Hall" className="mt-1 w-9 h-11" />
-                                <div>
-                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
-                                        300 Seating | 400 Floating <br /> Hall
-                                    </p>
+                                {/* Item 1 */}
+                                <div className="flex items-start gap-3 ">
+                                    <img src={Indoor} alt="Hall" className="mt-1 w-9 h-11" />
+                                    <div>
+                                        <p className="text-[15px] font-semibold text-gray-500 leading-snug">
+                                            300 Seating | 400 Floating <br /> Hall
+                                        </p>
+                                    </div>
                                 </div>
+
+                                {/* Item 2 */}
+                                <div className="flex items-start gap-3">
+                                    <img src={Outdoor} alt="Lawn" className="mt-1 w-9 h-11" />
+                                    <div>
+                                        <p className="text-[15px] font-semibold text-gray-500 leading-snug">
+                                            100 Seating | 150 Floating <br /> Lawn Area
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Item 3 */}
+                                <div className="flex items-start gap-3">
+                                    <img src={Poolside} alt="Poolside" className="w-9 h-11" />
+                                    <div>
+                                        <p className="text-[15px] font-semibold text-gray-500 leading-snug">
+                                            150 Seating | 200 Floating <br /> Poolside
+                                        </p>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            {/* Item 2 */}
-                            <div className="flex items-start gap-3">
-                                <img src={Outdoor} alt="Lawn" className="mt-1 w-9 h-11" />
-                                <div>
-                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
-                                        100 Seating | 150 Floating <br /> Lawn Area
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Item 3 */}
-                            <div className="flex items-start gap-3">
-                                <img src={Poolside} alt="Poolside" className="w-9 h-11" />
-                                <div>
-                                    <p className="text-[15px] font-semibold text-gray-500 leading-snug">
-                                        150 Seating | 200 Floating <br /> Poolside
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
+                        </div>)}
                 </div >
 
                 <div className="w-full lg:w-[32%] mt-[0px] lg:mt-[32px]">
@@ -309,22 +335,37 @@ I am interested in your venue. Please contact me.
                         )}
 
                         {/* Veg price */}
-                        <div className="flex justify-between items-center px-4 border-b border-gray-300">
-                            <p className="mt-2">
-                                <span className="text-pink-600 font-semibold text-xl ">₹ 1,650</span>
-                                <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
-                            </p>
-                            <span className="text-gray-500 text-sm">Veg price</span>
-                        </div>
+                        {!isVendor ? (
+                            <>
+                                <div className="flex justify-between items-center px-4 border-b border-gray-300">
+                                    <p className="mt-2">
+                                        <span className="text-pink-600 font-semibold text-xl">
+                                            {item.veg_price}
+                                        </span>
+                                        <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
+                                    </p>
+                                    <span className="text-gray-500 text-sm">Veg price</span>
+                                </div>
 
-                        {/* Non-Veg price */}
-                        <div className="flex justify-between items-center px-4">
-                            <p className="mt-2">
-                                <span className="text-pink-600 font-semibold text-xl">₹ 1,750</span>
-                                <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
-                            </p>
-                            <span className="text-gray-500 text-sm">Non Veg price</span>
-                        </div>
+                                <div className="flex justify-between items-center px-4">
+                                    <p className="mt-2">
+                                        <span className="text-pink-600 font-semibold text-xl">
+                                            {item.nonveg_price}
+                                        </span>
+                                        <span className="text-gray-500 text-sm"> per plate (taxes extra)</span>
+                                    </p>
+                                    <span className="text-gray-500 text-sm">Non Veg price</span>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="px-4 py-4">
+                                <span className="text-pink-600 font-semibold text-xl">
+                                    {item.price}
+                                </span>
+                                <span className="text-gray-500 text-sm"> (Starting Price)</span>
+                            </div>
+                        )}
+
                     </div>
 
 
@@ -443,7 +484,7 @@ I am interested in your venue. Please contact me.
                         {showMessageForm && (
                             <div className="py-2">
                                 <span className="!text-lg font-semibold text-gray-700 mb-5 px-4">
-                                    Hi {venue.name},
+                                    Hi {item.name},
                                 </span>
                                 <div className="mt-3">
                                     <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm px-4 pb-6" onSubmit={handleSubmit}>

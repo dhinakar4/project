@@ -19,6 +19,7 @@ import ContactPage from "./ContactPage";
 import Layout from "./components/Layout";
 import VenueList from "./pages/VenueList";
 import VenueDetails from "./pages/VenueDetails";
+import PopularSearchList from "./PopularSearch";
 
 function App() {
   return (

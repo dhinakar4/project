@@ -7,6 +7,7 @@ import img from "../assets/handpick.png";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { IoSearchSharp } from "react-icons/io5";
 import venuesData from "../data/venues.json";
+import popularsearchData from "../data/popularsearch.json";
 import Filters from "./Filters";
 import "./VenueList.css";
 import { TbMathGreater } from "react-icons/tb";
@@ -49,9 +50,11 @@ const typeMapping = {
   "resort": "Wedding Resorts",
 };
 
-const allVenues = Object.values(venuesData)
-  .flat()
-  .filter(v => v?.id && v?.name);
+const allVenues = [
+  ...Object.values(venuesData).flat(),
+  ...Object.values(popularsearchData).flat()
+];
+
 
 const toNumber = (val) => Number(val?.replace(/\D/g, "")) || 0;
 
@@ -90,8 +93,12 @@ function VenueList() {
 
   const params = new URLSearchParams(location.search);
   const selectedCity = params.get("city");
-
   const selectedType = params.get("type");
+
+  const isPopularSearch =
+    selectedType &&
+    ["BridalWear", "Bridal Makeup Artists", "Photographers", "Invitations"]
+      .includes(selectedType);
 
   const selectedKey = typeToJsonKey[selectedType];
 
@@ -212,8 +219,15 @@ function VenueList() {
   };
 
   useEffect(() => {
-    setFilteredData(baseData);
-  }, [selectedType]);
+    if (isPopularSearch) {
+      const data = popularsearchData[selectedType] || [];
+      setFilteredData(data);
+      return;
+    }
+
+    setFilteredData(getBaseData());
+  }, [selectedType, selectedCity, searchText]);
+
 
 
 
@@ -284,7 +298,7 @@ function VenueList() {
                       <div
                         key={v.id}
                         className="flex items-center gap-3 hover:bg-gray-100 p-2 cursor-pointer"
-                        onClick={() => window.open(`/venue/${v.image}`, "_blank")}
+                        onClick={() => window.open(`/venue/${venue.id}`, "_blank")}
                       >
                         <img
                           src={v.image}
@@ -351,11 +365,11 @@ function VenueList() {
           <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm" >
             {[img1, img2, img3, img4, img5, img6, img7].map((imgSrc, idx) => (
               <div key={idx} className="text-center w-20 md:w-24"
-               onClick={() =>
-                navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
-                state: { title: cities[idx] },
-                })
-              } >
+                onClick={() =>
+                  navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
+                    state: { title: cities[idx] },
+                  })
+                } >
                 <img
                   src={imgSrc}
                   alt={cities[idx]}
