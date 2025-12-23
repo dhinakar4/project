@@ -40,6 +40,15 @@ const typeToJsonKey = {
   "resort": "Wedding Resorts",
 };
 
+const typeMatchMap = {
+  "4star": "4star",
+  "3star": "3star",
+  "banquet": "banquet",
+  "garden": "garden",
+  "club": "club",
+  "resort": "resort",
+};
+
 
 const typeMapping = {
   "4star": "4 Star & Above Wedding Hotels",
@@ -50,10 +59,11 @@ const typeMapping = {
   "resort": "Wedding Resorts",
 };
 
-const allVenues = [
-  ...Object.values(venuesData).flat(),
-  ...Object.values(popularsearchData).flat()
-];
+const onlyVenues = Object.values(venuesData).flat();
+
+
+const allPopularSearch = Object.values(popularsearchData).flat();
+
 
 
 const toNumber = (val) => Number(val?.replace(/\D/g, "")) || 0;
@@ -82,7 +92,8 @@ const parseLakhs = (text) => {
 };
 
 function VenueList() {
-  const [filteredData, setFilteredData] = useState(allVenues);
+
+  const [filteredData, setFilteredData] = useState(onlyVenues);
   const [searchText, setSearchText] = useState("");
 
   const navigate = useNavigate();
@@ -109,15 +120,20 @@ function VenueList() {
 
 
   const getBaseData = () => {
-    let data = [...allVenues];
+    let data = [...onlyVenues];
 
-    if (selectedType && selectedType !== "all") {
-      data = data.filter(v =>
-        v["venue-type"]?.toLowerCase().includes(
-          typeMapping[selectedType]?.toLowerCase().split(" ")[0]
-        )
-      );
+    if (selectedType && selectedType !== "all" && !isPopularSearch) {
+      const matchText = typeMatchMap[selectedType];
+
+      if (matchText) {
+        data = data.filter(v =>
+          v["venue-type"]?.toLowerCase().includes(matchText)
+        );
+      }
     }
+
+
+
 
     if (selectedCity) {
       data = data.filter(
@@ -136,10 +152,6 @@ function VenueList() {
 
     return data;
   };
-
-  useEffect(() => {
-    setFilteredData(getBaseData());
-  }, [searchText, selectedCity, selectedType]);
 
   const handleFilterChange = (filters) => {
     let updated = getBaseData();
@@ -220,12 +232,10 @@ function VenueList() {
 
   useEffect(() => {
     if (isPopularSearch) {
-      const data = popularsearchData[selectedType] || [];
-      setFilteredData(data);
-      return;
+      setFilteredData(popularsearchData[selectedType] || []);
+    } else {
+      setFilteredData(getBaseData());
     }
-
-    setFilteredData(getBaseData());
   }, [selectedType, selectedCity, searchText]);
 
 
@@ -248,7 +258,7 @@ function VenueList() {
               >
                 <p className="hover:text-pink-600" onClick={() => {
                   navigate("/venues?type=all", { state: { title: "Wedding Venues" } });
-                  setFilteredData(allVenues);
+                  setFilteredData(onlyVenues);
                 }}>Wedding Venues</p>
               </span>
             </span>
@@ -298,7 +308,7 @@ function VenueList() {
                       <div
                         key={v.id}
                         className="flex items-center gap-3 hover:bg-gray-100 p-2 cursor-pointer"
-                        onClick={() => window.open(`/venue/${venue.id}`, "_blank")}
+                        onClick={() => window.open(`/venue/${v.id}`, "_blank")}
                       >
                         <img
                           src={v.image}
@@ -347,13 +357,13 @@ function VenueList() {
               </div>
             )}
 
-            {(selectedType || selectedCity || searchText !== "all") && (
+            {!isPopularSearch && (selectedType || selectedCity || searchText) && (
               <button
                 className="!text-xs !md:text-sm font-semibold underline"
                 onClick={() => {
                   navigate("/venues?type=all");
                   setSearchText("");
-                  setFilteredData(allVenues);
+                  setFilteredData(onlyVenues);
                 }}
               >
                 <span className="block">Clear all</span>
