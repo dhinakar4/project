@@ -27,7 +27,6 @@ const cities = [
   "Bangalore",
   "Cochin",
   "Mysore",
-  "Madurai",
   "Thrissur",
 ];
 
@@ -111,6 +110,28 @@ function VenueList() {
     ["BridalWear", "Bridal Makeup Artists", "Photographers", "Invitations"]
       .includes(selectedType);
 
+  const getPopularSearchData = () => {
+    let data = popularsearchData[selectedType] || [];
+
+    if (selectedCity) {
+      data = data.filter(
+        v => v.city?.toLowerCase() === selectedCity.toLowerCase()
+      );
+    }
+
+    if (searchText.trim()) {
+      const text = searchText.toLowerCase();
+      data = data.filter(
+        v =>
+          v.name?.toLowerCase().includes(text) ||
+          v.city?.toLowerCase().includes(text)
+      );
+    }
+
+    return data;
+  };
+
+
   const selectedKey = typeToJsonKey[selectedType];
 
   const baseData =
@@ -131,9 +152,6 @@ function VenueList() {
         );
       }
     }
-
-
-
 
     if (selectedCity) {
       data = data.filter(
@@ -232,11 +250,12 @@ function VenueList() {
 
   useEffect(() => {
     if (isPopularSearch) {
-      setFilteredData(popularsearchData[selectedType] || []);
+      setFilteredData(getPopularSearchData());
     } else {
       setFilteredData(getBaseData());
     }
   }, [selectedType, selectedCity, searchText]);
+
 
 
 
@@ -313,7 +332,7 @@ function VenueList() {
                         <img
                           src={v.image}
                           alt={v.name}
-                          className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-sm"
+                          className="w-12 h-12 md:w-14 md:h-14 !object-cover rounded-sm"
                         />
                         <div>
                           <h6 className="text-sm font-normal">{v.name}</h6>
@@ -331,49 +350,58 @@ function VenueList() {
             </div>
           </div>
 
-          <div className="flex items-center !gap-2 !md:gap-3 my-4">
+          {!isPopularSearch && (
+            <>
+              <div className="flex items-center !gap-2 !md:gap-3 my-4">
 
-            {selectedType && selectedType !== "all" && (
-              <div className="clear-venues px-2 py-1 font-base rounded-full border text-gray-500 text-xs md:text-sm flex items-center gap-1">
-                <span className="ms-1">{typeMapping[selectedType]}</span>
-                <button
-                  onClick={() => {
-                    navigate(selectedCity ? `/venues?city=${selectedCity}` : "/venues");
-                  }}
-                >
-                  <MdCancel className="text-sm d-block" />
-                </button>
+                {selectedType && selectedType !== "all" && (
+                  <div className="clear-venues px-2 py-1 font-base rounded-full border text-gray-500 text-xs md:text-sm flex items-center gap-1">
+                    <span className="ms-1">{typeMapping[selectedType]}</span>
+                    <button
+                      onClick={() => {
+                        navigate(selectedCity ? `/venues?city=${selectedCity}` : "/venues");
+                        setSearchText("");
+                        setFilteredData(onlyVenues);
+                      }}
+                    >
+                      <MdCancel className="text-sm d-block" />
+                    </button>
+                  </div>
+                )}
+
+
+                {selectedCity && (
+                  <div className=" px-2 py-1 rounded-full border font-base text-gray-500 text-xs md:text-sm flex items-center gap-1">
+                    <span className="ms-1">{selectedCity}</span>
+                    <button onClick={() => {
+                      navigate(selectedType ? `/venues?type=${selectedType}` : "/venues");
+                      setSearchText("");
+                      setFilteredData(onlyVenues);
+                    }}>
+                      <MdCancel className="text-sm d-block" />
+                    </button>
+                  </div>
+                )}
+
+                {!isPopularSearch && (selectedType || selectedCity || searchText) && (
+                  <button
+                    className="!text-xs !md:text-sm font-semibold underline"
+                    onClick={() => {
+                      navigate("/venues?type=all");
+                      setSearchText("");
+                      setFilteredData(onlyVenues);
+                    }}
+                  >
+                    <span className="block">Clear all</span>
+                  </button>
+                )}
               </div>
-            )}
-
-            {selectedCity && (
-              <div className=" px-2 py-1 rounded-full border font-base text-gray-500 text-xs md:text-sm flex items-center gap-1">
-                <span className="ms-1">{selectedCity}</span>
-                <button onClick={() => {
-                  navigate(selectedType ? `/venues?type=${selectedType}` : "/venues");
-                }}>
-                  <MdCancel className="text-sm d-block" />
-                </button>
-              </div>
-            )}
-
-            {!isPopularSearch && (selectedType || selectedCity || searchText) && (
-              <button
-                className="!text-xs !md:text-sm font-semibold underline"
-                onClick={() => {
-                  navigate("/venues?type=all");
-                  setSearchText("");
-                  setFilteredData(onlyVenues);
-                }}
-              >
-                <span className="block">Clear all</span>
-              </button>
-            )}
-          </div>
+            </>
+          )}
 
 
           <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm" >
-            {[img1, img2, img3, img4, img5, img6, img7].map((imgSrc, idx) => (
+            {[img1, img2, img3, img4, img5, img7].map((imgSrc, idx) => (
               <div key={idx} className="text-center w-20 md:w-24"
                 onClick={() =>
                   navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
@@ -394,7 +422,6 @@ function VenueList() {
               </div>
             ))}
           </div>
-
 
         </div>
 
@@ -426,7 +453,7 @@ function VenueList() {
                   <img src={venue?.image} alt={venue.name} className="card-img-top json-img" />
 
                   <div className="d-flex pt-2">
-                    <h5 className="json-title">{venue.name}</h5>
+                    <h5 className="json-title truncate max-w-[210px]">{venue.name}</h5>
                     <span className="json-rating ms-auto d-flex">
                       <TiStarFullOutline className="mt-[2px] text-pink-600 me-1" size={20} />
                       {venue.rating || 0}
@@ -435,41 +462,62 @@ function VenueList() {
                   </div>
 
                   <span className="nowrap json-city d-flex text-gray-400 justify-content-between">
-                    <span className="d-flex">
-                      <FaLocationDot className="mt-1 me-1" />
-                      {venue.city}
-                    </span>
-                    <span className="flex">
-                      <PiBankFill className="location-icon me-1 ms-1" />
-                      <span className=" truncate max-w-[210px] location-text ">{venue.location}</span>
-                    </span>
+                    {!isPopularSearch && (
+                      <>
+                        <span className="flex">
+                          <FaLocationDot className="mt-1 me-1" />
+                          {venue.city}
+                        </span>
+                        <span className="flex">
+                          <PiBankFill className="location-icon me-1 ms-1" />
+                          <span className=" truncate max-w-[210px] location-text ">{venue.location}</span>
+                        </span>
+                      </>
+                    )}
+
+                    {isPopularSearch && (
+                      <span className="flex">
+                        <FaLocationDot className="mt-1 me-1" />
+                        {venue.location}
+                      </span>
+                    )}
                   </span>
 
                   <span className="d-flex json-price justify-content-md-start justify-content-between">
-                    <span className="text-gray-400 text-xs font-normal">
-                      Veg
-                      <p className="text-gray-700 text-lg font-bold">
-                        {venue.veg_price}
-                        <span className="text-xs ms-1 text-gray-600 font-normal">
-                          {venue.quantity}
+                    {!isPopularSearch && (
+                      <>
+                        <span className="text-gray-400 text-xs font-normal">
+                          Veg
+                          <p className="text-gray-700 text-lg font-bold">
+                            {venue.veg_price}
+                            <span className="text-xs ms-1 text-gray-600 font-normal">
+                              {venue.quantity}
+                            </span>
+                          </p>
                         </span>
-                      </p>
-                    </span>
-                    <span className="text-gray-400 text-xs ms-2 ms-md-5 font-normal">
-                      Non Veg
-                      <p className="text-gray-700 text-lg font-bold">
-                        {venue.nonveg_price}
-                        <span className="text-xs ms-1 text-gray-600 font-normal">
-                          {venue.quantity}
+                        <span className="text-gray-400 text-xs ms-2 ms-md-5 font-normal">
+                          Non Veg
+                          <p className="text-gray-700 text-lg font-bold">
+                            {venue.nonveg_price}
+                            <span className="text-xs ms-1 text-gray-600 font-normal">
+                              {venue.quantity}
+                            </span>
+                          </p>
                         </span>
-                      </p>
-                    </span>
+                      </>
+                    )}
+
+                    {isPopularSearch && (
+                      <span className="text-gray-700 text-lg font-semibold pb-2">
+                        {venue.price || venue.veg_price}
+                      </span>
+                    )}
                   </span>
 
-                  <div className="json-extra text-xs">
-                    <span className="bg-gray-100 px-2 py-1">{venue.pax_range}</span>
-                    <span className="bg-gray-100 ms-2 px-2 py-1">{venue.rooms} Rooms</span>
-                    <span className="ms-2 font-bold !text-gray-400 underline">{venue.extra}</span>
+                  <div className="json-extra text-xs flex">
+                    <span className="bg-gray-100 px-2 py-1 !truncate !max-w-[155px]">{venue.pax_range}</span>
+                    <span className="bg-gray-100 ms-2 px-2 py-1 !truncate !max-w-[150px]">{venue.rooms}</span>
+                    <span className="ms-2 mt-1 font-bold !text-gray-400 underline">{venue.extra}</span>
                   </div>
 
                 </div>

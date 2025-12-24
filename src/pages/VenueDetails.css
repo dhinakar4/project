@@ -23,7 +23,7 @@
   border-right: 8px solid #fc8932; 
 }
 .Venue-Detail-Img{
-  object-fit:cover !important;
+  object-fit:contain !important;
   width: 100%;
   height: auto;
 }
