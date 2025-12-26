@@ -104,7 +104,7 @@ function PopularSearch() {
           {slides.map((slide, index) => (
             <div key={index} className="carousel-card" onClick={() =>
               navigate(`/venues?type=${slide.type}`, {
-                state: { title: slide.title },
+                state: { title: slide.title,source: "venues" },
               })
             }>
               <div className="carousel-image-wrapper">

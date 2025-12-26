@@ -36,6 +36,22 @@ function VenueDetails() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
+    const handleShortlistClick = () => {
+        const isAuthenticated = !!localStorage.getItem("token");
+        
+        if (!isAuthenticated) {
+            navigate("/login", { state: { from: "/shortlist", venueId: item.id }, });
+        }
+        else {
+            const shortlist = JSON.parse(localStorage.getItem("shortlist")) || [];
+            if (!shortlist.includes(item.id)) {
+                shortlist.push(item.id);
+                localStorage.setItem("shortlist", JSON.stringify(shortlist));
+            }
+            navigate("/shortlist");
+        }
+    }
+
     const [showMessageForm, setShowMessageForm] = useState(true);
     const [showContactForm, setShowContactForm] = useState(false);
 
@@ -158,13 +174,13 @@ I am interested in your venue. Please contact me.
                             onClick={() =>
                                 navigate(
                                     isVendor
-                                        ? `/venues?type=${venue["search-type"]}`
+                                        ? `/venues?type=${item["search-type"]}`
                                         : "/venues?type=all"
                                 )
                             }
                             className="hover:text-pink-600 cursor-pointer"
                         >
-                            {isVendor ? venue["search-type"] : "Wedding Venues"}
+                            {isVendor ? item["search-type"] : "Wedding Venues"}
                         </span>
 
                         <TbMathGreater className="mt-1" size={12} />
@@ -225,7 +241,7 @@ I am interested in your venue. Please contact me.
 
                                 {/* Shortlist */}
                                 <div className="adjust-text flex items-center gap-2 cursor-pointer text-gray-600 w-1/2 sm:w-auto mb- sm:mb-0 "
-                                    onClick={() => navigate('/login')}>
+                                    onClick={handleShortlistClick}>
                                     <IoIosHeartEmpty className="!ml-2 !md:ml-0" size={18} />
                                     <span>Shortlist</span>
                                 </div>

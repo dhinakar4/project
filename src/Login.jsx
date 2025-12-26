@@ -5,10 +5,55 @@ import loginimg from "./assets/login.webp";
 import { IoMdContact } from "react-icons/io";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Login() {
     const [isFocused, setIsFocused] = useState(false);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const [value, setValue] = useState("");
+    const [error, setError] = useState("");
+
+
+    const from = location.state?.from || "/";
+    const venueId = location.state?.venueId;
+
+    const handleLoginSuccess = () => {
+        if (!validateInput()) return;
+
+        localStorage.setItem("token", "dummy-token");
+
+        if (venueId) {
+            const shortlist = JSON.parse(localStorage.getItem("shortlist")) || [];
+            if (!shortlist.includes(venueId)) {
+                shortlist.push(venueId);
+                localStorage.setItem("shortlist", JSON.stringify(shortlist));
+            }
+        }
+
+        navigate(from, { replace: true });
+    };
+
+    const validateInput = () => {
+        if (!value.trim()) {
+            setError("Email or mobile number is required");
+            return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const mobileRegex = /^[0-9]{10}$/;
+
+        if (!emailRegex.test(value) && !mobileRegex.test(value)) {
+            setError("Enter a valid email or 10-digit mobile number");
+            return false;
+        }
+
+        setError("");
+        return true;
+    };
+
 
     return (
         <div>
@@ -32,13 +77,15 @@ function Login() {
                     >
                         <IoMdContact className="input-icon" />
                         <div className="divider-line "></div>
-
                         <input
                             type="text"
                             placeholder="Enter email or mobile*"
                             className="login-input"
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
                             onFocus={() => setIsFocused(true)}
                         />
+                        {error && <p className="text-danger mt-2">{error}</p>}
                     </div>
 
 
@@ -70,6 +117,11 @@ function Login() {
                             </div>
                         </>
                     )}
+
+                    <div className="justify-center flex mt-4">
+                        <button className="btn btn-primary px-4 justify-center text-md font-bold" onClick={handleLoginSuccess}>Login</button>
+                    </div>
+
 
                     <p className="vendor-text">
                         Are you a vendor?

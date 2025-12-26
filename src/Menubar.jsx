@@ -27,6 +27,11 @@ function Menubar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("token")
+  );
+
+
   const handleDropdownClick = (menu) => {
     // Toggle dropdown when same item clicked again
     setActiveDropdown(activeDropdown === menu ? null : menu);
@@ -51,6 +56,20 @@ function Menubar() {
       document.body.style.width = '';
     }
   }, [menuOpen]);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+    };
+
+    window.addEventListener("storage", checkAuth);
+    return () => window.removeEventListener("storage", checkAuth);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
 
   return (
@@ -503,13 +522,34 @@ function Menubar() {
                 </svg>
               </Button>
 
-              <Button
-                className="login-button me-3"
-                variant="link"
-                onClick={() => navigate('/login')}
-              >
-                Log In
-              </Button>
+              {!isLoggedIn ? (
+                <Button
+                  className="login-button me-3"
+                  variant="link"
+                  onClick={() => navigate("/login")}
+                >
+                  Log In
+                </Button>
+              ) : (
+                <>
+                  {/* <Button
+                    className="login-button me-3"
+                    variant="link"
+                    onClick={() => navigate("/shortlist")}
+                  >
+                    Shortlist
+                  </Button> */}
+
+                  <Button
+                    className="login-button me-3 text-danger"
+                    variant="link"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </>
+              )}
+
             </div>
           </Navbar.Collapse>
         </Container>

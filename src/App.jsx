@@ -21,6 +21,10 @@ import VenueList from "./pages/VenueList";
 import VenueDetails from "./pages/VenueDetails";
 import PopularSearchList from "./PopularSearch";
 
+import PrivateRoute from "./components/PrivateRoute";
+import Shortlist from "./pages/Shortlist";
+
+
 function App() {
   return (
     <Router>
@@ -37,6 +41,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/venues" element={<VenueList />} />     {/* Popular search category pages */}
           <Route path="/venue/:id" element={<VenueDetails />} />     {/* Single venue details */}
+
+          {/* 🔐 PROTECTED ROUTE */}
+          <Route
+            path="/shortlist"
+            element={
+              <PrivateRoute>
+                <Shortlist />
+              </PrivateRoute>
+            }
+          />
+
         </Route>
 
       </Routes>

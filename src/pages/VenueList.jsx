@@ -262,7 +262,9 @@ function VenueList() {
 
   return (
     <div>
-      <Filters onFilterChange={handleFilterChange} />
+      {!isPopularSearch && (
+        <Filters onFilterChange={handleFilterChange} />
+      )}
 
       <div className="container p-3 px-md-5">
         <div className="px-3">
@@ -403,10 +405,16 @@ function VenueList() {
           <div className="flex flex-wrap justify-start gap-2 gap-md-4 mt-4 text-sm" >
             {[img1, img2, img3, img4, img5, img7].map((imgSrc, idx) => (
               <div key={idx} className="text-center w-20 md:w-24"
-                onClick={() =>
-                  navigate(`/venues?city=${encodeURIComponent(cities[idx])}`, {
-                    state: { title: cities[idx] },
-                  })
+                onClick={() => {
+                  if (isPopularSearch && selectedType) {
+                    navigate(`/venues?type=${selectedType}&city=${encodeURIComponent(cities[idx])}`,
+                      { state: { title: `${selectedType} in ${cities[idx]}` } });
+                  } else {
+                    navigate(`/venues?city=${encodeURIComponent(cities[idx])}`,
+                      { state: { title: cities[idx] } }
+                    )
+                  }
+                }
                 } >
                 <img
                   src={imgSrc}
