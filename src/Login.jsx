@@ -119,7 +119,7 @@ function Login() {
                     )}
 
                     <div className="justify-center flex mt-4">
-                        <button className="btn btn-primary px-4 justify-center text-md font-bold" onClick={handleLoginSuccess}>Login</button>
+                        <button className="btn btn-primary px-4 justify-center text-md font-bold rounded-sm" onClick={handleLoginSuccess}>Login</button>
                     </div>
 
 

@@ -215,7 +215,7 @@ I am interested in your venue. Please contact me.
                                 <div className="ml-1">
                                     <strong className="!text-md !md:text-md !font-semibold">{item.city}</strong> <span className="text-xs md:text-sm flex sm:inline-block">(View on Map)</span>
                                     <div className="text-gray-500 text-sm">
-                                        {item.location || item.area || item.city}, India
+                                        { item.area || item.location}, India
                                     </div>
                                 </div>
 
@@ -655,6 +655,7 @@ I am interested in your venue. Please contact me.
 
             </div >
             <ContactPage />
+    
         </div>
     );
 }

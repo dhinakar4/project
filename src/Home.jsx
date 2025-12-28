@@ -13,6 +13,8 @@ import Gallery from "./Gallery";
 import FeatureVendor from "./FeatureVendor";
 import LatestBlogs from "./LatestBlogs";
 import ContactPage from "./ContactPage";
+import { GiButterfly } from "react-icons/gi";
+
 
 
 function Home() {
@@ -44,6 +46,18 @@ function Home() {
       <FeatureVendor />
       <LatestBlogs />
       <ContactPage />
+
+      <div className="bg-light h-13 w-full flex text-sm justify-between px-5 py-3">
+        <div>
+          <span className="flex text-gray-400">© <strong className="!text-gray-600">2025</strong>
+            <GiButterfly className="ms-3 mt-[3px]" size={16} /> <span className="text-xs ms-[2px] mt-[3px]">Wed<strong>Me</strong>Good</span>
+          </span>
+        </div>
+        <div>
+          <span className="font-semibold">Terms & Conditions | Privacy Policy</span>
+        </div>
+      </div>
+      
     </div>
   );
 }

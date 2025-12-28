@@ -37,13 +37,13 @@ function Shortlist() {
 
     return (
         <div className="shortlist-container px-4 py-6">
-            <h2 className="text-2xl font-semibold mb-4">My Shortlist</h2>
+            <h3 className="text-2xl font-semibold mb-4">Shortlist Items! </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {shortlistItems.map((item) => (
-                    <div key={item.id} className="shortlist-card border rounded p-4 shadow relative">
-                        <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded mb-2" />
-                        <h3 className="font-semibold">{item.name}</h3>
-                        <p className="text-gray-500">{item.city}</p>
+                    <div key={item.id} className="shortlist-card rounded p-4 shadow-md relative">
+                        <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded-sm mb-2" />
+                        <h4 className="font-semibold">{item.name}</h4>
+                        <p className="text-gray-500">{item.area || item.location }</p>
                         <div className="flex justify-between mt-2">
                             <Link
                                 to={`/venue/${item.id}`}

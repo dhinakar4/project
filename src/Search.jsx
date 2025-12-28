@@ -109,7 +109,7 @@ function Search() {
                 </div>
 
                 <div className="bottom">
-                    <GiButterfly className="pink " size={25} /> <br />
+                    <GiButterfly className="pink" size={25} /> <br />
                     <p className="color">India's favorite wedding planning platform.</p>
                 </div>
 
