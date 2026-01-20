@@ -50,7 +50,7 @@ function Filters({ onFilterChange }) {
     ],
     space: ["Indoor", "Outdoor", "Poolside", "Terrace / Rooftop"],
     features: ["Beach view", "Mountain view", "Lake view", "Sea view", "Pet Friendly"],
-    rating: ["4", "4.5", "4.8"],
+    rating: ["4.5", "4.8"],
   };
 
   const handleFilterClick = () => {
